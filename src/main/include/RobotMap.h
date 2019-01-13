@@ -28,6 +28,8 @@ constexpr int kIDCargoRoller {9};
 
 //Hatch Motors
 constexpr int kIDHatchPivot {10};
+constexpr int kIDHatchPuncherForward {2};
+constexpr int kIDHatchPuncherReverse {6};
 
 //Hatch Pnuematics
 constexpr int kIDHatchPuncherForward {1};
