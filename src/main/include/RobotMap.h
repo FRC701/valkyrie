@@ -15,9 +15,9 @@
  */
 namespace RobotMap 
 {
-static constexpr int kIDHatchPuncherForward {16};
-static constexpr int kIDHatchPuncherReverse {16};
-static constexpr int kIDHatchPivot {16};
+constexpr int kIDHatchPuncherForward {16};
+constexpr int kIDHatchPuncherReverse {16};
+constexpr int kIDHatchPivot {16};
 }
 
 

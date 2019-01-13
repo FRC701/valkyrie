@@ -8,7 +8,6 @@
 #pragma once
 
 #include <frc/commands/InstantCommand.h>
-#include "subsystems/HatchIntake.h"
 
 class HatchPuncherDisengage : public frc::InstantCommand {
  public:

@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchPuncherEngage.h"
+#include "subsystems/HatchIntake.h"
 
 HatchPuncherEngage::HatchPuncherEngage() {
   // Use Requires() here to declare subsystem dependencies
@@ -16,5 +17,5 @@ HatchPuncherEngage::HatchPuncherEngage() {
 // Called once when the command executes
 void HatchPuncherEngage::Initialize() 
 {
-  HatchIntake::getInstance()->SetEngage();
+  HatchIntake::getInstance()->Engage();
 }

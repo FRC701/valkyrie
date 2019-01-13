@@ -8,11 +8,10 @@
 #pragma once
 
 #include <frc/commands/Command.h>
-#include "subsystems/HatchIntake.h"
 
-class RunPivot : public frc::Command {
+class PivotHatch : public frc::Command {
  public:
-  RunPivot();
+  PivotHatch();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

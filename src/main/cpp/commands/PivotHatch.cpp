@@ -5,29 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/RunPivot.h"
+#include "commands/PivotHatch.h"
+#include "subsystems/HatchIntake.h"
 
-RunPivot::RunPivot() {
+PivotHatch::PivotHatch() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(HatchIntake::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void RunPivot::Initialize() {}
+void PivotHatch::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunPivot::Execute() 
+void PivotHatch::Execute() 
 {
-HatchIntake::getInstance()->SetPivot(1);
+HatchIntake::getInstance()->Pivot(0.25);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RunPivot::IsFinished() { return false; }
+bool PivotHatch::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void RunPivot::End() {}
+void PivotHatch::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RunPivot::Interrupted() {}
+void PivotHatch::Interrupted() {}

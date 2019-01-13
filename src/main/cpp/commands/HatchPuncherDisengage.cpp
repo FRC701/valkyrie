@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchPuncherDisengage.h"
+#include "subsystems/HatchIntake.h"
 
 HatchPuncherDisengage::HatchPuncherDisengage() {
   // Use Requires() here to declare subsystem dependencies
@@ -16,5 +17,5 @@ HatchPuncherDisengage::HatchPuncherDisengage() {
 // Called once when the command executes
 void HatchPuncherDisengage::Initialize() 
 {
-  HatchIntake::getInstance()->SetDisengage();
+  HatchIntake::getInstance()->Disengage();
 }

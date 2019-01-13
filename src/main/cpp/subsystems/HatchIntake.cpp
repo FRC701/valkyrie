@@ -6,9 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
-static frc::DoubleSolenoid::Value kMotorEngage = frc::DoubleSolenoid::kForward;
-static frc::DoubleSolenoid::Value kMotorDisengage = frc::DoubleSolenoid::kReverse;
-
+namespace
+{
+  constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
+  constexpr frc::DoubleSolenoid::Value kMotorDisengage {frc::DoubleSolenoid::kReverse};
+}
 
 const char HatchIntake::kSubsystemName[] = "HatchIntake";
 
@@ -20,24 +22,26 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
   }
   return self;
 }
+
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
-hatchPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
-hatchPivot(RobotMap::kIDHatchPivot)
+mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
+mPivot(RobotMap::kIDHatchPivot)
 {}
 
 void HatchIntake::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
-void HatchIntake::SetDisengage() {
-  hatchPuncher.Set(kMotorEngage);
+
+void HatchIntake::Disengage() {
+  mPuncher.Set(kMotorEngage);
 }
 
-void HatchIntake::SetEngage() {
-  hatchPuncher.Set(kMotorDisengage);
+void HatchIntake::Engage() {
+  mPuncher.Set(kMotorDisengage);
 }
 
-void HatchIntake::SetPivot(double speed) 
+void HatchIntake::Pivot(double speed) 
 {
   
 }

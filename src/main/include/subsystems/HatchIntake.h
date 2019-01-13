@@ -19,14 +19,14 @@ class HatchIntake : public frc::Subsystem {
   // for methods that implement subsystem capabilities
   static const char kSubsystemName[];
   static std::shared_ptr<HatchIntake> self;
-  frc::DoubleSolenoid hatchPuncher;
-  WPI_TalonSRX hatchPivot;
+  frc::DoubleSolenoid mPuncher;
+  WPI_TalonSRX mPivot;
  public:
   HatchIntake();
   static std::shared_ptr<HatchIntake> getInstance();
   void InitDefaultCommand() override;
-  void SetEngage();
-  void SetDisengage();
-  void SetPivot(double speed);
+  void Engage();
+  void Disengage();
+  void Pivot(double speed);
 };
 #endif 
