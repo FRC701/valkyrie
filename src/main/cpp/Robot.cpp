@@ -9,9 +9,9 @@
 
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include "subsystems/HatchIntake.h"
 #include "subsystems/CargoCarriage.h"
-#include "subsystems/Climber.h"
+#include "subsystems/Chassis.h"
+#include "subsystems/HatchIntake.h"
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
@@ -20,10 +20,10 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-  HatchIntake::getInstance();
   CargoCarriage::getInstance();
-  Climber::getInstance();
-  }
+  Chassis::getInstance();
+  HatchIntake::getInstance();
+}
 
 /**
  * This function is called every robot packet, no matter the mode. Use
