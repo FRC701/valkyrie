@@ -13,6 +13,13 @@
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+namespace RobotMap 
+{
+static constexpr int kIDHatchPuncherForward {16};
+static constexpr int kIDHatchPuncherReverse {16};
+static constexpr int kIDHatchPivot {16};
+}
+
 
 // For example to map the left and right motors, you could define the
 // following variables to use with your drivetrain subsystem.
