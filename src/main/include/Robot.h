@@ -1,3 +1,6 @@
+#ifndef _ROBOT_H
+#define _ROBOT_H
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -7,9 +10,8 @@
 
 #pragma once
 
-#include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
-#include <frc/smartdashboard/SendableChooser.h>
+
 
 #include "OI.h"
 #include "commands/ExampleCommand.h"
@@ -39,3 +41,4 @@ class Robot : public frc::TimedRobot {
   MyAutoCommand m_myAuto;
   frc::SendableChooser<frc::Command*> m_chooser;
 };
+#endif

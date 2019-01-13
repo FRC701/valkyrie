@@ -1,13 +1,35 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+#ifndef OI_H
+#define OI_H
 
-#pragma once
+#include <frc/WPILib.h>
 
 class OI {
- public:
-  OI();
+private:
+
+  static std::shared_ptr<OI> self;
+	std::shared_ptr<frc::Joystick> coDriver;
+	std::shared_ptr<frc::Joystick> driver;
+public:
+
+	double getDriverLeftXAxis() const;
+	double getDriverLeftYAxis() const;
+	double getDriverRightXAxis() const;
+	double getDriverRightYAxis() const;
+
+	double getCoDriverLeftXAxis() const;
+	double getCoDriverLeftYAxis() const;
+	double getCoDriverRightXAxis() const;
+	double getCoDriverRightYAxis() const;
+
+  static std::shared_ptr<OI> getInstance();
+	std::shared_ptr<frc::Joystick> getdriver();
+	std::shared_ptr<frc::Joystick> getcoDriver();
+	OI();
+
+	static const int kLeftXAxis_ID = 0;
+	static const int kLeftYAxis_ID = 1;
+	static const int kRightXAxis_ID = 4;
+	static const int kRightYAxis_ID = 5;
+
 };
+#endif
