@@ -9,15 +9,11 @@ namespace RobotMap
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
- //Chassis Motors   
-constexpr int kIDRight1Wheel {1};
-constexpr int kIDRight2Wheel {2};
-constexpr int kIDLeft1Wheel {3};
-constexpr int kIDLeft2Wheel {4};
 
-//Elevator motors
-constexpr int kIDLeftElevator {5};
-constexpr int kIDRightElevator {6};
+// For example to map the left and right motors, you could define the
+// following variables to use with your drivetrain subsystem.
+// constexpr int kLeftMotor = 1;
+// constexpr int kRightMotor = 2;
 
 //Climber motors
 constexpr int kIDClimberDriveMotor {7};
@@ -28,6 +24,8 @@ constexpr int kIDCargoRoller {9};
 
 //Hatch Motors
 constexpr int kIDHatchPivot {10};
+constexpr int kIDHatchPuncherForward {2};
+constexpr int kIDHatchPuncherReverse {6};
 
 //Hatch Pnuematics
 constexpr int kIDHatchPuncherForward {1};
