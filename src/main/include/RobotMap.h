@@ -18,6 +18,9 @@ namespace RobotMap
 constexpr int kIDHatchPuncherForward {16};
 constexpr int kIDHatchPuncherReverse {16};
 constexpr int kIDHatchPivot {16};
+constexpr int kIDCargoPneumaticForward {16};
+constexpr int kIDCargoPneumaticReverse {16};
+constexpr int kIDCargoRoller {16};
 }
 
 
