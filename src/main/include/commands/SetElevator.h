@@ -1,6 +1,4 @@
-#ifndef SetElevator_H
-#define SetElevator_H
-
+#pragma once
 #include <frc/commands/Command.h>
 
 class SetElevator : public frc::Command{
@@ -15,4 +13,4 @@ private:
         double mSpeed;
 };
 
-#endif  // SetElevator_H
+// SetElevator_H
