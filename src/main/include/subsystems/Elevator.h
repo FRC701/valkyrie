@@ -1,5 +1,3 @@
-#ifndef _ELEVATOR_H
-#define _ELEVATOR_H
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -8,17 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "RobotMap.h"
 #include <frc/commands/Subsystem.h>
-#include <frc/AnalogInput.h>
-#include <frc/Preferences.h>
+#include <ctre/Phoenix.h>
 
 class Elevator : public frc::Subsystem {
  private:
       	static const char kSubsystemName[];
       	static std::shared_ptr<Elevator> self;
-        WPI_TalonSRX LeftElevator;
-        WPI_TalonSRX RightElevator;
+        WPI_TalonSRX mLeftElevator;
+        WPI_TalonSRX mRightElevator;
 
         //void SetUpTalons();
   
@@ -36,5 +32,3 @@ class Elevator : public frc::Subsystem {
 
 
 };
-
-#endif

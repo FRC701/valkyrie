@@ -19,8 +19,8 @@ std::shared_ptr<Elevator> Elevator::getInstance() {
 }
 
 Elevator::Elevator() : Subsystem("Elevator"),
-      LeftElevator(RobotMap::kIDLeftElevator),
-      RightElevator(RobotMap::kIDRightElevator)
+      mLeftElevator(RobotMap::kIDLeftElevator),
+      mRightElevator(RobotMap::kIDRightElevator)
 
       {
        // void SetUpTalons();
@@ -33,8 +33,8 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::SetElevator(double speed) {
-          RightElevator.Set(ControlMode::PercentOutput,speed);
-		  LeftElevator.Set(ControlMode::PercentOutput,speed);
+          mRightElevator.Set(ControlMode::PercentOutput,speed);
+		  mLeftElevator.Set(ControlMode::PercentOutput,speed);
 }
 
 /*void SetElevatorPos(int position){
@@ -60,11 +60,11 @@ void Elevator::SetElevator(double speed) {
 }*/
 
 bool Elevator::IsFwdLimitSwitchClosed() {
-	return RightElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
+	return mRightElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 
 bool Elevator::IsRevLimitSwitchClosed() {
-	return RightElevator.GetSensorCollection().IsRevLimitSwitchClosed();
+	return mRightElevator.GetSensorCollection().IsRevLimitSwitchClosed();
 }
 
 /*double Elevator::GetPosError() {
