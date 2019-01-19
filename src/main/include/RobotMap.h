@@ -21,6 +21,10 @@ constexpr int kIDHatchPivot {16};
 
 constexpr int kIDLeftElevator {10};
 constexpr int kIDRightElevator {11};
+
+constexpr int kIDCargoPneumaticForward {16};
+constexpr int kIDCargoPneumaticReverse {16};
+constexpr int kIDCargoRoller {16};
 }
 
 
