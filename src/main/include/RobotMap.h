@@ -33,6 +33,11 @@ constexpr int kIDCargoPuncherForward {16};
 constexpr int kIDCargoPuncherReverse {16};
 
 
+
+constexpr int kIDDriveMotor {5};
+constexpr int kIDLiftMotor {5};
+constexpr int kIDClimberForward {5};
+constexpr int kIDClimberReverse {5}; 
 }
 
 
