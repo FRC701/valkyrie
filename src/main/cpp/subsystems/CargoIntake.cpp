@@ -6,9 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/CargoIntake.h"
-static frc::DoubleSolenoid::Value kDeployerOut = frc::DoubleSolenoid::kForward;
-static frc::DoubleSolenoid::Value kDeployerIn = frc::DoubleSolenoid::kReverse;
 
+constexpr frc::DoubleSolenoid::Value kDeployerOut = frc::DoubleSolenoid::kForward;
+constexpr frc::DoubleSolenoid::Value kDeployerIn = frc::DoubleSolenoid::kReverse;
 
 const char CargoIntake::kSubsystemName[] = "CargoIntake";
 
