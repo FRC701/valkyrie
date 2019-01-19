@@ -24,8 +24,8 @@ std::shared_ptr<CargoCarriage> CargoCarriage::getInstance() {
 }
 CargoCarriage::CargoCarriage() : Subsystem("CargoCarriage"),
 mPuncher(RobotMap::kIDCargoPuncherForward, RobotMap::kIDCargoPuncherReverse),
-mLeftHook(RobotMap::kIDLeftCargoForward, RobotMap::kIDLeftCargoReverse),
-mRightHook(RobotMap::kIDRightCargoForward, RobotMap::kIDRightCargoReverse)
+mLeftHook(RobotMap::kIDCargoRightForward, RobotMap::kIDCargoRightReverse),
+mRightHook(RobotMap::kIDCargoRightForward, RobotMap::kIDCargoRightReverse)
  {
 
  }
