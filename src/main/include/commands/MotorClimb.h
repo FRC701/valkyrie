@@ -11,6 +11,7 @@
 
 class MotorClimb : public frc::Command {
  public:
+  MotorClimb();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

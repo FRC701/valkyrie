@@ -10,7 +10,6 @@
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 
-frc::DoubleSolenoid::Value frc::DoubleSolenoid::kForward;
 namespace
 {
 constexpr frc::DoubleSolenoid::Value kClimberEngage = frc::DoubleSolenoid::kForward;
@@ -36,14 +35,14 @@ void Climber::InitDefaultCommand() {
 }
 
 void Climber::Engage() {
-    mLiftSolenoid.Set(kClimberkEngage);
+    mLiftSolenoid.Set(kClimberEngage);
 }
 
 void Climber::Disengage() {
     mLiftSolenoid.Set(kClimberDisengage);
 }
 
-void Climber::MotorClimb(double speed) {
+void Climber::MotorClimber(double speed) {
     mLiftMotor.Set(speed);
 }
 

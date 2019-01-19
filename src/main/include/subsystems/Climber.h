@@ -31,6 +31,6 @@ class Climber : public frc::Subsystem {
         void InitDefaultCommand() override;
         void Engage();
         void Disengage();
-        void MotorClimb(double speed);
+        void MotorClimber(double speed);
         void DriveClimb(double speed);
 };

@@ -4,6 +4,7 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
+
 #include "commands/MotorClimb.h"
 #include "subsystems/Climber.h"
 
@@ -17,8 +18,9 @@ MotorClimb::MotorClimb() {
 void MotorClimb::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void MotorClimb::Execute() {
-  Climber::getInstance()->MotorClimb(0.3);
+void MotorClimb::Execute() 
+{
+  Climber::getInstance()->MotorClimber(0.3);
 }
 
 // Make this return true when this Command no longer needs to run execute()

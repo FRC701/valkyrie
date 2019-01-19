@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "SetClimber.h"
+#include "commands/SetClimber.h"
 #include "subsystems/Climber.h"
 
 SetClimber::SetClimber() {
@@ -18,7 +18,10 @@ SetClimber::SetClimber() {
 void SetClimber::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void SetClimber::Execute() {}
+void SetClimber::Execute() 
+{
+  Climber::getInstance()->MotorClimber(0.3);
+}
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetClimber::IsFinished() { return false; }

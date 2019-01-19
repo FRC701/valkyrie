@@ -8,13 +8,15 @@
 #include "commands/ClimberEngage.h"
 #include "subsystems/Climber.h"
 
-ClimberEngage::ClimberEngage() {
+ClimberEngage::ClimberEngage() 
+{
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(Climber::getInstance().get());
 }
 
 // Called once when the command executes
-void ClimberEngage::Initialize() {
+void ClimberEngage::Initialize() 
+{
   Climber::getInstance()->Engage();
 }

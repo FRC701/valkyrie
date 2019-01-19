@@ -11,6 +11,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/HatchIntake.h"
 #include "subsystems/CargoCarriage.h"
+#include "subsystems/Climber.h"
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
@@ -21,7 +22,8 @@ void Robot::RobotInit() {
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   HatchIntake::getInstance();
   CargoCarriage::getInstance();
-}
+  Climber::getInstance();
+  }
 
 /**
  * This function is called every robot packet, no matter the mode. Use

@@ -8,13 +8,15 @@
 #include "commands/ClimberDisengage.h"
 #include "subsystems/Climber.h"
 
-ClimberDisengage::ClimberDisengage() {
+ClimberDisengage::ClimberDisengage() 
+{
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(Climber::getInstance().get());
 }
 
 // Called once when the command executes
-void ClimberDisengage::Initialize() {
+void ClimberDisengage::Initialize() 
+{
   Climber::getInstance()->Disengage();
 }
