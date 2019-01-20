@@ -24,11 +24,11 @@ std::shared_ptr<Climber> Climber::getInstance() {
   return self;
 }
 Climber::Climber() : Subsystem("Climber"),
-    mDriveMotor(RobotMap::kIDDriveMotor),
-    mLiftMotor(RobotMap::kIDLiftMotor),
+    mDriveMotor(RobotMap::kIDClimberDriveMotor),
+    mLiftMotor(RobotMap::kIDClimberLiftMotor),
     mLiftSolenoid(RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
-    //mLiftSolenoid.Set(kForward);
+    mLiftSolenoid.Set(kClimberDisengage);
 }
 
 void Climber::InitDefaultCommand() {
