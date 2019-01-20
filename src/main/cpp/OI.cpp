@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "OI.h"
-#include "commands/TankDrive.h"
 #include <frc/WPILib.h>
 
 std::shared_ptr<OI> OI::self;

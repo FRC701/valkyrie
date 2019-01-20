@@ -22,8 +22,8 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   left1Wheel{RobotMap::kIDLeft1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
   left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless}
   {
+    right2Wheel.Follow(right1Wheel);
     left2Wheel.Follow(left1Wheel);
-	  right2Wheel.Follow(right1Wheel);
     right1Wheel.SetInverted(true);
     right2Wheel.SetInverted(true);
   }
@@ -36,7 +36,5 @@ void Chassis::InitDefaultCommand() {
 void Chassis::SetTankDrive(double left, double right) {
   left1Wheel.Set(left);
   right1Wheel.Set(right);
-  left2Wheel.Set(left);
-  right2Wheel.Set(right);
 }
 

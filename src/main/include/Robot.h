@@ -1,5 +1,4 @@
-#ifndef _ROBOT_H
-#define _ROBOT_H
+
 
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
@@ -41,4 +40,3 @@ class Robot : public frc::TimedRobot {
   MyAutoCommand m_myAuto;
   frc::SendableChooser<frc::Command*> m_chooser;
 };
-#endif

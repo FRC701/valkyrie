@@ -1,6 +1,4 @@
-#ifndef OI_H
-#define OI_H
-
+#pragma once
 #include <frc/WPILib.h>
 
 class OI {
@@ -32,4 +30,3 @@ public:
 	static const int kRightYAxis_ID = 5;
 
 };
-#endif
