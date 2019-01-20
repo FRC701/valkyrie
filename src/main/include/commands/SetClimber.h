@@ -5,18 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchPuncherEngage.h"
-#include "subsystems/HatchIntake.h"
+#pragma once
 
-HatchPuncherEngage::HatchPuncherEngage() 
-{
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(HatchIntake::getInstance().get());
-}
+#include <frc/commands/Command.h>
 
-// Called once when the command executes
-void HatchPuncherEngage::Initialize() 
-{
-  HatchIntake::getInstance()->Engage();
-}
+class SetClimber : public frc::Command {
+ public:
+  SetClimber();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+};

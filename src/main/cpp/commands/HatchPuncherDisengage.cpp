@@ -8,7 +8,8 @@
 #include "commands/HatchPuncherDisengage.h"
 #include "subsystems/HatchIntake.h"
 
-HatchPuncherDisengage::HatchPuncherDisengage() {
+HatchPuncherDisengage::HatchPuncherDisengage() 
+{
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(HatchIntake::getInstance().get());

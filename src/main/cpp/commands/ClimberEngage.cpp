@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchPuncherEngage.h"
-#include "subsystems/HatchIntake.h"
+#include "commands/ClimberEngage.h"
+#include "subsystems/Climber.h"
 
-HatchPuncherEngage::HatchPuncherEngage() 
+ClimberEngage::ClimberEngage() 
 {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(HatchIntake::getInstance().get());
+  Requires(Climber::getInstance().get());
 }
 
 // Called once when the command executes
-void HatchPuncherEngage::Initialize() 
+void ClimberEngage::Initialize() 
 {
-  HatchIntake::getInstance()->Engage();
+  Climber::getInstance()->Engage();
 }

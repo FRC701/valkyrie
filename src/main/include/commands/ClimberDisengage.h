@@ -5,18 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchPuncherEngage.h"
-#include "subsystems/HatchIntake.h"
+#pragma once
 
-HatchPuncherEngage::HatchPuncherEngage() 
-{
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(HatchIntake::getInstance().get());
-}
+#include <frc/commands/InstantCommand.h>
 
-// Called once when the command executes
-void HatchPuncherEngage::Initialize() 
-{
-  HatchIntake::getInstance()->Engage();
-}
+class ClimberDisengage : public frc::InstantCommand {
+ public:
+  ClimberDisengage();
+  void Initialize() override;
+};
