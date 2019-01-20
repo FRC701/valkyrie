@@ -16,8 +16,8 @@ class CargoCarriage : public frc::Subsystem {
   static const char kSubsystemName[];
   static std::shared_ptr<CargoCarriage> self;
   frc::DoubleSolenoid mPuncher;
-  frc::DoubleSolenoid mLeftHook;
-  frc::DoubleSolenoid mRightHook;
+  frc::DoubleSolenoid mHook;
+
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 

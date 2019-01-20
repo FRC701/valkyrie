@@ -24,8 +24,8 @@ std::shared_ptr<CargoCarriage> CargoCarriage::getInstance() {
 }
 CargoCarriage::CargoCarriage() : Subsystem("CargoCarriage"),
 mPuncher(RobotMap::kIDCargoPuncherForward, RobotMap::kIDCargoPuncherReverse),
-mLeftHook(RobotMap::kIDCargoRightForward, RobotMap::kIDCargoRightReverse),
-mRightHook(RobotMap::kIDCargoRightForward, RobotMap::kIDCargoRightReverse)
+mHook(RobotMap::kIDCargoClawForward, RobotMap::kIDCargoClawReverse)
+
  {
 
  }
@@ -39,14 +39,14 @@ void CargoCarriage::InitDefaultCommand() {
 // here. Call these from Commands.
 void CargoCarriage::Engage()
 {
-  mLeftHook.Set(kEngage);
-  mRightHook.Set(kEngage);
+  mHook.Set(kEngage);
+
 }
 
 void CargoCarriage::Disengage()
 {
-  mLeftHook.Set(kDisengage);
-  mRightHook.Set(kDisengage);
+  mHook.Set(kDisengage);
+ 
 }
 
 void CargoCarriage::Punch()
