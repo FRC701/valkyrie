@@ -1,7 +1,7 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
-#include "rev/CANSparkMax.h"
+#include "rev/SparkMax.h"
 
 class Chassis: public frc::Subsystem {
 private:
@@ -9,10 +9,10 @@ private:
   static const char kSubsystemName[];
   static std::shared_ptr<Chassis> self;
 
-  rev::CANSparkMax right1Wheel;
-  rev::CANSparkMax right2Wheel;
-  rev::CANSparkMax left1Wheel;
-  rev::CANSparkMax left2Wheel;
+  rev::SparkMax right1Wheel;
+  rev::SparkMax right2Wheel;
+  rev::SparkMax left1Wheel;
+  rev::SparkMax left2Wheel;
 
  public:
   

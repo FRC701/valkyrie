@@ -10,10 +10,10 @@ namespace RobotMap
  * floating around.
  */
  //Chassis Motors   
-constexpr int kIDRight1Wheel {1};
-constexpr int kIDRight2Wheel {2};
-constexpr int kIDLeft1Wheel {3};
-constexpr int kIDLeft2Wheel {4};
+constexpr int kIDRight1Wheel {0};
+constexpr int kIDRight2Wheel {1};
+constexpr int kIDLeft1Wheel {2};
+constexpr int kIDLeft2Wheel {3};
 
 //Elevator motors
 constexpr int kIDLeftElevator {5};

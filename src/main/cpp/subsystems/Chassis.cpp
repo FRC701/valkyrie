@@ -17,13 +17,11 @@ std::shared_ptr<Chassis> Chassis::getInstance() {
 
 Chassis::Chassis() : Subsystem(kSubsystemName),
   //defaultCommand(nullptr),
-  right1Wheel{RobotMap::kIDRight1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
-  right2Wheel{RobotMap::kIDRight2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
-  left1Wheel{RobotMap::kIDLeft1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
-  left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless}
+  right1Wheel{RobotMap::kIDRight1Wheel},
+  right2Wheel{RobotMap::kIDRight2Wheel},
+  left1Wheel{RobotMap::kIDLeft1Wheel},
+  left2Wheel{RobotMap::kIDLeft2Wheel}
   {
-    right2Wheel.Follow(right1Wheel);
-    left2Wheel.Follow(left1Wheel);
     right1Wheel.SetInverted(true);
     right2Wheel.SetInverted(true);
   }
@@ -36,5 +34,7 @@ void Chassis::InitDefaultCommand() {
 void Chassis::SetTankDrive(double left, double right) {
   left1Wheel.Set(left);
   right1Wheel.Set(right);
+  left2Wheel.Set(left);
+  right2Wheel.Set(right);
 }
 
