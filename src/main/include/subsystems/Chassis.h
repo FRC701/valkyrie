@@ -28,5 +28,6 @@ private:
   void SetBrake();
   void SetupDrive();
   void SetUpSpark(); 
+  void DriveChassis(double speed);
 
 };

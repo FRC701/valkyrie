@@ -38,3 +38,8 @@ void Chassis::SetTankDrive(double left, double right) {
   right1Wheel.Set(right);
 }
 
+void Chassis::DriveChassis(double speed) {
+  left1Wheel.Set(speed);
+  left2Wheel.Set(speed);
+}
+
