@@ -22,10 +22,16 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   left1Wheel{RobotMap::kIDLeft1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
   left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless}
   {
-    right2Wheel.Follow(right1Wheel);
-    left2Wheel.Follow(left1Wheel);
+    left1Wheel.SetRampRate(1.0);
+    left2Wheel.SetRampRate(1.0);
+    right1Wheel.SetRampRate(1.0);
+    right2Wheel.SetRampRate(1.0);
+
     right1Wheel.SetInverted(true);
     right2Wheel.SetInverted(true);
+
+    right2Wheel.Follow(right1Wheel);
+    left2Wheel.Follow(left1Wheel); 
   }
 
 void Chassis::InitDefaultCommand() {
