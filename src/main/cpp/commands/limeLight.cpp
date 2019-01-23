@@ -5,9 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include <networktables/NetworkTableInstance.h>
+#include <frc/smartdashboard/Smartdashboard.h>
+
 #include "commands/limeLight.h"
-#include "Networktables/NetworkTable.h"
-#include "frc/smartdashboard/Smartdashboard.h"
 
 std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
