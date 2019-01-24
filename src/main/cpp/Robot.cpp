@@ -25,6 +25,11 @@ void Robot::RobotInit() {
   HatchIntake::getInstance();
 }
 
+constexpr void Robot::LimitSwitches() {
+  frc::SmartDashboard::PutBoolean("Arm Reverse Limit Switch", HatchIntake::getInstance()->IsHatchBack());
+	frc::SmartDashboard::PutBoolean("Arm Forward Limit Switch", HatchIntake::getInstance()->IsHatchForward());
+}
+
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want ran during disabled,
@@ -33,7 +38,9 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  LimitSwitches();
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You
