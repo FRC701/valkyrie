@@ -20,13 +20,15 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
   if (! self) {
     self = std::shared_ptr<HatchIntake>(new HatchIntake);
   }
-  return self;
+  return self; 
 }
 
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
 mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot)
-{}
+{
+
+}
 
 void HatchIntake::InitDefaultCommand() {
   // Set the default command for a subsystem here.
@@ -43,7 +45,16 @@ void HatchIntake::Engage() {
 
 void HatchIntake::Pivot(double speed) 
 {
-  
+  mPivot.Set(speed);
 }
+
+bool HatchIntake::IsHatchBack() {
+  return mPivot.GetSensorCollection().IsRevLimitSwitchClosed();
+}
+
+bool HatchIntake::IsHatchForward() {
+  return mPivot.GetSensorCollection().IsFwdLimitSwitchClosed();
+}
+  
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
