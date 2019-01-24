@@ -26,4 +26,6 @@ class HatchIntake : public frc::Subsystem {
   void Engage();
   void Disengage();
   void Pivot(double speed);
+  bool IsHatchBack();
+  bool IsHatchForward();
 };
