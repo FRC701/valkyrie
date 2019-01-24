@@ -28,4 +28,5 @@ class CargoIntake : public frc::Subsystem {
   void DeployIn();
   void DeployOut();
   void SetCargoRoller(double speed);
+  bool IsCargoIn();
 };
