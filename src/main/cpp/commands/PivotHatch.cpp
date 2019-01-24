@@ -24,7 +24,10 @@ HatchIntake::getInstance()->Pivot(0.25);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool PivotHatch::IsFinished() { return false; }
+bool PivotHatch::IsFinished() { 
+	return HatchIntake::getInstance()->IsHatchBack()
+		|| HatchIntake::getInstance()->IsHatchForward();
+ }
 
 // Called once after isFinished returns true
 void PivotHatch::End() {}
