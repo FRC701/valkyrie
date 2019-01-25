@@ -8,7 +8,7 @@
 #include "commands/RunCargoRoller.h"
 #include "subsystems/CargoIntake.h"
 
-RunCargoRoller::RunCargoRoller() {
+RunCargoRoller::RunCargoRoller(double speed): mSpeed(speed) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(CargoIntake::getInstance().get());
@@ -20,11 +20,20 @@ void RunCargoRoller::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void RunCargoRoller::Execute() 
 {
-  CargoIntake::getInstance()->SetCargoRoller(0.25);
+  CargoIntake::getInstance()->SetCargoRoller(mSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RunCargoRoller::IsFinished() { return false; }
+bool RunCargoRoller::IsFinished() {
+  if(mSpeed < 0){
+    return ! CargoIntake::getInstance()->IsCargoIn();
+  }
+  else{
+    return CargoIntake::getInstance()->IsCargoIn();
+  }
+
+
+}
 
 // Called once after isFinished returns true
 void RunCargoRoller::End() {}
