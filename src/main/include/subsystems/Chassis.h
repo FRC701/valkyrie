@@ -29,5 +29,6 @@ private:
   void SetupDrive();
   void SetUpSpark(); 
   void DriveChassis(double speed);
+  void LimeLightDrive(double leftSpeed, double rightSpeed);
 
 };

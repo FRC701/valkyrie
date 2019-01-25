@@ -1,6 +1,7 @@
 #include "subsystems/Chassis.h"
 #include "RobotMap.h"
 #include "commands/TankDrive.h"
+#include "commands/limeLight.h"
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
@@ -36,7 +37,7 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
 
 void Chassis::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  SetDefaultCommand(new TankDrive);
+  SetDefaultCommand(new limeLight);
 }
 
 void Chassis::SetTankDrive(double left, double right) {
@@ -47,5 +48,11 @@ void Chassis::SetTankDrive(double left, double right) {
 void Chassis::DriveChassis(double speed) {
   left1Wheel.Set(speed);
   left2Wheel.Set(speed);
+}
+
+
+void Chassis::LimeLightDrive(double leftSpeed, double rightSpeed) {
+  left1Wheel.Set(leftSpeed);
+  right1Wheel.Set(rightSpeed);
 }
 
