@@ -24,9 +24,11 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
 }
 
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
-mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
+mPuncher(1, RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot)
-{}
+{
+
+}
 
 void HatchIntake::InitDefaultCommand() {
   // Set the default command for a subsystem here.
