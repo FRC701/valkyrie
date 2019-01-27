@@ -45,5 +45,16 @@ constexpr int kIDCargoPneumaticReverse {8};
 //Climber Pnuematics
 constexpr int kIDClimberForward {1};
 constexpr int kIDClimberReverse {5}; 
+
+static const int kArmPot = 1;
+
 }
+static const int kPID_PrimaryClosedLoop = 0;
+static const int kPID_CascadedClosedLoop = 1;
+
+static const int kTimeout_DontBlock = 0;
+static const int kTimeout_10Millis = 10;
+
+static const int kSlot0 = 0;
+static const int kSlot1 = 1;
 
