@@ -13,18 +13,22 @@ namespace
   constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
   constexpr frc::DoubleSolenoid::Value kMotorDisengage {frc::DoubleSolenoid::kReverse};
   constexpr int kSlotIndex {0};
-  constexpr double calcFeedforward() {
-  constexpr double kMaxUnitsPer100ms {3675.0};
-  // static const double kUnitsPerRev = 4096.0;
-  // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
-  double feedforward = 1023.0 / kMaxUnitsPer100ms;
-  return feedforward;
+
+  constexpr double calcFeedforward() 
+  {
+   constexpr double kMaxUnitsPer100ms {3675.0};
+    // static const double kUnitsPerRev = 4096.0;
+    // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
+    double feedforward = 1023.0 / kMaxUnitsPer100ms;
+    return feedforward;
   }
-  constexpr double calcP(){
-  constexpr double kEigthUnitsPerRev = 4096.0/ 1.0;
-  double pGain = 1* 1023.0/kEigthUnitsPerRev;
-  return pGain;
-}
+
+  constexpr double calcP() 
+  {
+    constexpr double kEigthUnitsPerRev = 4096.0/ 1.0;
+    double pGain = 1* 1023.0/kEigthUnitsPerRev;
+    return pGain;
+  }
 }
 
 const char HatchIntake::kSubsystemName[] = "HatchIntake";

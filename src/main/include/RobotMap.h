@@ -57,4 +57,3 @@ constexpr int kTimeout_10Millis {10};
 
 constexpr int kSlot0 {0};
 constexpr int kSlot1 {1};
-
