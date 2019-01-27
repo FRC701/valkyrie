@@ -47,8 +47,6 @@ constexpr int kIDClimberForward {1};
 constexpr int kIDClimberReverse {5}; 
 
 constexpr int kIDArmPot {1};
-
-}
 constexpr int kPID_PrimaryClosedLoop {0};
 constexpr int kPID_CascadedClosedLoop {1};
 
@@ -57,3 +55,5 @@ constexpr int kTimeout_10Millis {10};
 
 constexpr int kSlot0 {0};
 constexpr int kSlot1 {1};
+}
+
