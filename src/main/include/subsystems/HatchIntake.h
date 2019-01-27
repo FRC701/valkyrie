@@ -12,6 +12,7 @@
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 #include "ctre/Phoenix.h"
+#include <frc/AnalogInput.h>
 
 class HatchIntake : public frc::Subsystem {
  private:
@@ -21,6 +22,11 @@ class HatchIntake : public frc::Subsystem {
   static std::shared_ptr<HatchIntake> self;
   frc::DoubleSolenoid mPuncher;
   WPI_TalonSRX mPivot;
+  frc::AnalogInput armPot;
+  int calibrateEncoderDown;
+  int calibratePotDown;
+  void SetupMotionMagic();
+  void SetUpTalons();
  public:
   HatchIntake();
   static std::shared_ptr<HatchIntake> getInstance();
@@ -28,5 +34,14 @@ class HatchIntake : public frc::Subsystem {
   void Engage();
   void Disengage();
   void Pivot(double speed);
+  int GetVelocity();
+  int GetPosition();
+  int GetPositionError();
+  int GetArmPotValue();
+  int GetArmPotVoltage();
+  void SetArmPositionDown(int potentiometer, int encoder);
+  void SetArmPositionUp(int potentiometer, int encoder);
+  void ResetArmPos();
+  int CalculateEncoderPos();
 };
 #endif 
