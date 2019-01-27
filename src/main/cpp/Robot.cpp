@@ -25,6 +25,10 @@ void Robot::RobotInit() {
   HatchIntake::getInstance();
 }
 
+const void EncoderValues() {
+    frc::SmartDashboard::PutNumber("Left Encoder Position", Chassis::getInstance()->GetLeftPosition());
+    frc::SmartDashboard::PutNumber("Right Encoder Position", Chassis::getInstance()->GetRightPosition());
+}
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want ran during disabled,
@@ -33,7 +37,9 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+    EncoderValues();
+}
 
 /**
  * This function is called once each time the robot enters Disabled mode. You
