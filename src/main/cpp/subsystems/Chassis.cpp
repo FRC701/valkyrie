@@ -20,7 +20,9 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   right1Wheel{RobotMap::kIDRight1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
   right2Wheel{RobotMap::kIDRight2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
   left1Wheel{RobotMap::kIDLeft1Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
-  left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless}
+  left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMaxLowLevel::MotorType::kBrushless},
+  leftEncoder{left1Wheel.GetEncoder()},
+  rightEncoder{right1Wheel.GetEncoder()}
   {
     right2Wheel.Follow(right1Wheel);
     left2Wheel.Follow(left1Wheel);
@@ -36,5 +38,14 @@ void Chassis::InitDefaultCommand() {
 void Chassis::SetTankDrive(double left, double right) {
   left1Wheel.Set(left);
   right1Wheel.Set(right);
+}
+
+double Chassis::GetLeftPosition() {
+  return leftEncoder.GetPosition();
+}
+
+double Chassis::GetRightPosition() {
+  return rightEncoder.GetPosition();
+
 }
 
