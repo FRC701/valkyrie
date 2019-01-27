@@ -26,7 +26,7 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"),
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor(RobotMap::kIDClimberLiftMotor),
-    mLiftSolenoid(RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
+    mLiftSolenoid(1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
 }
