@@ -12,8 +12,8 @@
 
 namespace
 {
-constexpr frc::DoubleSolenoid::Value kClimberEngage = frc::DoubleSolenoid::kForward;
-constexpr frc::DoubleSolenoid::Value kClimberDisengage = frc::DoubleSolenoid::kReverse;
+constexpr frc::DoubleSolenoid::Value kClimberEngage {frc::DoubleSolenoid::kForward};
+constexpr frc::DoubleSolenoid::Value kClimberDisengage {frc::DoubleSolenoid::kReverse};
 }
 
 std::shared_ptr<Climber> Climber::self;
