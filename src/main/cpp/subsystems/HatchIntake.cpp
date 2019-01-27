@@ -7,6 +7,8 @@
 
 #include "subsystems/HatchIntake.h"
 #include <frc/Preferences.h>
+using RobotMap::kPID_PrimaryClosedLoop;
+using RobotMap::kTimeout_10Millis;
 
 namespace
 {
@@ -83,13 +85,13 @@ void HatchIntake::SetUpTalons() {
 
 
 
-  mPivot.SetSelectedSensorPosition(CalculateEncoderPos(), kPID_PrimaryClosedLoop, kTimeout_10Millis);
+  mPivot.SetSelectedSensorPosition(CalculateEncoderPos(), RobotMap::kPID_PrimaryClosedLoop, kTimeout_10Millis);
  
 }
 
 int HatchIntake::GetVelocity()
 {
- return mPivot.GetSelectedSensorVelocity(kPID_PrimaryClosedLoop);
+ return mPivot.GetSelectedSensorVelocity(RobotMap::kPID_PrimaryClosedLoop);
 }
 
 int HatchIntake::GetPosition()
