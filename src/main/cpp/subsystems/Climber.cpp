@@ -14,6 +14,7 @@ namespace
 {
 constexpr frc::DoubleSolenoid::Value kClimberEngage {frc::DoubleSolenoid::kForward};
 constexpr frc::DoubleSolenoid::Value kClimberDisengage {frc::DoubleSolenoid::kReverse};
+constexpr int kPCMID1 {1};
 }
 
 std::shared_ptr<Climber> Climber::self;
@@ -26,7 +27,7 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"),
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor(RobotMap::kIDClimberLiftMotor),
-    mLiftSolenoid(1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
+    mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
 }
