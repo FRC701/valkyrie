@@ -12,8 +12,7 @@
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 #include "ctre/Phoenix.h"
-#include "AnalogInput.h"
-#include "Preferences.h"
+#include <frc/AnalogInput.h>
 
 class HatchIntake : public frc::Subsystem {
  private:

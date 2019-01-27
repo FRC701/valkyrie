@@ -46,15 +46,15 @@ constexpr int kIDCargoPneumaticReverse {8};
 constexpr int kIDClimberForward {1};
 constexpr int kIDClimberReverse {5}; 
 
-static const int kArmPot = 1;
+constexpr int kIDArmPot {1};
 
 }
-static const int kPID_PrimaryClosedLoop = 0;
-static const int kPID_CascadedClosedLoop = 1;
+constexpr int kPID_PrimaryClosedLoop {0};
+constexpr int kPID_CascadedClosedLoop {1};
 
-static const int kTimeout_DontBlock = 0;
-static const int kTimeout_10Millis = 10;
+constexpr int kTimeout_DontBlock {0};
+constexpr int kTimeout_10Millis {10};
 
-static const int kSlot0 = 0;
-static const int kSlot1 = 1;
+constexpr int kSlot0 {0};
+constexpr int kSlot1 {1};
 

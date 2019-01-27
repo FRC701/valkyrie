@@ -6,13 +6,25 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
-
-static const int kSlotIndex = 0;
+#include <frc/Preferences.h>
 
 namespace
 {
   constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
   constexpr frc::DoubleSolenoid::Value kMotorDisengage {frc::DoubleSolenoid::kReverse};
+  constexpr int kSlotIndex {0};
+  constexpr double calcFeedforward() {
+  constexpr double kMaxUnitsPer100ms {3675.0};
+  // static const double kUnitsPerRev = 4096.0;
+  // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
+  double feedforward = 1023.0 / kMaxUnitsPer100ms;
+  return feedforward;
+  }
+  constexpr double calcP(){
+  constexpr double kEigthUnitsPerRev = 4096.0/ 1.0;
+  double pGain = 1* 1023.0/kEigthUnitsPerRev;
+  return pGain;
+}
 }
 
 const char HatchIntake::kSubsystemName[] = "HatchIntake";
@@ -28,23 +40,11 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
   }
   return self;
 }
-static double calcFeedforward() {
-  constexpr double kMaxUnitsPer100ms = 3675.0;
-  // static const double kUnitsPerRev = 4096.0;
-  // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
-  double feedforward = 1023.0 / kMaxUnitsPer100ms;
-  return feedforward;
-}
-static double calcP(){
-  constexpr double kEigthUnitsPerRev = 4096.0/ 1.0;
-  double pGain = 1* 1023.0/kEigthUnitsPerRev;
-  return pGain;
-}
 
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
 mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot),
-armPot(RobotMap::kArmPot)
+armPot(RobotMap::kIDArmPot)
 {
 
 }
@@ -67,14 +67,13 @@ void HatchIntake::Pivot(double speed) {
 }
 void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
-                                         kPID_PrimaryClosedLoop,
-                                         kTimeout_10Millis);
+                                       kPID_PrimaryClosedLoop,
+                                       kTimeout_10Millis);
   mPivot.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
   mPivot.ConfigReverseSoftLimitEnable(false, kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
-  mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
@@ -102,15 +101,14 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigNominalOutputReverse(0, kTimeout_10Millis);
   mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
-  static const double kF = calcFeedforward();
-  static const double kP = calcP();
-  constexpr double kI = 0;
-  constexpr double kD = 0;
-  constexpr double kMaxVelocity = 3675;
-  constexpr int kCruiseVelocity = kMaxVelocity; //Sensor Units per 100ms
-  constexpr int kMotionAcceleration = kCruiseVelocity * 2; //Sensor Units per 100ms/sec
-
-    mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
+  constexpr double kF {calcFeedforward()};
+  constexpr double kP {calcP()};
+  constexpr double kI {0};
+  constexpr double kD {0};
+  constexpr double kMaxVelocity {3675};
+  constexpr double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
+  constexpr double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
   mPivot.Config_kI(kSlotIndex, kI, kTimeout_10Millis);
@@ -147,9 +145,10 @@ void HatchIntake::SetArmPositionUp(int potentiometer, int encoder)
   frc::Preferences::GetInstance()->PutDouble(kKey, scaleFactor);
   frc::Preferences::GetInstance()->PutDouble(kKeyPot, calibratePotDown);
 }
-  int HatchIntake::CalculateEncoderPos()
-  {
-      return frc::Preferences::GetInstance()->GetDouble(kKey,0) * (HatchIntake::GetArmPotValue() - frc::Preferences::GetInstance()->GetDouble(kKeyPot,0));
-  }
+
+int HatchIntake::CalculateEncoderPos()
+{
+  return frc::Preferences::GetInstance()->GetDouble(kKey,0) * (HatchIntake::GetArmPotValue() - frc::Preferences::GetInstance()->GetDouble(kKeyPot,0));
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
