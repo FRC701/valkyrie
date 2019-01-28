@@ -6,6 +6,8 @@
 /*----------------------------------------------------------------------------*/
 #include "RobotMap.h"
 #include "subsystems/Elevator.h"
+using RobotMap::kPID_PrimaryClosedLoop;
+using RobotMap::kTimeout_10Millis;
 
 constexpr char Elevator::kSubsystemName[] = "Elevator";
 
@@ -23,7 +25,7 @@ Elevator::Elevator() : Subsystem("Elevator"),
       mRightElevator(RobotMap::kIDRightElevator)
 
       {
-       // void SetUpTalons();
+    	void SetUpTalons();
       }
 
 
@@ -41,26 +43,21 @@ void Elevator::SetElevator(double speed) {
   RightElevator.Set(ControlMode::MotionMagic, position);
 }*/
 
-/*void Elevator::SetUpTalons(){
-  RightElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
+void Elevator::SetUpTalons(){
+  mRightElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
 			kPID_PrimaryClosedLoop,
 			kTimeout_10Millis);
-	RightElevator.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
-	RightElevator.ConfigReverseSoftLimitEnable(false, kTimeout_10Millis);
-	RightElevator.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	RightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	RightElevator.SetSensorPhase(true);
-	RightElevator.SetInverted(false);
-	RightElevator.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
-	RightElevator.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
+	mRightElevator.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
+	//mRightElevator.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
+	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
+	mRightElevator.SetSensorPhase(true);
+	mRightElevator.SetInverted(false);
+	mRightElevator.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
+	mRightElevator.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
-	LeftElevator.SetInverted(true);
-	LeftElevator.Follow(RightElevator);
+	mLeftElevator.SetInverted(true);
+	mLeftElevator.Follow(mRightElevator);
 
-}*/
-
-bool Elevator::IsFwdLimitSwitchClosed() {
-	return mRightElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 
 bool Elevator::IsRevLimitSwitchClosed() {

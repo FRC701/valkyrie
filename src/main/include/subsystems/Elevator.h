@@ -16,7 +16,7 @@ class Elevator : public frc::Subsystem {
         WPI_TalonSRX mLeftElevator;
         WPI_TalonSRX mRightElevator;
 
-        //void SetUpTalons();
+        void SetUpTalons();
   
  public:
         static std::shared_ptr<Elevator> getInstance();

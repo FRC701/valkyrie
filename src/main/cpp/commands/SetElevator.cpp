@@ -19,8 +19,7 @@ void SetElevator::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetElevator::IsFinished() {
-    return (Elevator::getInstance()->IsFwdLimitSwitchClosed()
-            || Elevator::getInstance()->IsRevLimitSwitchClosed());
+    return Elevator::getInstance()->IsRevLimitSwitchClosed();
 }
 // Called once after isFinished returns true
 void SetElevator::End() {
