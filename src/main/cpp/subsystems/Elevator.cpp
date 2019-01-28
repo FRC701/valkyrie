@@ -48,7 +48,6 @@ void Elevator::SetUpTalons(){
 			kPID_PrimaryClosedLoop,
 			kTimeout_10Millis);
 	mRightElevator.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
-	//mRightElevator.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mRightElevator.SetSensorPhase(true);
 	mRightElevator.SetInverted(false);
