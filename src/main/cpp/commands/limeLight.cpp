@@ -36,50 +36,22 @@ void limeLight::Execute() {
   double targetArea = table->GetNumber("ta",0.0);
   double targetAreaL = table->GetNumber("ta0",0.0);
   double targetAreaS = table->GetNumber("ta1",0.0);
+  double angleCoefficiant = 0;
+  if (targetOffsetAngle_HorizontalS > targetOffsetAngle_HorizontalL) {
+    angleCoefficiant = 1;
+  }
+  if (targetOffsetAngle_HorizontalS < targetOffsetAngle_HorizontalL) {
+    angleCoefficiant = -1;
+  }
+  double targetAngle = (targetAreaL - targetAreaS) * angleCoefficiant
+  double turnAngle = 90 - targetAngle;
 
-  if (targetOffsetAngle_Horizontal < -4) {
-    rotation = true;
-    Chassis::getInstance()->LimeLightDrive(0.025,-0.025);
-  }
-  if (targetOffsetAngle_Horizontal > -2) {
-    rotation = true;
-    Chassis::getInstance()->LimeLightDrive(-0.025,0.025);
-  }
-
-  if (targetOffsetAngle_Horizontal < -2 && targetOffsetAngle_Horizontal > -4) {
-    rotation = false;
-    Chassis::getInstance()->LimeLightDrive(0,0);
-  }
-
-  if (targetArea < 3) {
-    driveF = true;
-    driveB = false;
-  }
-  
-  if (targetArea > 3.5) {
-    driveF = false;
-    driveB = true;
-  }
-
-  if (targetArea < 3.5 && targetArea > 3) {
-    driveF = false;
-    driveB = false;
-  }
-
-  if (rotation == true) {
+  if (targetAngle != 0 && targetAngle < 45 && targetAngle > -45) {
     
   }
-  if (rotation == false) {
-    if (driveF == true) {
-      Chassis::getInstance()->LimeLightDrive(0.05,0.05);   
-    }
-    if (driveB == true) {
-      Chassis::getInstance()->LimeLightDrive(-0.05,-0.05);
-    }
-    if (driveF == false && driveB == false) {
-      Chassis::getInstance()->LimeLightDrive(0,0);
-    }
-  }
+
+   
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
