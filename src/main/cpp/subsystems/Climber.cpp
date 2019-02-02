@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Climber.h"
-#include "commands/SetClimber.h"
+#include "commands/ClimberZeroDefaults.h"
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 
@@ -33,6 +33,7 @@ Climber::Climber() : Subsystem("Climber"),
 }
 
 void Climber::InitDefaultCommand() {
+      SetDefaultCommand(new ClimberZeroDefaults());
 }
 
 void Climber::Engage() {
