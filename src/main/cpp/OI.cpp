@@ -8,6 +8,10 @@
 #include "OI.h"
 #include <frc/WPILib.h>
 #include "commands/Drive.h"
+#include "commands/SaveHatchIntakeValueFWD.h"
+#include "commands/SaveHatchIntakeValueREV.h"
+#include "commands/ResetHatchIntakePosition.h"
+#include "subsystems/HatchIntake.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -33,6 +37,10 @@ OI::OI() {
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
+  frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
+  frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
+  frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
