@@ -20,14 +20,25 @@ class HatchIntake : public frc::Subsystem {
   // for methods that implement subsystem capabilities
   static const char kSubsystemName[];
   static std::shared_ptr<HatchIntake> self;
+  
   frc::DoubleSolenoid mPuncher;
   WPI_TalonSRX mPivot;
   frc::AnalogInput armPot;
+
   int calibrateEncoderDown;
   int calibratePotDown;
+
   void SetupMotionMagic();
   void SetUpTalons();
+
+  double Encoder;
+  double Pot;
+  double forwardPoint;
+  double reversePoint;
+
+
  public:
+
   HatchIntake();
   static std::shared_ptr<HatchIntake> getInstance();
   void InitDefaultCommand() override;
@@ -39,9 +50,11 @@ class HatchIntake : public frc::Subsystem {
   int GetPositionError();
   int GetArmPotValue();
   int GetArmPotVoltage();
-  void SetArmPositionDown(int potentiometer, int encoder);
-  void SetArmPositionUp(int potentiometer, int encoder);
-  void ResetArmPos();
-  int CalculateEncoderPos();
+  void SetArmPosition(double potentiometer, double encoder);
+  void ResetHatchIntakePosition();
+  double CalculateEncoderPos();
+  void SaveHatchIntakeValueFWD();
+  void SaveHatchIntakeValueREV();
+
 };
 #endif 
