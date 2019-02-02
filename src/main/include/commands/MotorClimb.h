@@ -11,10 +11,12 @@
 
 class MotorClimb : public frc::Command {
  public:
-  MotorClimb();
+  MotorClimb(double speed);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+  private:
+  double mClimberSpeed;
 };

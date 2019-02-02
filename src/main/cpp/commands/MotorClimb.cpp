@@ -8,7 +8,7 @@
 #include "commands/MotorClimb.h"
 #include "subsystems/Climber.h"
 
-MotorClimb::MotorClimb() {
+MotorClimb::MotorClimb(double speed) : mClimberSpeed(speed)  {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(Climber::getInstance().get());
@@ -20,7 +20,7 @@ void MotorClimb::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void MotorClimb::Execute() 
 {
-  Climber::getInstance()->MotorClimber(0.3);
+  Climber::getInstance()->DriveClimb(mClimberSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
