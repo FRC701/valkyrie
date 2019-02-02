@@ -9,7 +9,7 @@
 #include <frc/Preferences.h>
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
-
+using frc::Preferences;
 namespace
 {
   constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
@@ -135,26 +135,26 @@ int HatchIntake::GetArmPotVoltage(){
   return armPot.GetVoltage();
 }
 
-void HatchIntake::ResetArmPos(){
+void HatchIntake::ResetHatchIntakePosition(){
   mPivot.SetSelectedSensorPosition(0, kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
 
-void HatchIntake::SetArmPositionDown(int potentiometer, int encoder)
+void HatchIntake::SetArmPosition(double potentiometer, double encoder)
 {
-  calibrateEncoderDown = encoder;
-  calibratePotDown = potentiometer;
+  Encoder = encoder;
+  Pot = potentiometer;
 }
 
-void HatchIntake::SetArmPositionUp(int potentiometer, int encoder)
-{
-  double scaleFactor = (calibrateEncoderDown - encoder) / (calibratePotDown - potentiometer);
-  frc::Preferences::GetInstance()->PutDouble(kKey, scaleFactor);
-  frc::Preferences::GetInstance()->PutDouble(kKeyPot, calibratePotDown);
+double HatchIntake::CalculateEncoderPos() {
+	return Preferences::GetInstance()->GetDouble(kKey,0) * (HatchIntake::GetArmPotValue() - Preferences::GetInstance()->GetDouble(kKeyPot,0));
 }
 
-int HatchIntake::CalculateEncoderPos()
-{
-  return frc::Preferences::GetInstance()->GetDouble(kKey,0) * (HatchIntake::GetArmPotValue() - frc::Preferences::GetInstance()->GetDouble(kKeyPot,0));
+void HatchIntake::SaveHatchIntakeValueFWD() {
+  Preferences::GetInstance()->PutDouble(kKeyPot, forwardPoint);
+}
+
+void HatchIntake::SaveHatchIntakeValueREV() {
+  Preferences::GetInstance()->PutDouble(kKeyPot, reversePoint);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
