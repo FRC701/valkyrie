@@ -35,8 +35,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
-  frc::SmartDashboard::PutData("Run Climber Motor 30", new SetClimber(0.5));
-  frc::SmartDashboard::PutData("Run Climber Motor -30", new SetClimber(-0.5));
+  frc::SmartDashboard::PutData("Run Climber Motor 50%", new SetClimber(0.5));
+  frc::SmartDashboard::PutData("Run Climber Motor -50%", new SetClimber(-0.5));
   frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
 }
 
