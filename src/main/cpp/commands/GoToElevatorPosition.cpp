@@ -19,7 +19,7 @@ void GoToElevatorPosition::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void GoToElevatorPosition::Execute() {
-  Elevator::getInstance()->SetElevatorPos(mPosition);
+  Elevator::getInstance()->SetElevatorPosition(mPosition);
 }
 
 // Make this return true when this Command no longer needs to run execute()

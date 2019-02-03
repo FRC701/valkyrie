@@ -55,10 +55,9 @@ void Elevator::InitDefaultCommand() {
 
 void Elevator::SetElevator(double speed) {
           mRightElevator.Set(ControlMode::PercentOutput,speed);
-		  mLeftElevator.Set(ControlMode::PercentOutput,speed);
 }
 
-void Elevator::SetElevatorPos(int position){
+void Elevator::SetElevatorPosition(int position){
    mRightElevator.Set(ControlMode::MotionMagic, position);
 }
 
@@ -95,8 +94,8 @@ void Elevator::SetUpMotionMagic() {
   constexpr double kI {0};
   constexpr double kD {0};
   constexpr double kMaxVelocity {3675};
-  constexpr int kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
-  constexpr int kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  constexpr double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
+  constexpr double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
 
   mRightElevator.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mRightElevator.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
