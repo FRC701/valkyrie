@@ -57,7 +57,7 @@ void Elevator::SetElevator(double speed) {
           mRightElevator.Set(ControlMode::PercentOutput,speed);
 }
 
-void Elevator::SetElevatorPosition(int position){
+void Elevator::SetElevatorPosition(double position){
    mRightElevator.Set(ControlMode::MotionMagic, position);
 }
 
