@@ -7,12 +7,14 @@
 
 #pragma once
 
-#include <frc/commands/InstantCommand.h>
+#include <frc/commands/Command.h>
 
-class SetClimber : public frc::InstantCommand {
+class ClimberDefaultCommand : public frc::Command {
  public:
-  SetClimber(double speed);
-  void Initialize();
-  private:
-  double mSpeed;
+  ClimberDefaultCommand();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

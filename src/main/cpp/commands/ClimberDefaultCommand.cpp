@@ -5,16 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/MotorClimb.h"
+#include "commands/ClimberDefaultCommand.h"
 #include "subsystems/Climber.h"
 
-MotorClimb::MotorClimb(double speed) : mClimberSpeed(speed)  {
+ClimberDefaultCommand::ClimberDefaultCommand() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(Climber::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void MotorClimb::Initialize() {
-  Climber::getInstance()->MotorClimber(mClimberSpeed);
+void ClimberDefaultCommand::Initialize() {}
+
+// Called repeatedly when this Command is scheduled to run
+void ClimberDefaultCommand::Execute() {
+  Climber::getInstance()->Update();
 }
+
+// Make this return true when this Command no longer needs to run execute()
+bool ClimberDefaultCommand::IsFinished() { return false; }
+
+// Called once after isFinished returns true
+void ClimberDefaultCommand::End() {}
+
+// Called when another command which requires one or more of the same
+// subsystems is scheduled to run
+void ClimberDefaultCommand::Interrupted() {}

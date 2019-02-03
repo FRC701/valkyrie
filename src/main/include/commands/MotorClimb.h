@@ -7,16 +7,12 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc/commands/InstantCommand.h>
 
-class MotorClimb : public frc::Command {
+class MotorClimb : public frc::InstantCommand {
  public:
   MotorClimb(double speed);
   void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
   private:
   double mClimberSpeed;
 };
