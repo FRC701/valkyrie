@@ -142,7 +142,7 @@ void HatchIntake::GetArmValuesFwd() {
 
 void HatchIntake::GetArmValuesRev() {
   potRev = armPot.GetValue();
-  encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
   LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
   Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
   Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
