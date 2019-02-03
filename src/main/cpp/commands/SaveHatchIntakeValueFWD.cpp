@@ -15,5 +15,5 @@ SaveHatchIntakeValueFWD::SaveHatchIntakeValueFWD() {
 
 // Called once when the command executes
 void SaveHatchIntakeValueFWD::Initialize() {
-    HatchIntake::getInstance()->SaveHatchIntakeValueFWD();
+    HatchIntake::getInstance()->GetArmValuesFwd();
 }

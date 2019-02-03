@@ -25,17 +25,13 @@ class HatchIntake : public frc::Subsystem {
   WPI_TalonSRX mPivot;
   frc::AnalogInput armPot;
 
-  int calibrateEncoderDown;
-  int calibratePotDown;
+  int potFwd;
+  int potRev;
+  int encoderFwd;
+  int encoderRev;
 
   void SetupMotionMagic();
   void SetUpTalons();
-
-  double Encoder;
-  double Pot;
-  double forwardPoint;
-  double reversePoint;
-
 
  public:
 
@@ -48,13 +44,13 @@ class HatchIntake : public frc::Subsystem {
   int GetVelocity();
   int GetPosition();
   int GetPositionError();
+  void ResetArmEncoder();
   int GetArmPotValue();
-  int GetArmPotVoltage();
-  void SetArmPosition(double potentiometer, double encoder);
-  void ResetHatchIntakePosition();
-  double CalculateEncoderPos();
-  void SaveHatchIntakeValueFWD();
-  void SaveHatchIntakeValueREV();
+  void GetArmValuesFwd();
+  void GetArmValuesRev();
+  int GetEncoderValue();
+  void SetArmValue();
+  
 
 };
 #endif 

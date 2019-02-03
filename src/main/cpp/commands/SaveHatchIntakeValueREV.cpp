@@ -16,5 +16,5 @@ SaveHatchIntakeValueREV::SaveHatchIntakeValueREV() {
 
 // Called once when the command executes
 void SaveHatchIntakeValueREV::Initialize() {
-    HatchIntake::getInstance()->SaveHatchIntakeValueREV();
+    HatchIntake::getInstance()->GetArmValuesRev();
 }

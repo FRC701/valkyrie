@@ -15,5 +15,5 @@ ResetHatchIntakePosition::ResetHatchIntakePosition() {
 
 // Called once when the command executes
 void ResetHatchIntakePosition::Initialize() {
-     HatchIntake::getInstance()->ResetHatchIntakePosition();
+     HatchIntake::getInstance()->ResetArmEncoder();
 }
