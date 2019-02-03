@@ -21,6 +21,9 @@ class Climber : public frc::Subsystem {
         WPI_TalonSRX mDriveMotor;
         WPI_TalonSRX mLiftMotor;
         frc::DoubleSolenoid mLiftSolenoid;
+        double mDriveMotorSpeed;
+        double mLiftMotorSpeed;
+       
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
@@ -33,4 +36,5 @@ class Climber : public frc::Subsystem {
         void Disengage();
         void MotorClimber(double speed);
         void DriveClimb(double speed);
+        void Update();
 };
