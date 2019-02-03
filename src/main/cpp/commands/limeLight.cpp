@@ -5,6 +5,8 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include <cmath>
+
 #include <networktables/NetworkTableInstance.h>
 #include <frc/smartdashboard/Smartdashboard.h>
 
@@ -36,20 +38,11 @@ void limeLight::Execute() {
   double targetArea = table->GetNumber("ta",0.0);
   double targetAreaL = table->GetNumber("ta0",0.0);
   double targetAreaS = table->GetNumber("ta1",0.0);
-  double angleCoefficiant = 0;
-  if (targetOffsetAngle_HorizontalS > targetOffsetAngle_HorizontalL) {
-    angleCoefficiant = 1;
-  }
-  if (targetOffsetAngle_HorizontalS < targetOffsetAngle_HorizontalL) {
-    angleCoefficiant = -1;
-  }
-  double targetAngle = (targetAreaL - targetAreaS) * angleCoefficiant
-  double turnAngle = 90 - targetAngle;
+  double angleCoefficiant = 75;
+  double distanceFromTarget = 69.291 * exp(-1.51 * targetArea);
+  double driveSpeed = (distanceFromTarget - 18) * 0.0016;
 
-  if (targetAngle != 0 && targetAngle < 45 && targetAngle > -45) {
-    
-  }
-
+  Chassis::getInstance()->LimeLightDrive(driveSpeed,driveSpeed);
    
 
 }
