@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Climber.h"
-#include "commands/SetClimber.h"
+#include "commands/ClimberDefaultCommand.h"
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 
@@ -24,15 +24,20 @@ std::shared_ptr<Climber> Climber::getInstance() {
   }
   return self;
 }
-Climber::Climber() : Subsystem("Climber"),
+Climber::Climber() : Subsystem("Climber"), 
+    mDriveMotorSpeed{0},
+    mLiftMotorSpeed{0},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor(RobotMap::kIDClimberLiftMotor),
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
+    mDriveMotor.Set(0.0);
+    mLiftMotor.Set(0.0);
 }
 
 void Climber::InitDefaultCommand() {
+      SetDefaultCommand(new ClimberDefaultCommand());
 }
 
 void Climber::Engage() {
@@ -44,9 +49,16 @@ void Climber::Disengage() {
 }
 
 void Climber::MotorClimber(double speed) {
-    mLiftMotor.Set(speed);
+    mDriveMotorSpeed = speed;
+    Update();
 }
 
 void Climber::DriveClimb(double speed) {
-    mDriveMotor.Set(speed);
+    mLiftMotorSpeed = speed;
+    Update();
+}
+
+void Climber::Update() {
+    mDriveMotor.Set(mDriveMotorSpeed);
+    mLiftMotor.Set(mLiftMotorSpeed);
 }

@@ -8,6 +8,8 @@
 #include "OI.h"
 #include <frc/WPILib.h>
 #include "commands/Drive.h"
+#include "commands/SetClimber.h"
+#include "commands/MotorClimb.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -33,6 +35,11 @@ OI::OI() {
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
+  frc::SmartDashboard::PutData("Run Climber Motor 50%", new SetClimber(0.5));
+  frc::SmartDashboard::PutData("Run Climber Motor -50%", new SetClimber(-0.5));
+  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
+  frc::SmartDashboard::PutData("Run Climber 0%", new SetClimber(0.));
+  frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
