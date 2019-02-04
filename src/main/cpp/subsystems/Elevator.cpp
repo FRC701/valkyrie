@@ -13,6 +13,7 @@ using RobotMap::kTimeout_10Millis;
 namespace
 {
 constexpr int kSlotIndex {0};
+constexpr int kForwardSoftLimit {1234567890}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
   constexpr double kMaxUnitsPer100ms {3675.0};
@@ -44,7 +45,7 @@ Elevator::Elevator() : Subsystem("Elevator"),
       mRightElevator(RobotMap::kIDRightElevator)
 
       {
-    	void SetUpTalons();
+		SetUpTalons();
       }
 
 
@@ -65,7 +66,8 @@ void Elevator::SetUpTalons(){
   mRightElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
 			kPID_PrimaryClosedLoop,
 			kTimeout_10Millis);
-	mRightElevator.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
+	mRightElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
+	mRightElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mRightElevator.SetSensorPhase(true);
 	mRightElevator.SetInverted(false);
@@ -74,7 +76,8 @@ void Elevator::SetUpTalons(){
 
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.Follow(mRightElevator);
-
+	mLeftElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
+	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 }
 
 bool Elevator::IsRevLimitSwitchClosed() {
