@@ -38,6 +38,8 @@ namespace
 
   const std::string kArmSlope { "ArmSlope" };
   const std::string kArmYIntercept { "ArmYIntercept" };
+  const std::string kHatchFwdSoftLimit { "HatchFwdSoftLimit" };
+  const std::string kHatchRevSoftLimit { "HatchRevSoftLimit" };
 }
 
 const char HatchIntake::kSubsystemName[] { "HatchIntake" };
@@ -87,6 +89,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
   SetArmValue();
+  SetSoftLimits();
 }
 
 int HatchIntake::GetVelocity()
@@ -143,6 +146,9 @@ void HatchIntake::GetArmValuesFwd() {
 void HatchIntake::GetArmValuesRev() {
   potRev = armPot.GetValue();
   encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  Preferences::GetInstance()->PutInt(kHatchFwdSoftLimit, encoderFwd);
+  Preferences::GetInstance()->PutInt(kHatchRevSoftLimit, encoderRev);
+  SetSoftLimits();
   LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
   Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
   Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
@@ -158,6 +164,15 @@ void HatchIntake::SetArmValue() {
   mPivot.SetSelectedSensorPosition(
     LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
     kPID_PrimaryClosedLoop, kTimeout_10Millis);
+}
+
+void HatchIntake::SetSoftLimits() {
+  int mEncoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
+  int mEncoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
+  mPivot.ConfigForwardSoftLimitEnable(true);
+  mPivot.ConfigForwardSoftLimitThreshold(mEncoderFwd);
+  mPivot.ConfigReverseSoftLimitEnable(true);
+  mPivot.ConfigReverseSoftLimitThreshold(mEncoderRev);
 }
 
 
