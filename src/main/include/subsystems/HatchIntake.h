@@ -50,6 +50,7 @@ class HatchIntake : public frc::Subsystem {
   void GetArmValuesRev();
   int GetEncoderValue();
   void SetArmValue();
+  void SetSoftLimits();
   
 
 };
