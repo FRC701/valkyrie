@@ -6,9 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
+#include "utilities/LineCalculator.h"
+
 #include <frc/Preferences.h>
+
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
+using frc::Preferences;
 
 namespace
 {
@@ -31,13 +35,12 @@ namespace
     double pGain = 1* 1023.0/kEigthUnitsPerRev;
     return pGain;
   }
+
+  const std::string kArmSlope { "ArmSlope" };
+  const std::string kArmYIntercept { "ArmYIntercept" };
 }
 
-const char HatchIntake::kSubsystemName[] = "HatchIntake";
-
-const std::string kKey = "ArmScale";
-const std::string kKeyPot = "ArmPotBottom";
-
+const char HatchIntake::kSubsystemName[] { "HatchIntake" };
 std::shared_ptr<HatchIntake> HatchIntake::self;
 
 std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
@@ -83,10 +86,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
-
-
-  mPivot.SetSelectedSensorPosition(CalculateEncoderPos(), RobotMap::kPID_PrimaryClosedLoop, kTimeout_10Millis);
- 
+  SetArmValue();
 }
 
 int HatchIntake::GetVelocity()
@@ -123,38 +123,44 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis); 
 }
 
-int HatchIntake::GetPositionError(){
+int HatchIntake::GetPositionError() {
   return mPivot.GetClosedLoopError(kSlotIndex);
 }
 
-int HatchIntake::GetArmPotValue(){
-  return armPot.GetValue();
-}
-
-int HatchIntake::GetArmPotVoltage(){
-  return armPot.GetVoltage();
-}
-
-void HatchIntake::ResetArmPos(){
+void HatchIntake::ResetArmEncoder() {
   mPivot.SetSelectedSensorPosition(0, kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
 
-void HatchIntake::SetArmPositionDown(int potentiometer, int encoder)
-{
-  calibrateEncoderDown = encoder;
-  calibratePotDown = potentiometer;
+int HatchIntake::GetArmPotValue() {
+  return armPot.GetValue();
 }
 
-void HatchIntake::SetArmPositionUp(int potentiometer, int encoder)
-{
-  double scaleFactor = (calibrateEncoderDown - encoder) / (calibratePotDown - potentiometer);
-  frc::Preferences::GetInstance()->PutDouble(kKey, scaleFactor);
-  frc::Preferences::GetInstance()->PutDouble(kKeyPot, calibratePotDown);
+void HatchIntake::GetArmValuesFwd() {
+  potFwd = armPot.GetValue();
+  encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
 }
 
-int HatchIntake::CalculateEncoderPos()
-{
-  return frc::Preferences::GetInstance()->GetDouble(kKey,0) * (HatchIntake::GetArmPotValue() - frc::Preferences::GetInstance()->GetDouble(kKeyPot,0));
+void HatchIntake::GetArmValuesRev() {
+  potRev = armPot.GetValue();
+  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
+  Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
+  Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
 }
+
+int HatchIntake::GetEncoderValue() {
+  return mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+}
+
+void HatchIntake::SetArmValue() {
+  double armSlope = Preferences::GetInstance()->GetDouble(kArmSlope);
+  double armYIntercept = Preferences::GetInstance()->GetDouble(kArmYIntercept);
+  mPivot.SetSelectedSensorPosition(
+    LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
+    kPID_PrimaryClosedLoop, kTimeout_10Millis);
+}
+
+
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

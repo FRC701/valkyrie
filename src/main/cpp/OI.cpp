@@ -10,6 +10,10 @@
 #include "commands/Drive.h"
 #include "commands/SetClimber.h"
 #include "commands/MotorClimb.h"
+#include "commands/SaveHatchIntakeValueFWD.h"
+#include "commands/SaveHatchIntakeValueREV.h"
+#include "commands/ResetHatchIntakePosition.h"
+#include "subsystems/HatchIntake.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -40,6 +44,10 @@ OI::OI() {
   frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
   frc::SmartDashboard::PutData("Run Climber 0%", new SetClimber(0.));
   frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
+  frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
+  frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
+  frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {

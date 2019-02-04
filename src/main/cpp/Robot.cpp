@@ -28,6 +28,8 @@ void Robot::RobotInit() {
 const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Left Encoder Position", Chassis::getInstance()->GetLeftPosition());
     frc::SmartDashboard::PutNumber("Right Encoder Position", Chassis::getInstance()->GetRightPosition());
+    frc::SmartDashboard::PutNumber("Arm Encoder Value", HatchIntake::getInstance()->GetEncoderValue());
+    frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use
