@@ -77,6 +77,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.Follow(mRightElevator);
 	mLeftElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
+	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 }
 
 bool Elevator::IsRevLimitSwitchClosed() {
