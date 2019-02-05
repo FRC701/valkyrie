@@ -14,6 +14,7 @@
 #include "commands/SaveHatchIntakeValueREV.h"
 #include "commands/ResetHatchIntakePosition.h"
 #include "subsystems/HatchIntake.h"
+#include "commands/SetHatchIntakeAngleValue.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -47,6 +48,7 @@ OI::OI() {
   frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
   frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+  frc::SmartDashboard::PutData("Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
 
 }
 

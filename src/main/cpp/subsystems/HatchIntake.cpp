@@ -38,6 +38,8 @@ namespace
 
   const std::string kArmSlope { "ArmSlope" };
   const std::string kArmYIntercept { "ArmYIntercept" };
+  const std::string kAngleSlope { "AngleSlope" };
+  const std::string kAngleYIntercept { "AngleYIntercept" };
 }
 
 const char HatchIntake::kSubsystemName[] { "HatchIntake" };
@@ -158,6 +160,21 @@ void HatchIntake::SetArmValue() {
   mPivot.SetSelectedSensorPosition(
     LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
     kPID_PrimaryClosedLoop, kTimeout_10Millis);
+}
+
+void HatchIntake::SetAngleValue() {
+  encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
+  Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
+  Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
+}
+
+double HatchIntake::GetEncoderFromAngle(double angle) {
+  int angleSlope = Preferences::GetInstance()->GetInt(kAngleSlope);
+  int angleYIntercept = Preferences::GetInstance()->GetInt(kAngleYIntercept);
+  double encoder = LineCalculator(angleSlope, angleYIntercept)(angle);
+  return encoder;
 }
 
 

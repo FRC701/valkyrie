@@ -29,6 +29,8 @@ class HatchIntake : public frc::Subsystem {
   int potRev;
   int encoderFwd;
   int encoderRev;
+  int angleFwd;
+  int angleRev;
 
   void SetupMotionMagic();
   void SetUpTalons();
@@ -50,6 +52,8 @@ class HatchIntake : public frc::Subsystem {
   void GetArmValuesRev();
   int GetEncoderValue();
   void SetArmValue();
+  void SetAngleValue();
+  double GetEncoderFromAngle(double angle);
   
 
 };
