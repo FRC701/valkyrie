@@ -4,8 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-#ifndef SRC_SUBSYSTEMS_HATCHINTAKE_H_
-#define SRC_SUBSYSTEMS_HATCHINTAKE_H_
 #pragma once
 
 #include <frc/commands/Subsystem.h>
@@ -54,7 +52,7 @@ class HatchIntake : public frc::Subsystem {
   void SetArmValue();
   void SetSoftLimits();
   void Update();
-  
+  void SetAngleValue();
+  double GetEncoderFromAngle(double angle);
 
 };
-#endif 
