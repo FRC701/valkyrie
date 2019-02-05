@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
+#include "commands/PivotHatch.h"
 #include "utilities/LineCalculator.h"
 
 #include <frc/Preferences.h>
@@ -61,6 +62,7 @@ armPot(RobotMap::kIDArmPot)
 }
 
 void HatchIntake::InitDefaultCommand() {
+  SetDefaultCommand(new PivotHatch());
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
