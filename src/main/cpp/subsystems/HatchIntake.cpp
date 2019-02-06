@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
-#include "commands/PivotHatch.h"
+#include "commands/HatchIntakeDefaultCommand.h"
 #include "utilities/LineCalculator.h"
 
 #include <frc/Preferences.h>
@@ -56,13 +56,14 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
 mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot),
-armPot(RobotMap::kIDArmPot)
+armPot(RobotMap::kIDArmPot),
+mMotorSpeed{0}
 {
 
 }
 
 void HatchIntake::InitDefaultCommand() {
-  SetDefaultCommand(new PivotHatch());
+  SetDefaultCommand(new HatchIntakeDefaultCommand());
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
@@ -76,7 +77,8 @@ void HatchIntake::Engage() {
 }
 
 void HatchIntake::Pivot(double speed) {
-
+  mMotorSpeed = speed;
+  Update();
 }
 void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
@@ -175,6 +177,10 @@ void HatchIntake::SetSoftLimits() {
   mPivot.ConfigForwardSoftLimitThreshold(mEncoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
   mPivot.ConfigReverseSoftLimitThreshold(mEncoderRev);
+}
+
+void HatchIntake::Update() {
+  mPivot.Set(mMotorSpeed);
 }
 
 
