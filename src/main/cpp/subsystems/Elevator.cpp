@@ -42,8 +42,9 @@ std::shared_ptr<Elevator> Elevator::getInstance() {
 
 Elevator::Elevator() : Subsystem("Elevator"),
       mLeftElevator(RobotMap::kIDLeftElevator),
-      mRightElevator(RobotMap::kIDRightElevator)
-
+      mRightElevator(RobotMap::kIDRightElevator),
+      mMotorSpeed{0},
+      mMotorPos{0}
       {
 		SetUpTalons();
       }
@@ -55,11 +56,13 @@ void Elevator::InitDefaultCommand() {
 }
 
 void Elevator::SetElevator(double speed) {
-          mRightElevator.Set(ControlMode::PercentOutput,speed);
+  mMotorSpeed = speed;
+  UpdateSpeed();
 }
 
 void Elevator::SetElevatorPosition(double position){
-   mRightElevator.Set(ControlMode::MotionMagic, position);
+  mMotorPos = position;
+  UpdatePos();
 }
 
 void Elevator::SetUpTalons(){
@@ -107,6 +110,14 @@ void Elevator::SetUpMotionMagic() {
   mRightElevator.Config_kD(kSlotIndex, kD, kTimeout_10Millis);
   mRightElevator.ConfigMotionCruiseVelocity(kCruiseVelocity, kTimeout_10Millis);
   mRightElevator.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis);
+}
+
+void Elevator::UpdateSpeed() {
+  mRightElevator.Set(mMotorSpeed);
+}
+
+void Elevator::UpdatePos() {
+  mRightElevator.Set(mMotorPos);
 }
 
 /*double Elevator::GetPosError() {

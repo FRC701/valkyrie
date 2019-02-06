@@ -17,6 +17,9 @@ class Elevator : public frc::Subsystem {
         WPI_TalonSRX mRightElevator;
 
         void SetUpTalons();
+
+        double mMotorSpeed;
+        double mMotorPos;
   
  public:
         static std::shared_ptr<Elevator> getInstance();
@@ -29,6 +32,8 @@ class Elevator : public frc::Subsystem {
         bool IsRevLimitSwitchClosed();
         //double GetPosError();
         void SetUpMotionMagic();
+        void UpdateSpeed();
+        void UpdatePos();
 
 
 

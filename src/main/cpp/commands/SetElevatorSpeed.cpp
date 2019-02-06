@@ -5,14 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/SetElevatorSpeed.h"
+#include "subsystems/Elevator.h"
 
-#include <frc/commands/InstantCommand.h>
+SetElevatorSpeed::SetElevatorSpeed(double speed) : mSpeed(speed) {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+  Requires(Elevator::getInstance().get());
+}
 
-class SetElevator : public frc::InstantCommand {
-private:
-  double mPosition;
- public:
-  SetElevator(double position);
-  void Initialize() override;
-};
+// Called once when the command executes
+void SetElevatorSpeed::Initialize() {
+  Elevator::getInstance()->SetElevator(mSpeed);
+}
