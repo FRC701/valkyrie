@@ -33,6 +33,8 @@ class HatchIntake : public frc::Subsystem {
   void SetupMotionMagic();
   void SetUpTalons();
 
+  double mMotorSpeed;
+
  public:
 
   HatchIntake();
@@ -51,6 +53,7 @@ class HatchIntake : public frc::Subsystem {
   int GetEncoderValue();
   void SetArmValue();
   void SetSoftLimits();
+  void Update();
   
 
 };
