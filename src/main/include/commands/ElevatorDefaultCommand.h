@@ -7,12 +7,14 @@
 
 #pragma once
 
-#include <frc/commands/InstantCommand.h>
+#include <frc/commands/Command.h>
 
-class SetElevator : public frc::InstantCommand {
-private:
-  double mPosition;
+class ElevatorDefaultCommand : public frc::Command {
  public:
-  SetElevator(double position);
+  ElevatorDefaultCommand();
   void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

@@ -9,10 +9,10 @@
 
 #include <frc/commands/InstantCommand.h>
 
-class SetElevator : public frc::InstantCommand {
+class SetElevatorSpeed : public frc::InstantCommand {
 private:
-  double mPosition;
+  double mSpeed;
  public:
-  SetElevator(double position);
+  SetElevatorSpeed(double speed);
   void Initialize() override;
 };
