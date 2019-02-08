@@ -145,6 +145,9 @@ void HatchIntake::GetArmValuesFwd() {
 void HatchIntake::GetArmValuesRev() {
   potRev = armPot.GetValue();
   encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+}
+
+void HatchIntake::SetEncoderValues() {
   LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
   Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
   Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
@@ -163,8 +166,6 @@ void HatchIntake::SetArmValue() {
 }
 
 void HatchIntake::SetAngleValue() {
-  encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
-  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
   LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
   Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
   Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
