@@ -60,11 +60,11 @@ void HatchIntake::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-void HatchIntake::Disengage() {
+void HatchIntake::Engage() {
   mPuncher.Set(kMotorEngage);
 }
 
-void HatchIntake::Engage() {
+void HatchIntake::Disengage() {
   mPuncher.Set(kMotorDisengage);
 }
 
