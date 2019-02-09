@@ -31,6 +31,7 @@
 #include "commands/SetHatchIntakeAngleValue.h"
 
 
+
 std::shared_ptr<OI> OI::self;
 
 std::shared_ptr<OI> OI::getInstance() {
@@ -46,6 +47,7 @@ OI::OI() {
 
   driver.reset(new frc::Joystick(0));
   // Process operator interface input here.
+
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
   frc::SmartDashboard::PutData("Drive 50", new Drive(.50));
   frc::SmartDashboard::PutData("Drive 75", new Drive(.75));
