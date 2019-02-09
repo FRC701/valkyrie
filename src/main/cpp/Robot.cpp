@@ -6,12 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
-
+#include "frc/WPILib.h"
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include "subsystems/CargoCarriage.h"
 #include "subsystems/Chassis.h"
 #include "subsystems/HatchIntake.h"
+#include <cameraserver/CameraServer.h>
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
@@ -23,6 +24,7 @@ void Robot::RobotInit() {
   CargoCarriage::getInstance();
   Chassis::getInstance();
   HatchIntake::getInstance();
+  frc::CameraServer::GetInstance()->StartAutomaticCapture();
 }
 
 const void EncoderValues() {
