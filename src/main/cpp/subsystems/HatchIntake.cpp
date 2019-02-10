@@ -41,6 +41,8 @@ namespace
   const std::string kArmYIntercept { "ArmYIntercept" };
   const std::string kHatchFwdSoftLimit { "HatchFwdSoftLimit" };
   const std::string kHatchRevSoftLimit { "HatchRevSoftLimit" };
+  const std::string kAngleSlope { "AngleSlope" };
+  const std::string kAngleYIntercept { "AngleYIntercept" };
 }
 
 const char HatchIntake::kSubsystemName[] { "HatchIntake" };
@@ -181,6 +183,20 @@ void HatchIntake::SetSoftLimits() {
 
 void HatchIntake::Update() {
   mPivot.Set(mMotorSpeed);
+}
+
+void HatchIntake::SetAngleValue() {
+  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
+  Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
+  Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
+}
+
+double HatchIntake::GetEncoderFromAngle(double angle) {
+  int angleSlope = Preferences::GetInstance()->GetInt(kAngleSlope);
+  int angleYIntercept = Preferences::GetInstance()->GetInt(kAngleYIntercept);
+  double encoder = LineCalculator(angleSlope, angleYIntercept)(angle);
+  return encoder;
 }
 
 

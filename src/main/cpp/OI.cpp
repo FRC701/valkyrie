@@ -28,6 +28,7 @@
 #include "commands/TestingCargoIntake.h"
 #include "commands/SetCargoDeployerIn.h"
 #include "commands/SetCargoDeployerOut.h"
+#include "commands/SetHatchIntakeAngleValue.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -58,9 +59,10 @@ OI::OI() {
   frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
   frc::SmartDashboard::PutData("Run Climber 0%", new SetClimber(0.));
   frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
-  frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
-  frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
-  frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+  frc::SmartDashboard::PutData("1. Reset Encoder", new ResetHatchIntakePosition());
+  frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
+  frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
+  frc::SmartDashboard::PutData("3. Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
    frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
@@ -78,7 +80,6 @@ OI::OI() {
   frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
   frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.8));
   frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.4));
-
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
