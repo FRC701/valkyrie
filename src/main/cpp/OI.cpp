@@ -15,6 +15,8 @@
 #include "commands/ResetHatchIntakePosition.h"
 #include "subsystems/HatchIntake.h"
 #include "commands/SetElevatorSpeed.h"
+#include "commands/HatchIntakeDisengage.h"
+#include "commands/HatchIntakeEngage.h"
 #include "commands/HatchPuncherEngage.h"
 #include "commands/HatchPuncherDisengage.h"
 #include "commands/CarriageClawEngage.h"
@@ -61,6 +63,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
    frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
+  frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
+  frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
   frc::SmartDashboard::PutData("Pivot", new PivotHatch(0.3));
   frc::SmartDashboard::PutData("Carriage Claw Engage", new CarriageClawEngage());
   frc::SmartDashboard::PutData("Carriage Claw Disengage", new CarriageClawDisengage());
