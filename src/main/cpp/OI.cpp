@@ -15,6 +15,7 @@
 #include "commands/ResetHatchIntakePosition.h"
 #include "subsystems/HatchIntake.h"
 #include "commands/SetHatchIntakeAngleValue.h"
+#include "commands/SettingEncoderValues.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -45,11 +46,12 @@ OI::OI() {
   frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
   frc::SmartDashboard::PutData("Run Climber 0%", new SetClimber(0.));
   frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
-  frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
-  frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
-  frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+  //Hatch arm  clibration:
+  frc::SmartDashboard::PutData("Reset hatch Encoder", new ResetHatchIntakePosition());
+  frc::SmartDashboard::PutData("Save hatch Forward Point", new SaveHatchIntakeValueREV());
+  frc::SmartDashboard::PutData("Save hatch Reverse Point", new SaveHatchIntakeValueFWD());
+  frc::SmartDashboard::PutData("Set Hatch Encoder values", new SettingEncoderValues());
   frc::SmartDashboard::PutData("Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
-
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
