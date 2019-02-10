@@ -7,6 +7,7 @@
 
 #include "RobotMap.h"
 #include "subsystems/Elevator.h"
+#include "commands/ElevatorDefaultCommand.h"
 #include "commands/SetElevatorSpeed.h"
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
