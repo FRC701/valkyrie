@@ -15,7 +15,17 @@
 #include "commands/ResetHatchIntakePosition.h"
 #include "subsystems/HatchIntake.h"
 #include "commands/SetElevatorSpeed.h"
+#include "commands/HatchPuncherEngage.h"
+#include "commands/HatchPuncherDisengage.h"
+#include "commands/CarriageClawEngage.h"
+#include "commands/CarriageClawDisengage.h"
+#include "commands/CarriagePuncherDisengage.h"
+#include "commands/CarriagePuncherEngage.h"
+#include "commands/PivotHatch.h"
+#include "commands/RunCargoRoller.h"
 #include "commands/TestingCargoIntake.h"
+#include "commands/SetCargoDeployerIn.h"
+#include "commands/SetCargoDeployerOut.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -49,8 +59,19 @@ OI::OI() {
   frc::SmartDashboard::PutData("Forward Point", new SaveHatchIntakeValueREV());
   frc::SmartDashboard::PutData("Reverse Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
+   frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
+  frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
+  frc::SmartDashboard::PutData("Pivot", new PivotHatch(0.3));
+  frc::SmartDashboard::PutData("Carriage Claw Engage", new CarriageClawEngage());
+  frc::SmartDashboard::PutData("Carriage Claw Disengage", new CarriageClawDisengage());
+  frc::SmartDashboard::PutData("Carriage Puncher Engage", new CarriagePuncherEngage());
+  frc::SmartDashboard::PutData("Carriage Puncher Disengage", new CarriagePuncherDisengage());
+  frc::SmartDashboard::PutData("Run Cargo Roller 30%", new RunCargoRoller(0.3));
+  frc::SmartDashboard::PutData("Run Cargo Roller -30%", new RunCargoRoller(-0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller 30%", new TestingCargoIntake(0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
+  frc::SmartDashboard::PutData("Cargo Deployer In", new SetCargoDeployerIn());
+  frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
   frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.8));
   frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.4));
 
