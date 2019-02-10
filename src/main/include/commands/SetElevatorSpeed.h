@@ -15,4 +15,5 @@ private:
  public:
   SetElevatorSpeed(double speed);
   void Initialize() override;
+  bool IsFinished() override;
 };

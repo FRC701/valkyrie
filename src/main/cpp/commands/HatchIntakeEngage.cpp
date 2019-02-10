@@ -5,20 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SetElevatorSpeed.h"
-#include "subsystems/Elevator.h"
+#include "commands/HatchIntakeEngage.h"
+#include "subsystems/HatchIntake.h"
 
-SetElevatorSpeed::SetElevatorSpeed(double speed) : mSpeed(speed) {
+HatchIntakeEngage::HatchIntakeEngage() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Elevator::getInstance().get());
+  Requires(HatchIntake::getInstance().get());
 }
 
 // Called once when the command executes
-void SetElevatorSpeed::Initialize() {
-  Elevator::getInstance()->SetElevatorSpeed(mSpeed);
-}
-
-bool SetElevatorSpeed::IsFinished(){
-  return false;
+void HatchIntakeEngage::Initialize() {
+  HatchIntake::getInstance()->Engage();
 }

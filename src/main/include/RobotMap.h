@@ -30,23 +30,23 @@ constexpr int kIDCargoRoller {9};
 constexpr int kIDHatchPivot {10};
 
 //Hatch Pnuematics
-constexpr int kIDHatchPuncherForward {1};
-constexpr int kIDHatchPuncherReverse {5};
+constexpr int kIDHatchPuncherForward {0};
+constexpr int kIDHatchPuncherReverse {7};
 
 
 //Cargo Pneumatics
-constexpr int kIDCargoClawForward {2};
+constexpr int kIDCargoClawForward {1};
 constexpr int kIDCargoClawReverse {6};
-constexpr int kIDCargoPuncherForward {3};
-constexpr int kIDCargoPuncherReverse {7};
-constexpr int kIDCargoPneumaticForward {4};
-constexpr int kIDCargoPneumaticReverse {8};
+constexpr int kIDCargoPuncherForward {2};
+constexpr int kIDCargoPuncherReverse {5};
+constexpr int kIDCargoPneumaticForward {3};
+constexpr int kIDCargoPneumaticReverse {4};
 
 //Climber Pnuematics
-constexpr int kIDClimberForward {1};
-constexpr int kIDClimberReverse {5}; 
+constexpr int kIDClimberForward {0};
+constexpr int kIDClimberReverse {7}; 
 
-constexpr int kIDArmPot {1};
+constexpr int kIDArmPot {3};
 constexpr int kPID_PrimaryClosedLoop {0};
 constexpr int kPID_CascadedClosedLoop {1};
 

@@ -7,6 +7,8 @@
 
 #include "RobotMap.h"
 #include "subsystems/Elevator.h"
+#include "commands/ElevatorDefaultCommand.h"
+#include "commands/SetElevatorSpeed.h"
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
 
@@ -52,10 +54,12 @@ Elevator::Elevator() : Subsystem("Elevator"),
 
 
 void Elevator::InitDefaultCommand() {
+    //SetDefaultCommand(new ElevatorDefaultCommand(0)); for when robot has encoder
+	SetDefaultCommand(new ::SetElevatorSpeed(0));
 
 }
 
-void Elevator::SetElevator(double speed) {
+void Elevator::SetElevatorSpeed(double speed) {
   mMotorSpeed = speed;
   UpdateSpeed();
 }
@@ -74,8 +78,8 @@ void Elevator::SetUpTalons(){
 	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mRightElevator.SetSensorPhase(true);
 	mRightElevator.SetInverted(false);
-	mRightElevator.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
-	mRightElevator.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
+	mRightElevator.ConfigPeakOutputForward(1.0, kTimeout_10Millis);
+	mRightElevator.ConfigPeakOutputReverse(-1.0, kTimeout_10Millis);
 
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.Follow(mRightElevator);
@@ -92,8 +96,8 @@ void Elevator::SetUpMotionMagic() {
 
   mRightElevator.ConfigNominalOutputForward(0, kTimeout_10Millis);
   mRightElevator.ConfigNominalOutputReverse(0, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputForward(1, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
+  mRightElevator.ConfigPeakOutputForward(0.7, kTimeout_10Millis);
+  mRightElevator.ConfigPeakOutputReverse(-0.2, kTimeout_10Millis);
 
   constexpr double kF {calcFeedforward()};
   constexpr double kP {calcP()};
@@ -113,15 +117,17 @@ void Elevator::SetUpMotionMagic() {
 }
 
 void Elevator::UpdateSpeed() {
-  mRightElevator.Set(mMotorSpeed);
+  mRightElevator.Set(ControlMode::PercentOutput, mMotorSpeed);
 }
 
 void Elevator::UpdatePos() {
-  mRightElevator.Set(mMotorPos);
+  mRightElevator.Set(ControlMode::Position, mMotorPos);
 }
 
 /*double Elevator::GetPosError() {
 	return RightElevator.GetClosedLoopError(kSlotIndex);
 }*/
 
-
+double Elevator::GetEncoderValue(){
+	return mRightElevator.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+}

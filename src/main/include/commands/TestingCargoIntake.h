@@ -5,20 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SetElevatorSpeed.h"
-#include "subsystems/Elevator.h"
+#pragma once
 
-SetElevatorSpeed::SetElevatorSpeed(double speed) : mSpeed(speed) {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(Elevator::getInstance().get());
-}
+#include "commands/RunCargoRoller.h"
 
-// Called once when the command executes
-void SetElevatorSpeed::Initialize() {
-  Elevator::getInstance()->SetElevatorSpeed(mSpeed);
-}
-
-bool SetElevatorSpeed::IsFinished(){
-  return false;
-}
+class TestingCargoIntake : public RunCargoRoller {
+ public:
+  TestingCargoIntake(double speed);
+  bool IsFinished() override;
+};
