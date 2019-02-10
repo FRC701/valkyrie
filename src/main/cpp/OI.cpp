@@ -14,6 +14,7 @@
 #include "commands/SaveHatchIntakeValueREV.h"
 #include "commands/ResetHatchIntakePosition.h"
 #include "subsystems/HatchIntake.h"
+#include "commands/SetElevatorSpeed.h"
 #include "commands/TestingCargoIntake.h"
 
 
@@ -50,6 +51,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Reset Encoder", new ResetHatchIntakePosition());
   frc::SmartDashboard::PutData("Running Test Cargo Roller 30%", new TestingCargoIntake(0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
+  frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.8));
+  frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.4));
 
 }
 

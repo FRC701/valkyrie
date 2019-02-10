@@ -16,5 +16,9 @@ SetElevatorSpeed::SetElevatorSpeed(double speed) : mSpeed(speed) {
 
 // Called once when the command executes
 void SetElevatorSpeed::Initialize() {
-  Elevator::getInstance()->SetElevator(mSpeed);
+  Elevator::getInstance()->SetElevatorSpeed(mSpeed);
+}
+
+bool SetElevatorSpeed::IsFinished(){
+  return false;
 }

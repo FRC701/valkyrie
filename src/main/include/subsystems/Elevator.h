@@ -26,7 +26,7 @@ class Elevator : public frc::Subsystem {
 
         Elevator();
         void InitDefaultCommand() override;
-        void SetElevator(double speed);
+        void SetElevatorSpeed(double speed);
         void SetElevatorPosition(double position);
         bool IsFwdLimitSwitchClosed();
         bool IsRevLimitSwitchClosed();

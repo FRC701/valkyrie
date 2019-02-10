@@ -7,6 +7,7 @@
 
 #include "RobotMap.h"
 #include "subsystems/Elevator.h"
+#include "commands/SetElevatorSpeed.h"
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
 
@@ -52,10 +53,12 @@ Elevator::Elevator() : Subsystem("Elevator"),
 
 
 void Elevator::InitDefaultCommand() {
+    //SetDefaultCommand(new ElevatorDefaultCommand(0)); for when robot has encoder
+	SetDefaultCommand(new ::SetElevatorSpeed(0));
 
 }
 
-void Elevator::SetElevator(double speed) {
+void Elevator::SetElevatorSpeed(double speed) {
   mMotorSpeed = speed;
   UpdateSpeed();
 }
