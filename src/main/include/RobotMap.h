@@ -46,7 +46,7 @@ constexpr int kIDCargoPneumaticReverse {4};
 constexpr int kIDClimberForward {0};
 constexpr int kIDClimberReverse {7}; 
 
-constexpr int kIDArmPot {1};
+constexpr int kIDArmPot {3};
 constexpr int kPID_PrimaryClosedLoop {0};
 constexpr int kPID_CascadedClosedLoop {1};
 
