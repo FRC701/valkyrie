@@ -34,6 +34,7 @@ class Elevator : public frc::Subsystem {
         void SetUpMotionMagic();
         void UpdateSpeed();
         void UpdatePos();
+        double GetEncoderValue();
 
 
 

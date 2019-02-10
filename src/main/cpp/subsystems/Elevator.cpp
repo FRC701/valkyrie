@@ -128,4 +128,6 @@ void Elevator::UpdatePos() {
 	return RightElevator.GetClosedLoopError(kSlotIndex);
 }*/
 
-
+double Elevator::GetEncoderValue(){
+	return mRightElevator.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+}
