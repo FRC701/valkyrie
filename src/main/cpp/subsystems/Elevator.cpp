@@ -78,8 +78,8 @@ void Elevator::SetUpTalons(){
 	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mRightElevator.SetSensorPhase(true);
 	mRightElevator.SetInverted(false);
-	mRightElevator.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
-	mRightElevator.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
+	mRightElevator.ConfigPeakOutputForward(1.0, kTimeout_10Millis);
+	mRightElevator.ConfigPeakOutputReverse(-1.0, kTimeout_10Millis);
 
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.Follow(mRightElevator);
@@ -96,8 +96,8 @@ void Elevator::SetUpMotionMagic() {
 
   mRightElevator.ConfigNominalOutputForward(0, kTimeout_10Millis);
   mRightElevator.ConfigNominalOutputReverse(0, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputForward(1, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
+  mRightElevator.ConfigPeakOutputForward(0.7, kTimeout_10Millis);
+  mRightElevator.ConfigPeakOutputReverse(-0.2, kTimeout_10Millis);
 
   constexpr double kF {calcFeedforward()};
   constexpr double kP {calcP()};
