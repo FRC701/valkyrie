@@ -117,11 +117,11 @@ void Elevator::SetUpMotionMagic() {
 }
 
 void Elevator::UpdateSpeed() {
-  mRightElevator.Set(mMotorSpeed);
+  mRightElevator.Set(ControlMode::PercentOutput, mMotorSpeed);
 }
 
 void Elevator::UpdatePos() {
-  mRightElevator.Set(mMotorPos);
+  mRightElevator.Set(ControlMode::Position, mMotorPos);
 }
 
 /*double Elevator::GetPosError() {
