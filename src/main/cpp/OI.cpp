@@ -40,7 +40,31 @@ std::shared_ptr<OI> OI::getInstance() {
   return self;
 }
 
-OI::OI() {
+OI::OI()
+: driver(new frc::Joystick(0))
+, dA(driver.get(), kButtonA_ID)
+, dB(driver.get(), kButtonB_ID)
+, dX(driver.get(), kButtonX_ID)
+, dY(driver.get(), kButtonY_ID)
+, dLB(driver.get(), kButtonLB_ID)
+, dRB(driver.get(), kButtonRB_ID)
+, dL3(driver.get(), kButtonL3_ID)
+, dR3(driver.get(), kButtonR3_ID)
+, dStart(driver.get(), kButtonStart_ID)
+, dBack(driver.get(), kButtonBack_ID)
+
+, coDriver(new frc::Joystick(1))
+, coA(coDriver.get(), kButtonA_ID)
+, coB(coDriver.get(), kButtonB_ID)
+, coX(coDriver.get(), kButtonX_ID)
+, coY(coDriver.get(), kButtonY_ID)
+, coLB(coDriver.get(), kButtonLB_ID)
+, coRB(coDriver.get(), kButtonRB_ID)
+, coL3(coDriver.get(), kButtonL3_ID)
+, coR3(coDriver.get(), kButtonR3_ID)
+, coStart(coDriver.get(), kButtonStart_ID)
+, coBack(coDriver.get(), kButtonBack_ID)
+{
 
   coDriver.reset(new frc::Joystick(1));
 
@@ -63,7 +87,7 @@ OI::OI() {
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
   frc::SmartDashboard::PutData("3. Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
-   frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
+  frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
