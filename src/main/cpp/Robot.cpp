@@ -35,7 +35,14 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Right Encoder Position", Chassis::getInstance()->GetRightPosition());
     frc::SmartDashboard::PutNumber("Arm Encoder Value", HatchIntake::getInstance()->GetEncoderValue());
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
+    frc::SmartDashboard::PutNumber("Elevator Encoder", Elevator::getInstance()->GetEncoderValue());
 }
+
+const void LimitSwitches() {
+  frc::SmartDashboard::PutBoolean("Elevator Bottom Limit Switch", Elevator::getInstance()->IsRevLimitSwitchClosed());
+  frc::SmartDashboard::PutBoolean("Cargo Intake Banner Sensor", CargoIntake::getInstance()->IsCargoIn());
+}
+
 /**
  * This function is called every robot packet, no matter the mode. Use
  * this for items like diagnostics that you want ran during disabled,
