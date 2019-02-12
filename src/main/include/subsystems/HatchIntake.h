@@ -29,7 +29,7 @@ class HatchIntake : public frc::Subsystem {
   void SetUpTalons();
 
   double mMotorSpeed;
-
+  double mMotorPosition;
  public:
 
   HatchIntake();
@@ -38,6 +38,7 @@ class HatchIntake : public frc::Subsystem {
   void Engage();
   void Disengage();
   void Pivot(double speed);
+  void PivotPosition(double position);
   int GetVelocity();
   int GetPosition();
   int GetPositionError();
@@ -46,8 +47,10 @@ class HatchIntake : public frc::Subsystem {
   void GetArmValuesRev();
   int GetEncoderValue();
   void SetSoftLimits();
-  void Update();
+  void UpdateSpeed();
+  void UpdatePosition();
   void SetAngleValue();
   double GetEncoderFromAngle(double angle);
+  
 
 };
