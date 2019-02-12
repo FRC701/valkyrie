@@ -61,7 +61,7 @@ mPivot(RobotMap::kIDHatchPivot),
 armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0}
 {
-
+  SetUpTalons();
 }
 
 void HatchIntake::InitDefaultCommand() {
@@ -91,8 +91,9 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
-  mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
-  mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
+  mPivot.SetInverted(true);
+  mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
+  mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
 
   SetArmValue();
   SetSoftLimits();

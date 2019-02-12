@@ -15,4 +15,5 @@ private:
  public:
   PivotHatch(double speed);
   void Initialize() override;
+  bool IsFinished() override;
 };

@@ -67,7 +67,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
-  frc::SmartDashboard::PutData("Pivot", new PivotHatch(0.3));
+  frc::SmartDashboard::PutData("Pivot Fwd", new PivotHatch(0.2));
+  frc::SmartDashboard::PutData("Pivot Rev", new PivotHatch(-0.2));
   frc::SmartDashboard::PutData("Carriage Claw Engage", new CarriageClawEngage());
   frc::SmartDashboard::PutData("Carriage Claw Disengage", new CarriageClawDisengage());
   frc::SmartDashboard::PutData("Carriage Puncher Engage", new CarriagePuncherEngage());

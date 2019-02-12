@@ -18,3 +18,7 @@ PivotHatch::PivotHatch(double speed) : mSpeed(speed) {
 void PivotHatch::Initialize() {
   HatchIntake::getInstance()->Pivot(mSpeed);
 }
+
+bool PivotHatch::IsFinished(){
+  return false;
+}
