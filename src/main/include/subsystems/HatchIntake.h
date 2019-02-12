@@ -21,10 +21,7 @@ class HatchIntake : public frc::Subsystem {
   
   frc::DoubleSolenoid mPuncher;
   WPI_TalonSRX mPivot;
-  frc::AnalogInput armPot;
 
-  int potFwd;
-  int potRev;
   int encoderFwd;
   int encoderRev;
 
@@ -45,11 +42,9 @@ class HatchIntake : public frc::Subsystem {
   int GetPosition();
   int GetPositionError();
   void ResetArmEncoder();
-  int GetArmPotValue();
   void GetArmValuesFwd();
   void GetArmValuesRev();
   int GetEncoderValue();
-  void SetArmValue();
   void SetSoftLimits();
   void Update();
   void SetAngleValue();

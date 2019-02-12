@@ -58,7 +58,6 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
 mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot),
-armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0}
 {
 
@@ -94,7 +93,6 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
-  SetArmValue();
   SetSoftLimits();
 }
 
@@ -140,36 +138,19 @@ void HatchIntake::ResetArmEncoder() {
   mPivot.SetSelectedSensorPosition(0, kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
 
-int HatchIntake::GetArmPotValue() {
-  return armPot.GetValue();
-}
-
 void HatchIntake::GetArmValuesFwd() {
-  potFwd = armPot.GetValue();
   encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
 }
 
 void HatchIntake::GetArmValuesRev() {
-  potRev = armPot.GetValue();
   encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
   Preferences::GetInstance()->PutInt(kHatchFwdSoftLimit, encoderFwd);
   Preferences::GetInstance()->PutInt(kHatchRevSoftLimit, encoderRev);
   SetSoftLimits();
-  LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
-  Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
-  Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
 }
 
 int HatchIntake::GetEncoderValue() {
   return mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
-}
-
-void HatchIntake::SetArmValue() {
-  double armSlope = Preferences::GetInstance()->GetDouble(kArmSlope);
-  double armYIntercept = Preferences::GetInstance()->GetDouble(kArmYIntercept);
-  mPivot.SetSelectedSensorPosition(
-    LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
-    kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
 
 void HatchIntake::SetSoftLimits() {
