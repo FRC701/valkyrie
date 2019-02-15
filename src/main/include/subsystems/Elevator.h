@@ -29,13 +29,12 @@ class Elevator : public frc::Subsystem {
         void SetElevatorSpeed(double speed);
         void SetElevatorPosition(double position);
         bool IsFwdLimitSwitchClosed();
-        bool IsRevLimitSwitchClosed();
         //double GetPosError();
         void SetUpMotionMagic();
         void UpdateSpeed();
         void UpdatePos();
         double GetEncoderValue();
-
+        void ResetElevatorEncoder();
 
 
 };
