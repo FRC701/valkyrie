@@ -36,6 +36,7 @@ private:
   void DriveChassis(double speed);
   double GetRightPosition();
   double GetLeftPosition();
+  void Pathfinder();
   //double GetVelocity();
 
 

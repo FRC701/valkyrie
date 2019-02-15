@@ -1,6 +1,7 @@
 #include "subsystems/Chassis.h"
 #include "RobotMap.h"
 #include "commands/TankDrive.h"
+#include <pathfinder.h>
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
@@ -62,6 +63,28 @@ double Chassis::GetLeftPosition() {
 
 double Chassis::GetRightPosition() {
   return rightEncoder.GetPosition();
-
 }
 
+void Chassis::Pathfinder() {
+  int pointLength = 3;
+
+  Waypoint points[pointLength];
+
+  Waypoint p1 = { -4, -1, d2r(45) };
+  Waypoint p2 = { -1, 2, 0};
+  Waypoint p3 = { 2, 4, 0 };
+  points[0] = p1;
+  points[1] = p2;
+  points[2] = p3;
+
+
+  TrajectoryCandidate candidate;
+
+  pathfinder_prepare(points, pointLength, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 0.001, 15.0, 10.0, 60.0, &candidate);
+
+  int length = candidate.length;
+
+  Segment *trajectory = malloc(length * sizeof(Segment));
+
+  pathfinder_generate(&candidate, trajectory);
+}
