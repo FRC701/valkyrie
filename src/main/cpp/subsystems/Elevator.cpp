@@ -49,13 +49,14 @@ Elevator::Elevator() : Subsystem("Elevator"),
       mMotorPos{0}
       {
 		SetUpTalons();
+    SetUpMotionMagic();
       }
 
 
 
 void Elevator::InitDefaultCommand() {
-    //SetDefaultCommand(new ElevatorDefaultCommand(0)); for when robot has encoder
-	SetDefaultCommand(new ::SetElevatorSpeed(0));
+    SetDefaultCommand(new ElevatorDefaultCommand()); //for when robot has encoder
+	//SetDefaultCommand(new ::SetElevatorSpeed(0));
 
 }
 
@@ -70,58 +71,59 @@ void Elevator::SetElevatorPosition(double position){
 }
 
 void Elevator::SetUpTalons(){
-  mRightElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
+  mLeftElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
 			kPID_PrimaryClosedLoop,
 			kTimeout_10Millis);
-	mRightElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
-	mRightElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
-	mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	mRightElevator.SetSensorPhase(true);
-	mRightElevator.SetInverted(false);
-	mRightElevator.ConfigPeakOutputForward(1.0, kTimeout_10Millis);
-	mRightElevator.ConfigPeakOutputReverse(-1.0, kTimeout_10Millis);
-
-	mLeftElevator.SetInverted(true);
-	mLeftElevator.Follow(mRightElevator);
 	mLeftElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
+	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
+	mLeftElevator.SetSensorPhase(false);
+	mLeftElevator.SetInverted(true);
+	mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
+	mLeftElevator.ConfigPeakOutputReverse(-0.5, kTimeout_10Millis);
+
+	mRightElevator.SetInverted(false);
+	mRightElevator.Follow(mLeftElevator);
+	mRightElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
+	mRightElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 }
 
-bool Elevator::IsRevLimitSwitchClosed() {
-	return mRightElevator.GetSensorCollection().IsRevLimitSwitchClosed();
+bool Elevator::IsFwdLimitSwitchClosed() {
+	return mLeftElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 void Elevator::SetUpMotionMagic() {
-  mRightElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, kTimeout_10Millis);
-  mRightElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, kTimeout_10Millis);
+  mLeftElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, kTimeout_10Millis);
+  mLeftElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, kTimeout_10Millis);
 
-  mRightElevator.ConfigNominalOutputForward(0, kTimeout_10Millis);
-  mRightElevator.ConfigNominalOutputReverse(0, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputForward(0.7, kTimeout_10Millis);
-  mRightElevator.ConfigPeakOutputReverse(-0.2, kTimeout_10Millis);
+  mLeftElevator.ConfigNominalOutputForward(0, kTimeout_10Millis);
+  mLeftElevator.ConfigNominalOutputReverse(0, kTimeout_10Millis);
+  mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
+  mLeftElevator.ConfigPeakOutputReverse(-0.5, kTimeout_10Millis);
 
   constexpr double kF {calcFeedforward()};
   constexpr double kP {calcP()};
+  //constexpr double kP{.05};
   constexpr double kI {0};
   constexpr double kD {0};
   constexpr double kMaxVelocity {3675};
-  constexpr double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
-  constexpr double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  constexpr double kCruiseVelocity {1600}; //Sensor Units per 100ms
+  constexpr double kMotionAcceleration {1300};//kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
 
-  mRightElevator.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
-  mRightElevator.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
-  mRightElevator.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
-  mRightElevator.Config_kI(kSlotIndex, kI, kTimeout_10Millis);
-  mRightElevator.Config_kD(kSlotIndex, kD, kTimeout_10Millis);
-  mRightElevator.ConfigMotionCruiseVelocity(kCruiseVelocity, kTimeout_10Millis);
-  mRightElevator.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis);
+  mLeftElevator.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
+  mLeftElevator.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
+  mLeftElevator.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
+  mLeftElevator.Config_kI(kSlotIndex, kI, kTimeout_10Millis);
+  mLeftElevator.Config_kD(kSlotIndex, kD, kTimeout_10Millis);
+  mLeftElevator.ConfigMotionCruiseVelocity(kCruiseVelocity, kTimeout_10Millis);
+  mLeftElevator.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis);
 }
 
 void Elevator::UpdateSpeed() {
-  mRightElevator.Set(ControlMode::PercentOutput, mMotorSpeed);
+  mLeftElevator.Set(ControlMode::PercentOutput, mMotorSpeed);
 }
 
 void Elevator::UpdatePos() {
-  mRightElevator.Set(ControlMode::Position, mMotorPos);
+  mLeftElevator.Set(ControlMode::Position, mMotorPos);
 }
 
 /*double Elevator::GetPosError() {
@@ -129,5 +131,9 @@ void Elevator::UpdatePos() {
 }*/
 
 double Elevator::GetEncoderValue(){
-	return mRightElevator.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+	return mLeftElevator.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+}
+
+void Elevator::ResetElevatorEncoder() {
+  mLeftElevator.SetSelectedSensorPosition(0, kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
