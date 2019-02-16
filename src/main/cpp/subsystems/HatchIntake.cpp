@@ -32,8 +32,10 @@ namespace
 
   constexpr double calcP() 
   {
-    constexpr double kEigthUnitsPerRev = 4096.0/ 1.0;
-    double pGain = 1* 1023.0/kEigthUnitsPerRev;
+    // TODO: What is the knob? What do we change to make this different.
+    constexpr double kEigthUnitsPerRev {4096.0 / 1.0};
+    constexpr double kGainRatio {1.0};
+    constexpr double pGain = kGainRatio * 1023.0 / kEigthUnitsPerRev;
     return pGain;
   }
 
@@ -62,7 +64,8 @@ armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0},
 mMotorPosition{0}
 {
-
+  SetUpTalons();
+  SetupMotionMagic();
 }
 
 void HatchIntake::InitDefaultCommand() {
@@ -122,13 +125,13 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigNominalOutputReverse(0, kTimeout_10Millis);
   mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
-  constexpr double kF {calcFeedforward()};
+  constexpr double kF {0 /* calcFeedforward() */};
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
-  constexpr double kMaxVelocity {3675};
-  constexpr double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
-  constexpr double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  const double kMaxVelocity {encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  const double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
+  const double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
@@ -179,12 +182,12 @@ void HatchIntake::SetArmValue() {
 }
 
 void HatchIntake::SetSoftLimits() {
-  int mEncoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
-  int mEncoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
+  encoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
+  encoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
   mPivot.ConfigForwardSoftLimitEnable(true);
-  mPivot.ConfigForwardSoftLimitThreshold(mEncoderFwd);
+  mPivot.ConfigForwardSoftLimitThreshold(encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
-  mPivot.ConfigReverseSoftLimitThreshold(mEncoderRev);
+  mPivot.ConfigReverseSoftLimitThreshold(encoderRev);
 }
 
 void HatchIntake::UpdateSpeed() {
