@@ -35,6 +35,10 @@ class Elevator : public frc::Subsystem {
         void UpdatePos();
         double GetEncoderValue();
         void ResetElevatorEncoder();
+        double GetRightCurrent();
+        double GetLeftCurrent();
+        double GetRightVoltage();
+        double GetLeftVoltage();
 
 
 };

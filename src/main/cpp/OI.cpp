@@ -88,8 +88,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
   frc::SmartDashboard::PutData("Level 1", new SetElevator(120));
   //frc::SmartDashboard::PutData("Level 2", new SetElevator(16750));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(5750));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(39299));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(10000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(23000));
 
 
 }
