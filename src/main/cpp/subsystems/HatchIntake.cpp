@@ -59,7 +59,8 @@ HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
 mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
 mPivot(RobotMap::kIDHatchPivot),
 armPot(RobotMap::kIDArmPot),
-mMotorSpeed{0}
+mMotorSpeed{0},
+mMotorPosition{0}
 {
 
 }
@@ -80,7 +81,12 @@ void HatchIntake::Engage() {
 
 void HatchIntake::Pivot(double speed) {
   mMotorSpeed = speed;
-  Update();
+  UpdateSpeed();
+}
+
+void HatchIntake::PivotPosition(double position) {
+  mMotorPosition = position;
+  UpdatePosition();
 }
 void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
@@ -181,8 +187,12 @@ void HatchIntake::SetSoftLimits() {
   mPivot.ConfigReverseSoftLimitThreshold(mEncoderRev);
 }
 
-void HatchIntake::Update() {
-  mPivot.Set(mMotorSpeed);
+void HatchIntake::UpdateSpeed() {
+  mPivot.Set(ControlMode::PercentOutput, mMotorSpeed);
+}
+
+void HatchIntake::UpdatePosition() {
+  mPivot.Set(ControlMode::Position, mMotorPosition);
 }
 
 void HatchIntake::SetAngleValue() {
