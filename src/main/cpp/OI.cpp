@@ -115,10 +115,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
   frc::SmartDashboard::PutData("Level 1", new SetElevator(120));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(5750));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(39299));
-  frc::SmartDashboard::PutData("Pivot score position", new PivotPosition(6000));
-    frc::SmartDashboard::PutData("Pivot zero position", new PivotPosition(0));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(10000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(23000));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {

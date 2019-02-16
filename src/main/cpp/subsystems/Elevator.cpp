@@ -137,3 +137,19 @@ double Elevator::GetEncoderValue(){
 void Elevator::ResetElevatorEncoder() {
   mLeftElevator.SetSelectedSensorPosition(0, kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
+
+double Elevator::GetRightCurrent() {
+  return mRightElevator.GetOutputCurrent();
+}
+
+double Elevator::GetLeftCurrent() {
+  return mLeftElevator.GetOutputCurrent();
+}
+
+double Elevator::GetRightVoltage() {
+  return mRightElevator.GetMotorOutputVoltage();
+}
+
+double Elevator::GetLeftVoltage() {
+  return mLeftElevator.GetMotorOutputVoltage();
+}
