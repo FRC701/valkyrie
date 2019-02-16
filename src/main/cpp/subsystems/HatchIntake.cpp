@@ -209,7 +209,9 @@ double HatchIntake::GetEncoderFromAngle(double angle) {
   return encoder;
 }
 
-
+double HatchIntake::GetArmPotVoltage(){
+  return armPot.GetVoltage();
+}
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
