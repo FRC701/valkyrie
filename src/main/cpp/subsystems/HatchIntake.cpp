@@ -7,6 +7,7 @@
 
 #include "subsystems/HatchIntake.h"
 #include "commands/HatchIntakeDefaultCommand.h"
+#include "commands/HatchIntakeSpeedDefaultCommand.h"
 #include "utilities/LineCalculator.h"
 #include "commands/PivotHatch.h"
 
@@ -70,10 +71,8 @@ mMotorPosition{0}
 }
 
 void HatchIntake::InitDefaultCommand() {
-  SetDefaultCommand(new HatchIntakeDefaultCommand());
-  //SetDefaultCommand(new PivotHatch(0));
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+  SetDefaultCommand(new HatchIntakeSpeedDefaultCommand);
+  // SetDefaultCommand(new HatchIntakeDefaultCommand); // TODO: When we're happy with positions.
 }
 
 void HatchIntake::Disengage() {
