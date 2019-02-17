@@ -50,14 +50,16 @@ const std::string kElevatorSlope {"ElevatorSlope"};
 const std::string kElevatorYIntercept {"ElevatorYIntercept"};
 
 Elevator::Elevator() : Subsystem("Elevator"),
-      mLeftElevator(RobotMap::kIDLeftElevator),
-      mRightElevator(RobotMap::kIDRightElevator),
-      mMotorSpeed{0},
-      mMotorPos{0}
+  mLeftElevator(RobotMap::kIDLeftElevator),
+  mRightElevator(RobotMap::kIDRightElevator),
+  mMotorSpeed{0},
+  mMotorPos{0},
       {
 		SetUpTalons();
-    SetUpMotionMagic();
-      }
+{
+  SetUpTalons();
+  SetUpMotionMagic();
+}
 
 
 
