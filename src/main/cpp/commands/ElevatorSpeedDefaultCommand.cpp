@@ -8,6 +8,7 @@
 #include "commands/ElevatorSpeedDefaultCommand.h"
 
 #include "subsystems/Elevator.h"
+#include "OI.h"
 
 ElevatorSpeedDefaultCommand::ElevatorSpeedDefaultCommand() {
   // Use Requires() here to declare subsystem dependencies
@@ -19,7 +20,8 @@ void ElevatorSpeedDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorSpeedDefaultCommand::Execute() {
-  Elevator::getInstance()->UpdateSpeed();
+  double left = OI::getInstance()->getCoDriverLeftYAxis();
+  Elevator::getInstance()->SetElevatorSpeed(left);
 }
 
 // Make this return true when this Command no longer needs to run execute()
