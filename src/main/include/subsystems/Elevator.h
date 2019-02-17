@@ -39,6 +39,7 @@ class Elevator : public frc::Subsystem {
         double GetLeftCurrent();
         double GetRightVoltage();
         double GetLeftVoltage();
+        bool IsRevLimitSwitchClosed();
 
 
 };

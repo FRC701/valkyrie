@@ -77,7 +77,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	mLeftElevator.SetSensorPhase(false);
+	mLeftElevator.SetSensorPhase(true);
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-0.5, kTimeout_10Millis);
@@ -123,7 +123,7 @@ void Elevator::UpdateSpeed() {
 }
 
 void Elevator::UpdatePos() {
-  mLeftElevator.Set(ControlMode::Position, mMotorPos);
+  mLeftElevator.Set(ControlMode::MotionMagic, mMotorPos);
 }
 
 /*double Elevator::GetPosError() {
@@ -152,4 +152,8 @@ double Elevator::GetRightVoltage() {
 
 double Elevator::GetLeftVoltage() {
   return mLeftElevator.GetMotorOutputVoltage();
+}
+
+bool Elevator::IsRevLimitSwitchClosed(){
+  return mLeftElevator.GetSensorCollection().IsRevLimitSwitchClosed();
 }

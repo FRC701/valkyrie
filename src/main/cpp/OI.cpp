@@ -111,12 +111,14 @@ OI::OI()
   frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
   frc::SmartDashboard::PutData("Cargo Deployer In", new SetCargoDeployerIn());
   frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
+  frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.3));
+  frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.3));
   frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
   frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
-  frc::SmartDashboard::PutData("Level 1", new SetElevator(120));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(10000));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(23000));
+  frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
