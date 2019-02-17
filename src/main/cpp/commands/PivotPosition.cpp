@@ -5,20 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/PivotHatch.h"
+#include "commands/PivotPosition.h"
 #include "subsystems/HatchIntake.h"
 
-PivotHatch::PivotHatch(double speed) : mSpeed(speed) {
+PivotPosition::PivotPosition(double position) : mPosition(position) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(HatchIntake::getInstance().get());
 }
 
 // Called once when the command executes
-void PivotHatch::Initialize() {
-  HatchIntake::getInstance()->Pivot(mSpeed);
-}
-
-bool PivotHatch::IsFinished(){
-  return false;
+void PivotPosition::Initialize() {
+  HatchIntake::getInstance()->PivotPosition(mPosition);
 }

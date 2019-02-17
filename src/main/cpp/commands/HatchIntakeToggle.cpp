@@ -5,20 +5,21 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/PivotHatch.h"
+#include "commands/HatchIntakeToggle.h"
 #include "subsystems/HatchIntake.h"
 
-PivotHatch::PivotHatch(double speed) : mSpeed(speed) {
+HatchIntakeToggle::HatchIntakeToggle() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(HatchIntake::getInstance().get());
 }
 
 // Called once when the command executes
-void PivotHatch::Initialize() {
-  HatchIntake::getInstance()->Pivot(mSpeed);
-}
-
-bool PivotHatch::IsFinished(){
-  return false;
+void HatchIntakeToggle::Initialize() {
+  if (HatchIntake::getInstance()->IsEngage()) {
+    HatchIntake::getInstance()->Disengage();
+  }
+  else {
+    HatchIntake::getInstance()->Engage();
+  }
 }

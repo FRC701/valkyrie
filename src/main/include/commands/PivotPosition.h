@@ -5,20 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/PivotHatch.h"
-#include "subsystems/HatchIntake.h"
+#pragma once
 
-PivotHatch::PivotHatch(double speed) : mSpeed(speed) {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(HatchIntake::getInstance().get());
-}
+#include <frc/commands/InstantCommand.h>
 
-// Called once when the command executes
-void PivotHatch::Initialize() {
-  HatchIntake::getInstance()->Pivot(mSpeed);
-}
-
-bool PivotHatch::IsFinished(){
-  return false;
-}
+class PivotPosition : public frc::InstantCommand {
+ private:
+  double mPosition;
+ public:
+  PivotPosition(double position);
+  void Initialize() override;
+};

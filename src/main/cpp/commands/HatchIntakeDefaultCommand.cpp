@@ -19,7 +19,7 @@ void HatchIntakeDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchIntakeDefaultCommand::Execute() {
-  HatchIntake::getInstance()->Update();
+  HatchIntake::getInstance()->UpdatePosition();
 }
 
 // Make this return true when this Command no longer needs to run execute()
