@@ -36,6 +36,8 @@
 #include "commands/SetElevatorPositionInches.h"
 #include "commands/SetElevatorPosDefaultCommand.h"
 #include "commands/SetElevatorSpeedDefaultCommand.h"
+#include "commands/SetHatchIntakePositionDefaultCommand.h"
+#include "commands/SetHatchIntakeSpeedDefaultCommand.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -127,6 +129,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(75));
   frc::SmartDashboard::PutData("Elevator: Position Default", new SetElevatorPosDefaultCommand());
   frc::SmartDashboard::PutData("Elevator: Speed Default", new SetElevatorSpeedDefaultCommand());
+  frc::SmartDashboard::PutData("Hatch Intake: Position Default", new SetHatchIntakePositionDefaultCommand());
+  frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
@@ -151,4 +155,20 @@ double OI::getDriverRightXAxis() const{
 
 double OI::getDriverRightYAxis() const{
   return driver->GetRawAxis(kRightYAxis_ID);
+}
+
+double OI::getCoDriverLeftXAxis() const{
+  return coDriver->GetRawAxis(kLeftXAxis_ID);
+}
+
+double OI::getCoDriverLeftYAxis() const{
+  return coDriver->GetRawAxis(kLeftYAxis_ID);
+}
+
+double OI::getCoDriverRightXAxis() const{
+  return coDriver->GetRawAxis(kRightXAxis_ID);
+}
+
+double OI::getCoDriverRightYAxis() const{
+  return coDriver->GetRawAxis(kRightYAxis_ID);
 }

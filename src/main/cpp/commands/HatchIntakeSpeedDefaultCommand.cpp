@@ -5,31 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ElevatorSpeedDefaultCommand.h"
-
-#include "subsystems/Elevator.h"
+#include "commands/HatchIntakeSpeedDefaultCommand.h"
+#include "subsystems/HatchIntake.h"
 #include "OI.h"
 
-ElevatorSpeedDefaultCommand::ElevatorSpeedDefaultCommand() {
+HatchIntakeSpeedDefaultCommand::HatchIntakeSpeedDefaultCommand() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(Elevator::getInstance().get());
+  Requires(HatchIntake::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void ElevatorSpeedDefaultCommand::Initialize() {}
+void HatchIntakeSpeedDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ElevatorSpeedDefaultCommand::Execute() {
-  double left = OI::getInstance()->getCoDriverLeftYAxis();
-  Elevator::getInstance()->SetElevatorSpeed(left);
+void HatchIntakeSpeedDefaultCommand::Execute() {
+  double right = OI::getInstance()->getDriverRightYAxis();  
+  HatchIntake::getInstance()->Pivot(right);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ElevatorSpeedDefaultCommand::IsFinished() { return false; }
+bool HatchIntakeSpeedDefaultCommand::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ElevatorSpeedDefaultCommand::End() {}
+void HatchIntakeSpeedDefaultCommand::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ElevatorSpeedDefaultCommand::Interrupted() {}
+void HatchIntakeSpeedDefaultCommand::Interrupted() {}
