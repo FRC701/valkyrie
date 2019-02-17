@@ -8,6 +8,7 @@
 #include "subsystems/HatchIntake.h"
 #include "commands/HatchIntakeDefaultCommand.h"
 #include "utilities/LineCalculator.h"
+#include "commands/PivotHatch.h"
 
 #include <frc/Preferences.h>
 
@@ -70,16 +71,17 @@ mMotorPosition{0}
 
 void HatchIntake::InitDefaultCommand() {
   SetDefaultCommand(new HatchIntakeDefaultCommand());
+  //SetDefaultCommand(new PivotHatch(0));
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
 
 void HatchIntake::Disengage() {
-  mPuncher.Set(kMotorEngage);
+  mPuncher.Set(kMotorDisengage);
 }
 
 void HatchIntake::Engage() {
-  mPuncher.Set(kMotorDisengage);
+  mPuncher.Set(kMotorEngage);
 }
 
 void HatchIntake::Pivot(double speed) {
@@ -100,6 +102,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
+  mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
 
@@ -125,13 +128,13 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigNominalOutputReverse(0, kTimeout_10Millis);
   mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
-  constexpr double kF {0 /* calcFeedforward() */};
+  constexpr double kF {0.128 /* calcFeedforward() */};
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
-  const double kMaxVelocity {encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {kMaxVelocity}; //Sensor Units per 100ms
-  const double kMotionAcceleration {kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  const double kCruiseVelocity {800}; //Sensor Units per 100ms
+  const double kMotionAcceleration {800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
@@ -185,9 +188,9 @@ void HatchIntake::SetSoftLimits() {
   encoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
   encoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
   mPivot.ConfigForwardSoftLimitEnable(true);
-  mPivot.ConfigForwardSoftLimitThreshold(encoderFwd);
+  mPivot.ConfigForwardSoftLimitThreshold(7000);//encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
-  mPivot.ConfigReverseSoftLimitThreshold(encoderRev);
+  mPivot.ConfigReverseSoftLimitThreshold(-1000);//encoderRev);
 }
 
 void HatchIntake::UpdateSpeed() {
@@ -195,7 +198,7 @@ void HatchIntake::UpdateSpeed() {
 }
 
 void HatchIntake::UpdatePosition() {
-  mPivot.Set(ControlMode::Position, mMotorPosition);
+  mPivot.Set(ControlMode::MotionMagic, mMotorPosition);
 }
 
 void HatchIntake::SetAngleValue() {
@@ -214,6 +217,10 @@ double HatchIntake::GetEncoderFromAngle(double angle) {
 
 double HatchIntake::GetArmPotVoltage(){
   return armPot.GetVoltage();
+}
+
+bool HatchIntake::IsEngage() {
+  return mPuncher.Get() == kMotorEngage;
 }
 
 // Put methods for controlling this subsystem
