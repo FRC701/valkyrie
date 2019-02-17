@@ -29,6 +29,8 @@
 #include "commands/SetCargoDeployerIn.h"
 #include "commands/SetCargoDeployerOut.h"
 #include "commands/SetHatchIntakeAngleValue.h"
+#include "commands/PivotPosition.h"
+#include "commands/HatchIntakeToggle.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -40,11 +42,39 @@ std::shared_ptr<OI> OI::getInstance() {
   return self;
 }
 
-OI::OI() {
+OI::OI() 
+: driver(new frc::Joystick(0))
 
-  coDriver.reset(new frc::Joystick(1));
+, dA(driver.get(), kButtonA_ID)
+, dB(driver.get(), kButtonB_ID)
+, dX(driver.get(), kButtonX_ID)
+, dY(driver.get(), kButtonY_ID)
+, dLB(driver.get(), kButtonLB_ID)
+, dRB(driver.get(), kButtonRB_ID)
+, dL3(driver.get(), kButtonL3_ID)
+, dR3(driver.get(), kButtonR3_ID)
+, dStart(driver.get(), kButtonStart_ID)
+, dBack(driver.get(), kButtonBack_ID)
 
-  driver.reset(new frc::Joystick(0));
+, coDriver(new frc::Joystick(1))
+
+, coA(coDriver.get(), kButtonA_ID)
+, coB(coDriver.get(), kButtonB_ID)
+, coX(coDriver.get(), kButtonX_ID)
+, coY(coDriver.get(), kButtonY_ID)
+, coLB(coDriver.get(), kButtonLB_ID)
+, coRB(coDriver.get(), kButtonRB_ID)
+, coL3(coDriver.get(), kButtonL3_ID)
+, coR3(coDriver.get(), kButtonR3_ID)
+, coStart(coDriver.get(), kButtonStart_ID)
+, coBack(coDriver.get(), kButtonBack_ID)
+{
+
+  coLB.WhenPressed(new HatchIntakeToggle());
+  coA.WhenPressed(new PivotPosition(6000));
+  coB.WhenPressed(new PivotPosition(0));
+  coY.WhenPressed(new PivotPosition(-6600));
+
   // Process operator interface input here.
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
   frc::SmartDashboard::PutData("Drive 50", new Drive(.50));
@@ -67,7 +97,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
-  frc::SmartDashboard::PutData("Pivot", new PivotHatch(0.3));
+  frc::SmartDashboard::PutData("Pivot fwd", new PivotHatch(0.3));
+  frc::SmartDashboard::PutData("Pivot rev", new PivotHatch(-0.3));
   frc::SmartDashboard::PutData("Carriage Claw Engage", new CarriageClawEngage());
   frc::SmartDashboard::PutData("Carriage Claw Disengage", new CarriageClawDisengage());
   frc::SmartDashboard::PutData("Carriage Puncher Engage", new CarriagePuncherEngage());
@@ -80,6 +111,8 @@ OI::OI() {
   frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
   frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.8));
   frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.4));
+  frc::SmartDashboard::PutData("Pivot score position", new PivotPosition(6000));
+    frc::SmartDashboard::PutData("Pivot zero position", new PivotPosition(0));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {

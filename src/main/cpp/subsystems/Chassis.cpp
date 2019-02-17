@@ -24,13 +24,13 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   leftEncoder{left1Wheel.GetEncoder()},
   rightEncoder{right1Wheel.GetEncoder()}
   {
-    left1Wheel.SetRampRate(1.0);
-    left2Wheel.SetRampRate(1.0);
-    right1Wheel.SetRampRate(1.0);
-    right2Wheel.SetRampRate(1.0);
+    left1Wheel.SetRampRate(0.2);
+    left2Wheel.SetRampRate(0.2);
+    right1Wheel.SetRampRate(0.2);
+    right2Wheel.SetRampRate(0.2);
 
-    left1Wheel.SetInverted(true);
-    left2Wheel.SetInverted(true);
+    right1Wheel.SetInverted(true);
+    right2Wheel.SetInverted(true);
 
     //right2Wheel.Follow(right1Wheel);
     //left2Wheel.Follow(left1Wheel); 
