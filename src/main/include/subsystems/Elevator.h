@@ -40,6 +40,8 @@ class Elevator : public frc::Subsystem {
         double GetRightVoltage();
         double GetLeftVoltage();
         bool IsRevLimitSwitchClosed();
+        double EncoderTicksToInches(double inches);
+        double GetEncoderFromAngle(double angle);
 
 
 };
