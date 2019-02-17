@@ -120,9 +120,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
   frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
   frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
-  frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(0));
-  frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(0));
-  frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(0));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(19));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(47));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(75));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
