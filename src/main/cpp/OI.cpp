@@ -152,3 +152,19 @@ double OI::getDriverRightXAxis() const{
 double OI::getDriverRightYAxis() const{
   return driver->GetRawAxis(kRightYAxis_ID);
 }
+
+double OI::getCoDriverLeftXAxis() const{
+  return coDriver->GetRawAxis(kLeftXAxis_ID);
+}
+
+double OI::getCoDriverLeftYAxis() const{
+  return coDriver->GetRawAxis(kLeftYAxis_ID);
+}
+
+double OI::getCoDriverRightXAxis() const{
+  return coDriver->GetRawAxis(kRightXAxis_ID);
+}
+
+double OI::getCoDriverRightYAxis() const{
+  return coDriver->GetRawAxis(kRightYAxis_ID);
+}
