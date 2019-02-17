@@ -33,6 +33,7 @@
 #include "commands/ResetElevatorPosition.h"
 #include "commands/PivotPosition.h"
 #include "commands/HatchIntakeToggle.h"
+#include "commands/SetElevatorPositionInches.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -119,6 +120,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
   frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
   frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(0));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(0));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(0));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
