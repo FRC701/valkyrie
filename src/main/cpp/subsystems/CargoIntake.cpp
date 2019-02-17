@@ -24,7 +24,9 @@ std::shared_ptr<CargoIntake> CargoIntake::getInstance() {
 CargoIntake::CargoIntake() : Subsystem("CargoIntake"),
 deployer(RobotMap::kIDCargoPneumaticForward, RobotMap::kIDCargoPneumaticReverse), 
 roller(RobotMap::kIDCargoRoller)
-{}
+{
+  roller.SetInverted(true);
+}
 
 
 void CargoIntake::InitDefaultCommand() {
