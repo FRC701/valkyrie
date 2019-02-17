@@ -20,12 +20,17 @@ class Elevator : public frc::Subsystem {
 
         double mMotorSpeed;
         double mMotorPos;
+
+        frc::Command* mPositionDefaultCommand;
+        frc::Command* mSpeedDefaultCommand;
   
  public:
         static std::shared_ptr<Elevator> getInstance();
 
         Elevator();
         void InitDefaultCommand() override;
+        void SetPositionDefaultCommand();
+        void SetSpeedDefaultCommand();
         void SetElevatorSpeed(double speed);
         void SetElevatorPosition(double position);
         bool IsFwdLimitSwitchClosed();

@@ -8,7 +8,7 @@
 #include "RobotMap.h"
 #include "subsystems/Elevator.h"
 #include "commands/ElevatorDefaultCommand.h"
-#include "commands/SetElevatorSpeed.h"
+#include "commands/ElevatorSpeedDefaultCommand.h"
 #include "utilities/LineCalculator.h"
 
 
@@ -54,19 +54,26 @@ Elevator::Elevator() : Subsystem("Elevator"),
   mRightElevator(RobotMap::kIDRightElevator),
   mMotorSpeed{0},
   mMotorPos{0},
-      {
-		SetUpTalons();
+  mPositionDefaultCommand(nullptr),
+  mSpeedDefaultCommand(nullptr)
 {
   SetUpTalons();
   SetUpMotionMagic();
 }
 
-
-
 void Elevator::InitDefaultCommand() {
-    SetDefaultCommand(new ElevatorDefaultCommand()); //for when robot has encoder
-	//SetDefaultCommand(new ::SetElevatorSpeed(0));
+    mPositionDefaultCommand = new ElevatorDefaultCommand;
+    mSpeedDefaultCommand = new ElevatorSpeedDefaultCommand;
+    SetSpeedDefaultCommand();
+    // SetPositionDefaultCommand(); // TODO: Once we're happy with positions.
+}
 
+void Elevator::SetPositionDefaultCommand() {
+  SetDefaultCommand(mPositionDefaultCommand);
+}
+
+void Elevator::SetSpeedDefaultCommand() {
+  SetDefaultCommand(mSpeedDefaultCommand);
 }
 
 void Elevator::SetElevatorSpeed(double speed) {
