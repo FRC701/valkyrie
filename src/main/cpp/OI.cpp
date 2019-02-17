@@ -29,8 +29,11 @@
 #include "commands/SetCargoDeployerIn.h"
 #include "commands/SetCargoDeployerOut.h"
 #include "commands/SetHatchIntakeAngleValue.h"
+#include "commands/SetElevator.h"
+#include "commands/ResetElevatorPosition.h"
 #include "commands/PivotPosition.h"
 #include "commands/HatchIntakeToggle.h"
+#include "commands/SetElevatorPositionInches.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -109,10 +112,17 @@ OI::OI()
   frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
   frc::SmartDashboard::PutData("Cargo Deployer In", new SetCargoDeployerIn());
   frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
-  frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.8));
-  frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.4));
-  frc::SmartDashboard::PutData("Pivot score position", new PivotPosition(6000));
-    frc::SmartDashboard::PutData("Pivot zero position", new PivotPosition(0));
+  frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.3));
+  frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.3));
+  frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
+  frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
+  frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
+  frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(19));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(47));
+  frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(75));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
