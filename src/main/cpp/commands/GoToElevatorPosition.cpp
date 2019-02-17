@@ -24,7 +24,7 @@ void GoToElevatorPosition::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool GoToElevatorPosition::IsFinished() {     
-  return Elevator::getInstance()->IsFwdLimitSwitchClosed();
+  return false;
  }
 
 // Called once after isFinished returns true

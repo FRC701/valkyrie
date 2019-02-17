@@ -37,7 +37,6 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
     frc::SmartDashboard::PutNumber("Arm Pot Voltage", HatchIntake::getInstance()->GetArmPotVoltage());
     frc::SmartDashboard::PutNumber("Elevator Encoder Value", Elevator::getInstance()->GetEncoderValue());
-    frc::SmartDashboard::PutBoolean("Elevator Limit Switch", Elevator::getInstance()->IsFwdLimitSwitchClosed());
     frc::SmartDashboard::PutNumber("Right Elevator Current", Elevator::getInstance()->GetRightCurrent());
     frc::SmartDashboard::PutNumber("Left Elevator Current", Elevator::getInstance()->GetLeftCurrent());
     frc::SmartDashboard::PutNumber("Right Elevator Voltage", Elevator::getInstance()->GetRightVoltage());
