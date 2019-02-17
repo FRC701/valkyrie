@@ -11,11 +11,10 @@
 #include "commands/SetElevatorSpeed.h"
 #include "utilities/LineCalculator.h"
 
-#include <frc/Preferences.h>
 
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
-using frc::Preferences;
+
 
 namespace
 {
@@ -47,10 +46,8 @@ std::shared_ptr<Elevator> Elevator::getInstance() {
 	return self;
 }
 
-const std::string kElevatorSlope {" ElevatorSlope "};
-const std::string kElevatorYIntercept {" ElevatorYIntercept "};
-const std::string kAngleSlope {" AngleSlope "};
-const std::string kYIntercept {"YIntercept"};
+const std::string kElevatorSlope {"ElevatorSlope"};
+const std::string kElevatorYIntercept {"ElevatorYIntercept"};
 
 Elevator::Elevator() : Subsystem("Elevator"),
       mLeftElevator(RobotMap::kIDLeftElevator),
@@ -80,13 +77,18 @@ void Elevator::SetElevatorPosition(double position){
   UpdatePos();
 }
 
+void Elevator::SetElevatorPositionInches(double inches) {
+  SetElevatorPosition(InchesToEncoderTicks(inches));
+}
+
 void Elevator::SetUpTalons(){
   mLeftElevator.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
 			kPID_PrimaryClosedLoop,
 			kTimeout_10Millis);
 	mLeftElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
-	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
+	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
+    LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mLeftElevator.SetSensorPhase(true);
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
@@ -96,11 +98,10 @@ void Elevator::SetUpTalons(){
 	mRightElevator.Follow(mLeftElevator);
 	mRightElevator.ConfigForwardSoftLimitEnable(true, kTimeout_10Millis);
 	mRightElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
+  mRightElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
+    LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 }
 
-bool Elevator::IsFwdLimitSwitchClosed() {
-	return mLeftElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
-}
 void Elevator::SetUpMotionMagic() {
   mLeftElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, kTimeout_10Millis);
   mLeftElevator.SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, kTimeout_10Millis);
@@ -168,21 +169,13 @@ bool Elevator::IsRevLimitSwitchClosed(){
   return mLeftElevator.GetSensorCollection().IsRevLimitSwitchClosed();
 }
 
-double Elevator::EncoderTicksToInches(double inches){
-  int encoder1 = 0;
-  int encoder2 = 13000;
-  int inches1 = 9;
-  int inches2 = 27;
-  LineCalculator encoderToInches(inches1, encoder1, inches2, encoder2);
-  double elevatorSlope = encoderToInches.slope();
-  double elevatorYIntercept = encoderToInches.yIntercept();
-  double encoder = LineCalculator(elevatorSlope, elevatorYIntercept)(inches);
-  return encoder;
-}
-
-double Elevator::GetEncoderFromAngle(double angle){
-  double angleSlope = Preferences::GetInstance()->GetDouble(kAngleSlope);
-  double YIntercept = Preferences::GetInstance()->GetDouble(kYIntercept);
-  double encoder = LineCalculator(angleSlope, YIntercept)(angle);
+double Elevator::InchesToEncoderTicks(double inches) {
+  // TODO: get all of these values
+  constexpr double encoderBottom {0.};
+  constexpr double encoderTop {23000.}; 
+  constexpr double inchesBottom {19.};
+  constexpr double inchesTop {12. * 8.}; // 8 feet?
+  LineCalculator inchesToEncoder(inchesBottom, encoderBottom, inchesTop, encoderTop);
+  double encoder = inchesToEncoder(inches);
   return encoder;
 }
