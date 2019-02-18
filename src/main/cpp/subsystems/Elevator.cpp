@@ -188,3 +188,8 @@ double Elevator::InchesToEncoderTicks(double inches) {
   double encoder = inchesToEncoder(inches);
   return encoder;
 }
+
+void Elevator::ResetPosition() {
+  double position = GetEncoderValue();
+  SetElevatorPosition(position); 
+}
