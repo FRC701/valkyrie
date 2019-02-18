@@ -24,12 +24,14 @@ std::shared_ptr<LimeLight> LimeLight::getInstance() {
   return self;
 }
 
+//.....Constants.....
 const int pointLength {2};
 constexpr double angleCoefficiant {75};
 constexpr double kTimeStep_Seconds {0.001};
 constexpr double kMaxVelocityMPS {15.0};
 constexpr double kMaxAccelerationMPSPS {10.0};
 constexpr double kMaxJerkMPSPSPS {60.0};
+//.....LimeLight Variables.....
 double targetOffsetAngleHorizontal;
 double targetOffsetAngleHorizontalL;
 double targetOffsetAngleHorizontalS;
@@ -41,6 +43,7 @@ double distanceFromTargetInches;
 double distanceFromTarget;
 double driveSpeed;
 double targetAngle;
+//.....NetworkTable shared pointer.....
 std::shared_ptr<NetworkTable> table = NetworkTableInstance::GetDefault().GetTable("limelight");
 
 LimeLight::LimeLight() : Subsystem(kSubsystemName) {}
@@ -98,6 +101,3 @@ void LimeLight::SetPath() {
   std::vector<Segment> trajectory(length);
   pathfinder_generate(&candidate, trajectory.data());
 }
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
