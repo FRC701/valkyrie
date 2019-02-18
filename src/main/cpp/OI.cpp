@@ -17,8 +17,6 @@
 #include "commands/SetElevatorSpeed.h"
 #include "commands/HatchIntakeDisengage.h"
 #include "commands/HatchIntakeEngage.h"
-#include "commands/HatchPuncherEngage.h"
-#include "commands/HatchPuncherDisengage.h"
 #include "commands/CarriageClawEngage.h"
 #include "commands/CarriageClawDisengage.h"
 #include "commands/CarriagePuncherDisengage.h"
@@ -100,8 +98,6 @@ OI::OI()
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
   frc::SmartDashboard::PutData("3. Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
-   frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
-  frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
   frc::SmartDashboard::PutData("Pivot fwd", new PivotHatch(0.3));
