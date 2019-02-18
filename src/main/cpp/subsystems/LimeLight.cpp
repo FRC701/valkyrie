@@ -7,7 +7,7 @@
 
 #include "subsystems/LimeLight.h"
 #include <networktables/NetworkTableInstance.h>
-#include <cmath>
+#include <networktables/NetworkTable.h>
 #include <vector>
 #include <pathfinder.h>
 #include <stdlib.h>
