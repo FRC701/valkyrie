@@ -19,7 +19,7 @@ using RobotMap::kTimeout_10Millis;
 namespace
 {
 constexpr int kSlotIndex {0};
-constexpr int kForwardSoftLimit {1234567890}; // TODO, please fix this number or else interrupted
+constexpr int kForwardSoftLimit {48000}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
   constexpr double kMaxUnitsPer100ms {3675.0};
@@ -82,6 +82,7 @@ void Elevator::SetElevatorSpeed(double speed) {
 }
 
 void Elevator::SetElevatorPosition(double position){
+  SetPositionDefaultCommand();
   mMotorPos = position;
   UpdatePos();
 }
@@ -127,7 +128,7 @@ void Elevator::SetUpMotionMagic() {
   constexpr double kD {0};
   constexpr double kMaxVelocity {3675};
   constexpr double kCruiseVelocity {1600}; //Sensor Units per 100ms
-  constexpr double kMotionAcceleration {1300};//kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  constexpr double kMotionAcceleration {2300};//kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
 
   mLeftElevator.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mLeftElevator.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
@@ -172,10 +173,6 @@ double Elevator::GetRightVoltage() {
 
 double Elevator::GetLeftVoltage() {
   return mLeftElevator.GetMotorOutputVoltage();
-}
-
-bool Elevator::IsRevLimitSwitchClosed(){
-  return mLeftElevator.GetSensorCollection().IsRevLimitSwitchClosed();
 }
 
 double Elevator::InchesToEncoderTicks(double inches) {
