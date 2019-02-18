@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/FullRetrieveArmPosition.h"
+#include "commands/FullArmPosition.h"
 #include "commands/SetCargoDeployerIn.h"
 #include "commands/PivotPosition.h"
 
 
-FullRetrieveArmPosition::FullRetrieveArmPosition() {
+FullArmPosition::FullArmPosition(int value) {
   AddSequential(new SetCargoDeployerIn());
-  AddSequential(new PivotPosition(-7000));
+  AddSequential(new PivotPosition(value));
   
 
   // Add Commands here:

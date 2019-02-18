@@ -9,7 +9,9 @@
 
 #include <frc/commands/CommandGroup.h>
 
-class FullCargoLevel3 : public frc::CommandGroup {
+class FullArmPosition : public frc::CommandGroup {
  public:
-  FullCargoLevel3();
+  FullArmPosition(int value);
+ private:
+  int value;
 };
