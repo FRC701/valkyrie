@@ -39,8 +39,7 @@
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "commands/SetHatchIntakeSpeedDefaultCommand.h"
 #include "commands/ScoreCargo.h"
-#include "commands/FullCargoLevel.h"
-#include "commands/FullHatchLevel.h"
+#include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
 
 std::shared_ptr<OI> OI::self;
@@ -82,10 +81,18 @@ OI::OI()
 , coPOV90(*coDriver.get(), 90)
 , coPOV180(*coDriver.get(), 180)
 , coPOV270(*coDriver.get(), 270)
+, mElevatorHatchLevel_0(new FullElevatorLevel(0))
+, mElevatorHatchLevel_1(new FullElevatorLevel(29000))
+, mElevatorHatchLevel_2(new FullElevatorLevel(50000))
+, mHatchIntakeEngage(new HatchIntakeEngage())
+, mElevatorCargoLevel_0(new FullElevatorLevel(5000))
+, mElevatorCargoLevel_1(new FullElevatorLevel(35000))
+, mElevatorCargoLevel_2(new FullElevatorLevel(55000))
+, mScoreCargo(new ScoreCargo())
 {
   
   coLB.WhenPressed(new HatchIntakeToggle());
-  coStart.WhenPressed(new FullCargoLevel(29000));
+  coStart.WhenPressed(new FullElevatorLevel(29000));
   coL3.WhenPressed(new SetElevator(29000));
   coR3.WhenPressed(new SetElevator(0));
   coX.WhenPressed(new RunCargoRoller(0.3));
@@ -143,6 +150,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator: Speed Default", new SetElevatorSpeedDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Position Default", new SetHatchIntakePositionDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
+
+  HatchIntakeControls();
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
@@ -186,15 +195,15 @@ double OI::getCoDriverRightYAxis() const{
 }
 
 void OI::HatchIntakeControls(){
-  coY.WhenPressed(new FullHatchLevel(0));
-  coB.WhenPressed(new FullHatchLevel(29000));
-  coA.WhenPressed(new FullHatchLevel(50000));
-  coRB.WhenPressed(new HatchIntakeEngage());
+  coY.WhenPressed(mElevatorHatchLevel_0);
+  coB.WhenPressed(mElevatorHatchLevel_1);
+  coA.WhenPressed(mElevatorHatchLevel_2);
+  coRB.WhenPressed(mHatchIntakeEngage);
 }
 
 void OI::CargoIntakeControls(){
-  coY.WhenPressed(new FullCargoLevel(5000));
-  coB.WhenPressed(new FullCargoLevel(35000));
-  coA.WhenPressed(new FullCargoLevel(55000));
-  coRB.WhenPressed(new ScoreCargo());
+  coY.WhenPressed(mElevatorCargoLevel_0);
+  coB.WhenPressed(mElevatorCargoLevel_1);
+  coA.WhenPressed(mElevatorCargoLevel_2);
+  coRB.WhenPressed(mScoreCargo);
 }

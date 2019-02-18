@@ -34,6 +34,15 @@ private:
   frc::POVButton coPOV180;
   frc::POVButton coPOV270;
 
+  frc::Command* mElevatorHatchLevel_0;
+  frc::Command* mElevatorHatchLevel_1;
+  frc::Command* mElevatorHatchLevel_2;
+  frc::Command* mHatchIntakeEngage;
+
+  frc::Command* mElevatorCargoLevel_0;
+  frc::Command* mElevatorCargoLevel_1;
+  frc::Command* mElevatorCargoLevel_2;
+  frc::Command* mScoreCargo;
 
 	static std::shared_ptr<OI> self;
 

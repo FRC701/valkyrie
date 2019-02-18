@@ -9,7 +9,7 @@
 
 #include <frc/commands/CommandGroup.h>
 
-class FullHatchLevel : public frc::CommandGroup {
-  public:
-    FullHatchLevel(int value);
+class FullElevatorLevel : public frc::CommandGroup {
+ public:
+  FullElevatorLevel(int height);
 };

@@ -7,9 +7,10 @@
 
 #pragma once
 
-#include <frc/commands/CommandGroup.h>
+#include <frc/commands/InstantCommand.h>
 
-class FullCargoLevel : public frc::CommandGroup {
+class CarriageClawDisengage : public frc::InstantCommand {
  public:
-  FullCargoLevel(int value);
+  CarriageClawDisengage();
+  void Initialize() override;
 };
