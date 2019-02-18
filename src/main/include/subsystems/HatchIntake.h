@@ -59,5 +59,5 @@ class HatchIntake : public frc::Subsystem {
   double GetArmPotVoltage();
   bool IsEngage();
   
-
+  void ResetPosition();
 };

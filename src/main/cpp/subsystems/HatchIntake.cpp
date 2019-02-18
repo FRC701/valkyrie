@@ -118,6 +118,7 @@ int HatchIntake::GetPosition()
 {
   return mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
 }
+
 void HatchIntake::SetupMotionMagic()
 {
   mPivot.SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, kTimeout_10Millis);
@@ -222,5 +223,9 @@ bool HatchIntake::IsEngage() {
   return mPuncher.Get() == kMotorEngage;
 }
 
+void HatchIntake::ResetPosition() {
+  double encoder = GetPosition();
+  PivotPosition(encoder);
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
