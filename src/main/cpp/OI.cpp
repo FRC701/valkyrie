@@ -37,17 +37,9 @@
 #include "commands/SetElevatorPosDefaultCommand.h"
 #include "commands/SetElevatorSpeedDefaultCommand.h"
 #include "commands/ScoreCargo.h"
-#include "commands/FullCargoLevel1.h"
-#include "commands/FullCargoLevel2.h"
-#include "commands/FullCargoLevel3.h"
-#include "commands/FullHatchLevel1.h"
-#include "commands/FullHatchLevel2.h"
-#include "commands/FullHatchLevel3.h"
-#include "commands/FullScoreArmPosition.h"
-#include "commands/FullRetrieveArmPosition.h"
-#include "commands/FullTopArmPosition.h"
-#include "commands/FullCargoShipPosition.h"
-
+#include "commands/FullCargoLevel.h"
+#include "commands/FullHatchLevel.h"
+#include "commands/FullArmPosition.h"
 
 std::shared_ptr<OI> OI::self;
 
@@ -90,15 +82,15 @@ OI::OI()
 , coPOV270(*coDriver.get(), 270)
 {
   
-  coBack.WhenPressed(new HatchIntakeToggle());
-  coStart.WhenPressed(new FullCargoShipPosition());
+  coLB.WhenPressed(new HatchIntakeToggle());
+  coStart.WhenPressed(new FullCargoLevel(29000));
   coL3.WhenPressed(new SetElevator(29000));
   coR3.WhenPressed(new SetElevator(0));
   coX.WhenPressed(new RunCargoRoller(0.3));
-  coPOV0.WhenPressed(new FullTopArmPosition());
-  coPOV90.WhenPressed(new FullScoreArmPosition());
+  coPOV0.WhenPressed(new FullArmPosition(0));
+  coPOV90.WhenPressed(new FullArmPosition(6000));
   //coPOV180.WhenPressed();
-  coPOV270.WhenPressed(new FullRetrieveArmPosition());
+  coPOV270.WhenPressed(new FullArmPosition(-7000));
 
   // Process operator interface input here.
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
@@ -174,15 +166,15 @@ double OI::getDriverRightYAxis() const{
 }
 
 void OI::HatchIntakeControls(){
-  coY.WhenPressed(new FullHatchLevel3());
-  coB.WhenPressed(new FullHatchLevel2());
-  coA.WhenPressed(new FullHatchLevel1());
+  coY.WhenPressed(new FullHatchLevel(0));
+  coB.WhenPressed(new FullHatchLevel(29000));
+  coA.WhenPressed(new FullHatchLevel(50000));
   coRB.WhenPressed(new HatchIntakeEngage());
 }
 
 void OI::CargoIntakeControls(){
-  coY.WhenPressed(new FullCargoLevel3());
-  coB.WhenPressed(new FullCargoLevel2());
-  coA.WhenPressed(new FullCargoLevel1());
+  coY.WhenPressed(new FullCargoLevel(5000));
+  coB.WhenPressed(new FullCargoLevel(35000));
+  coA.WhenPressed(new FullCargoLevel(55000));
   coRB.WhenPressed(new ScoreCargo());
 }
