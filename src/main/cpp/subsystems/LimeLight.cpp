@@ -13,9 +13,16 @@
 #include <cmath>
 #include <vector>
 
-constexpr double angleCoefficiant = 75;
-double distanceFromTarget;
-double driveSpeed;
+const char LimeLight::kSubsystemName[] = "LimeLight";
+
+std::shared_ptr<LimeLight> LimeLight::self;
+
+std::shared_ptr<LimeLight> LimeLight::getInstance() {
+  if (! self) {
+     self = std::shared_ptr<LimeLight>(new LimeLight);
+  }
+  return self;
+}
 
 const int pointLength {2};
 constexpr double angleCoefficiant {75};
@@ -29,19 +36,16 @@ double targetOffsetAngleHorizontalS;
 double targetArea;
 double targetAreaL;
 double targetAreaS;
-
+//.....Calculated Variables.....
 double distanceFromTargetInches;
 double distanceFromTarget;
 double driveSpeed;
 double targetAngle;
 std::shared_ptr<NetworkTable> table = NetworkTableInstance::GetDefault().GetTable("limelight");
 
-
-LimeLight::LimeLight() : Subsystem("ExampleSubsystem") {}
+LimeLight::LimeLight() : Subsystem(kSubsystemName) {}
 
 void LimeLight::InitDefaultCommand() {
-  // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
 }
 void LimeLight::SetVariables() {
   double targetOffsetAngleHorizontal = table->GetNumber("tx", 0.0);
