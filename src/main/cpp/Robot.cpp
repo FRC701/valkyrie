@@ -85,6 +85,9 @@ void Robot::AutonomousInit() {
   //   m_autonomousCommand = &m_defaultAuto;
   // }
 
+  Elevator::getInstance()->ResetPosition();
+  HatchIntake::getInstance()->ResetPosition();
+
   m_autonomousCommand = m_chooser.GetSelected();
 
   if (m_autonomousCommand != nullptr) {
@@ -103,6 +106,9 @@ void Robot::TeleopInit() {
     m_autonomousCommand->Cancel();
     m_autonomousCommand = nullptr;
   }
+
+  Elevator::getInstance()->ResetPosition();
+  HatchIntake::getInstance()->ResetPosition();
 }
 
 void Robot::TeleopPeriodic() { frc::Scheduler::GetInstance()->Run(); }
