@@ -3,6 +3,8 @@
 #include "commands/TankDrive.h"
 #include <pathfinder.h>
 
+#include <stdlib.h>
+
 const char Chassis::kSubsystemName[] = "Chassis";
 
 std::shared_ptr<Chassis> Chassis::self;
@@ -65,8 +67,10 @@ double Chassis::GetRightPosition() {
   return rightEncoder.GetPosition();
 }
 
+#include <vector>
+
 void Chassis::Pathfinder() {
-  int pointLength = 3;
+  const int pointLength = 3;
 
   Waypoint points[pointLength];
 
@@ -80,11 +84,21 @@ void Chassis::Pathfinder() {
 
   TrajectoryCandidate candidate;
 
-  pathfinder_prepare(points, pointLength, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 0.001, 15.0, 10.0, 60.0, &candidate);
+  constexpr double kTimeStep_Seconds = 0.001;
+  constexpr double kMaxVelocity_meters_per_second = 15.0;
+  constexpr double kMaxAcceleration_meters_per_second_per_second = 10.0;
+  constexpr double kMaxJerk_yeah_you_type_it_out = 60.0;
+  pathfinder_prepare(points, pointLength, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 
+    kTimeStep_Seconds, 
+    kMaxVelocity_meters_per_second, 
+    kMaxAcceleration_meters_per_second_per_second, 
+    kMaxJerk_yeah_you_type_it_out, 
+    &candidate);
 
   int length = candidate.length;
 
-  Segment *trajectory = malloc(length * sizeof(Segment));
+  // Segment *trajectory = static_cast<Segment *>(malloc(length * sizeof(Segment)));
+  std::vector<Segment> trajectory(length);
+  pathfinder_generate(&candidate, trajectory.data());
 
-  pathfinder_generate(&candidate, trajectory);
 }
