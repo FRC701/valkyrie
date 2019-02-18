@@ -36,6 +36,7 @@
 #include "commands/SetElevatorPositionInches.h"
 #include "commands/SetElevatorPosDefaultCommand.h"
 #include "commands/SetElevatorSpeedDefaultCommand.h"
+#include "commands/ScoreCargo.h"
 
 
 std::shared_ptr<OI> OI::self;
@@ -74,11 +75,15 @@ OI::OI()
 , coStart(coDriver.get(), kButtonStart_ID)
 , coBack(coDriver.get(), kButtonBack_ID)
 {
-
+  
   coLB.WhenPressed(new HatchIntakeToggle());
   coA.WhenPressed(new PivotPosition(6000));
   coB.WhenPressed(new PivotPosition(0));
-  coY.WhenPressed(new PivotPosition(-6600));
+  coY.WhenPressed(new PivotPosition(-7000));
+  coL3.WhenPressed(new SetElevator(29000));
+  coR3.WhenPressed(new SetElevator(0));
+  coX.WhenPressed(new CarriagePuncherEngage());
+  coRB.WhenPressed(new ScoreCargo());
 
   // Process operator interface input here.
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
@@ -119,9 +124,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
   frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
-  frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
+  frc::SmartDashboard::PutData("Level 1", new SetElevator(500));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(27000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(50000));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(19));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(47));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(75));
@@ -151,4 +156,8 @@ double OI::getDriverRightXAxis() const{
 
 double OI::getDriverRightYAxis() const{
   return driver->GetRawAxis(kRightYAxis_ID);
+}
+
+void OI::HatchIntakeControls(){
+
 }

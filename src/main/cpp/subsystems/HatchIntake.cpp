@@ -104,7 +104,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.SetSensorPhase(true);
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
-  mPivot.ConfigPeakOutputReverse(-0.02, kTimeout_10Millis);
+  mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
 
   SetArmValue();
   SetSoftLimits();
@@ -190,7 +190,7 @@ void HatchIntake::SetSoftLimits() {
   mPivot.ConfigForwardSoftLimitEnable(true);
   mPivot.ConfigForwardSoftLimitThreshold(7000);//encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
-  mPivot.ConfigReverseSoftLimitThreshold(-1000);//encoderRev);
+  mPivot.ConfigReverseSoftLimitThreshold(-8000);//encoderRev);
 }
 
 void HatchIntake::UpdateSpeed() {

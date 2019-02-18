@@ -47,6 +47,6 @@ class Elevator : public frc::Subsystem {
         bool IsRevLimitSwitchClosed();
         double InchesToEncoderTicks(double inches);
         void SetElevatorPositionInches(double inches);
-
+       
 
 };

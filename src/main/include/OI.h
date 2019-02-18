@@ -64,4 +64,6 @@ public:
   static constexpr int kButtonL3_ID { 9 };
   static constexpr int kButtonR3_ID { 10 };
 
+  void HatchIntakeControls();
+
 };
