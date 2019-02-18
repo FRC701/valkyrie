@@ -5,19 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/CarriageClawDisengage.h"
-#include "subsystems/CargoCarriage.h"
-#include "OI.h"
+#pragma once
 
-CarriageClawDisengage::CarriageClawDisengage() {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(CargoCarriage::getInstance().get());
-}
+#include <frc/commands/CommandGroup.h>
 
-// Called once when the command executes
-void CarriageClawDisengage::Initialize() 
-{
-  CargoCarriage::getInstance()->Disengage();
-  OI::getInstance()->HatchIntakeControls();
-}
+class FullArmPosition : public frc::CommandGroup {
+ public:
+  FullArmPosition(int value);
+};

@@ -38,7 +38,9 @@
 #include "commands/SetElevatorSpeedDefaultCommand.h"
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "commands/SetHatchIntakeSpeedDefaultCommand.h"
-
+#include "commands/ScoreCargo.h"
+#include "commands/FullElevatorLevel.h"
+#include "commands/FullArmPosition.h"
 
 std::shared_ptr<OI> OI::self;
 
@@ -75,12 +77,29 @@ OI::OI()
 , coR3(coDriver.get(), kButtonR3_ID)
 , coStart(coDriver.get(), kButtonStart_ID)
 , coBack(coDriver.get(), kButtonBack_ID)
+, coPOV0(*coDriver.get(), 0)
+, coPOV90(*coDriver.get(), 90)
+, coPOV180(*coDriver.get(), 180)
+, coPOV270(*coDriver.get(), 270)
+, mElevatorHatchLevel_0(new FullElevatorLevel(0))
+, mElevatorHatchLevel_1(new FullElevatorLevel(29000))
+, mElevatorHatchLevel_2(new FullElevatorLevel(50000))
+, mHatchIntakeEngage(new HatchIntakeEngage())
+, mElevatorCargoLevel_0(new FullElevatorLevel(5000))
+, mElevatorCargoLevel_1(new FullElevatorLevel(35000))
+, mElevatorCargoLevel_2(new FullElevatorLevel(55000))
+, mScoreCargo(new ScoreCargo())
 {
-
+  
   coLB.WhenPressed(new HatchIntakeToggle());
-  coA.WhenPressed(new PivotPosition(6000));
-  coB.WhenPressed(new PivotPosition(0));
-  coY.WhenPressed(new PivotPosition(-6600));
+  coStart.WhenPressed(new FullElevatorLevel(29000));
+  coL3.WhenPressed(new SetElevator(29000));
+  coR3.WhenPressed(new SetElevator(0));
+  coX.WhenPressed(new RunCargoRoller(0.3));
+  coPOV0.WhenPressed(new FullArmPosition(0));
+  coPOV90.WhenPressed(new FullArmPosition(6000));
+  //coPOV180.WhenPressed();
+  coPOV270.WhenPressed(new FullArmPosition(-7000));
 
   // Process operator interface input here.
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
@@ -121,9 +140,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
   frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
-  frc::SmartDashboard::PutData("Level 1", new SetElevator(0));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(23000));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(48000));
+  frc::SmartDashboard::PutData("Level 1", new SetElevator(500));
+  frc::SmartDashboard::PutData("Level 2", new SetElevator(27000));
+  frc::SmartDashboard::PutData("Level 3", new SetElevator(50000));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 1", new SetElevatorPositionInches(19));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 2", new SetElevatorPositionInches(47));
   frc::SmartDashboard::PutData("Elevator Inches Lvl 3", new SetElevatorPositionInches(75));
@@ -131,6 +150,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator: Speed Default", new SetElevatorSpeedDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Position Default", new SetHatchIntakePositionDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
+
+  HatchIntakeControls();
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
@@ -171,4 +192,18 @@ double OI::getCoDriverRightXAxis() const{
 
 double OI::getCoDriverRightYAxis() const{
   return coDriver->GetRawAxis(kRightYAxis_ID);
+}
+
+void OI::HatchIntakeControls(){
+  coY.WhenPressed(mElevatorHatchLevel_0);
+  coB.WhenPressed(mElevatorHatchLevel_1);
+  coA.WhenPressed(mElevatorHatchLevel_2);
+  coRB.WhenPressed(mHatchIntakeEngage);
+}
+
+void OI::CargoIntakeControls(){
+  coY.WhenPressed(mElevatorCargoLevel_0);
+  coB.WhenPressed(mElevatorCargoLevel_1);
+  coA.WhenPressed(mElevatorCargoLevel_2);
+  coRB.WhenPressed(mScoreCargo);
 }

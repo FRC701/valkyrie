@@ -50,10 +50,10 @@ void Chassis::SetTankDrive(double left, double right) {
 }
 
 void Chassis::DriveChassis(double speed) {
-  left1Wheel.Set(speed);
-  left2Wheel.Set(speed);
-  right1Wheel.Set(speed);
-  right2Wheel.Set(speed);
+  left1Wheel.Set(speed*.75);
+  left2Wheel.Set(speed*.75);
+  right1Wheel.Set(speed*.75);
+  right2Wheel.Set(speed*.75);
 }
 
 double Chassis::GetLeftPosition() {
