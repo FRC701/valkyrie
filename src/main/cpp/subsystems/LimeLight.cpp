@@ -44,7 +44,7 @@ double distanceFromTarget;
 double driveSpeed;
 double targetAngle;
 //.....NetworkTable shared pointer.....
-std::shared_ptr<NetworkTable> table = NetworkTableInstance::GetDefault().GetTable("limelight");
+std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
 LimeLight::LimeLight() : Subsystem(kSubsystemName) {}
 
