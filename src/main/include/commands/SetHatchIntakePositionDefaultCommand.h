@@ -14,5 +14,6 @@ class SetHatchIntakePositionDefaultCommand : public frc::InstantCommand {
   SetHatchIntakePositionDefaultCommand();
   void Initialize() override;
 private:
-  Command* mCommand;
+  frc::Command* getCommand();
+  frc::Command* mCommand;
 };
