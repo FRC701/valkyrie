@@ -9,11 +9,12 @@
 
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+
 #include "subsystems/CargoCarriage.h"
-#include "subsystems/Chassis.h"
-#include "subsystems/HatchIntake.h"
-#include "subsystems/Elevator.h"
 #include "subsystems/CargoIntake.h"
+#include "subsystems/Chassis.h"
+#include "subsystems/Elevator.h"
+#include "subsystems/HatchIntake.h"
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
