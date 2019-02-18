@@ -8,16 +8,21 @@
 #include "subsystems/LimeLight.h"
 #include <networktables/NetworkTableInstance.h>
 #include <networktables/NetworkTable.h>
-#include <vector>
 #include <pathfinder.h>
 #include <stdlib.h>
 #include <cmath>
+#include <vector>
 
 constexpr double angleCoefficiant = 75;
 double distanceFromTarget;
 double driveSpeed;
 
+const int pointLength {2};
 constexpr double angleCoefficiant {75};
+constexpr double kTimeStep_Seconds {0.001};
+constexpr double kMaxVelocityMPS {15.0};
+constexpr double kMaxAccelerationMPSPS {10.0};
+constexpr double kMaxJerkMPSPSPS {60.0};
 double targetOffsetAngleHorizontal;
 double targetOffsetAngleHorizontalL;
 double targetOffsetAngleHorizontalS;
@@ -26,7 +31,9 @@ double targetAreaL;
 double targetAreaS;
 
 double distanceFromTargetInches;
-
+double distanceFromTarget;
+double driveSpeed;
+double targetAngle;
 std::shared_ptr<NetworkTable> table = NetworkTableInstance::GetDefault().GetTable("limelight");
 
 
@@ -36,7 +43,7 @@ void LimeLight::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
-void LimeLight::GetVariables() {
+void LimeLight::SetVariables() {
   double targetOffsetAngleHorizontal = table->GetNumber("tx", 0.0);
   double targetOffsetAngleHorizontalL = table->GetNumber("tx0", 0.0);
   double targetOffsetAngleHorizontalS = table->GetNumber("tx1", 0.0);
@@ -46,7 +53,6 @@ void LimeLight::GetVariables() {
 }
 
 void LimeLight::GetDistanceToTargetInches() {
-  GetVariables();
   distanceFromTargetInches = 69.291 * exp(-1.51 * targetArea);
 }
 
@@ -61,28 +67,25 @@ void LimeLight::GetTargetAngle() {
 }
 
 void LimeLight::SetPath() {
+  SetVariables();
   GetDistanceToTargetInches();
-  const int pointLength = 2;
+  GetTargetAngle();
 
   Waypoint points[pointLength];
 
   Waypoint p1 = { 0, 0, 0 };
-  Waypoint p2 = { distanceFromTargetInches, 0, 0 };
+  Waypoint p2 = { distanceFromTargetInches, 0, -(targetAngle) };
   points[0] = p1;
   points[1] = p2;
 
 
   TrajectoryCandidate candidate;
 
-  constexpr double kTimeStep_Seconds = 0.001;
-  constexpr double kMaxVelocity_meters_per_second = 15.0;
-  constexpr double kMaxAcceleration_meters_per_second_per_second = 10.0;
-  constexpr double kMaxJerk_yeah_you_type_it_out = 60.0;
   pathfinder_prepare(points, pointLength, FIT_HERMITE_CUBIC, PATHFINDER_SAMPLES_HIGH, 
     kTimeStep_Seconds, 
-    kMaxVelocity_meters_per_second, 
-    kMaxAcceleration_meters_per_second_per_second, 
-    kMaxJerk_yeah_you_type_it_out, 
+    kMaxVelocityMPS, 
+    kMaxAccelerationMPSPS, 
+    kMaxJerkMPSPSPS, 
     &candidate);
 
   int length = candidate.length;
