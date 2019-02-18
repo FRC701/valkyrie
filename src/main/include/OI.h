@@ -1,5 +1,6 @@
 #pragma once
 #include <frc/WPILib.h>
+#include "frc/buttons/POVButton.h"
 
 class OI {
 private:
@@ -28,6 +29,11 @@ private:
   frc::JoystickButton coR3;
   frc::JoystickButton coStart;
   frc::JoystickButton coBack;
+  frc::POVButton coPOV0;
+  frc::POVButton coPOV90;
+  frc::POVButton coPOV180;
+  frc::POVButton coPOV270;
+
 
 	static std::shared_ptr<OI> self;
 
@@ -63,5 +69,8 @@ public:
   static constexpr int kButtonStart_ID { 8 };
   static constexpr int kButtonL3_ID { 9 };
   static constexpr int kButtonR3_ID { 10 };
+
+  void HatchIntakeControls();
+  void CargoIntakeControls();
 
 };

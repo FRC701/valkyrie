@@ -7,6 +7,7 @@
 
 #include "commands/RunCargoRoller.h"
 #include "subsystems/CargoIntake.h"
+#include "OI.h"
 
 RunCargoRoller::RunCargoRoller(double speed): mSpeed(speed) {
   // Use Requires() here to declare subsystem dependencies
@@ -36,7 +37,9 @@ bool RunCargoRoller::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void RunCargoRoller::End() {}
+void RunCargoRoller::End() {
+  OI::getInstance()->CargoIntakeControls();
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

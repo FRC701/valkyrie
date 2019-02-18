@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <frc/commands/InstantCommand.h>
+#include <frc/commands/CommandGroup.h>
 
-class CarriageClawDisengage : public frc::InstantCommand {
+class FullArmPosition : public frc::CommandGroup {
  public:
-  CarriageClawDisengage();
-  void Initialize() override;
+  FullArmPosition(int value);
+ private:
+  int value;
 };
