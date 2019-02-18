@@ -10,13 +10,22 @@
 #include "subsystems/HatchIntake.h"
 
 SetHatchIntakeSpeedDefaultCommand::SetHatchIntakeSpeedDefaultCommand()
-: mCommand(new HatchIntakeSpeedDefaultCommand) 
+: mCommand(nullptr) 
 {
   // Use Requires() here to declare subsystem dependencies
   Requires(HatchIntake::getInstance().get());
 }
 
+frc::Command* SetHatchIntakeSpeedDefaultCommand::getCommand()
+{
+  if ( ! mCommand)
+  {
+    mCommand = new HatchIntakeSpeedDefaultCommand;
+  }
+  return mCommand;
+}
+
 // Called once when the command executes
 void SetHatchIntakeSpeedDefaultCommand::Initialize() {
-  HatchIntake::getInstance()->SetDefaultCommand(mCommand);
+  HatchIntake::getInstance()->SetDefaultCommand(getCommand());
 }
