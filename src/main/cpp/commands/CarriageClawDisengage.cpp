@@ -7,6 +7,7 @@
 
 #include "commands/CarriageClawDisengage.h"
 #include "subsystems/CargoCarriage.h"
+#include "OI.h"
 
 CarriageClawDisengage::CarriageClawDisengage() {
   // Use Requires() here to declare subsystem dependencies
@@ -18,4 +19,5 @@ CarriageClawDisengage::CarriageClawDisengage() {
 void CarriageClawDisengage::Initialize() 
 {
   CargoCarriage::getInstance()->Disengage();
+  OI::getInstance()->HatchIntakeControls();
 }

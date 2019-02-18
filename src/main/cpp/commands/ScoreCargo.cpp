@@ -8,6 +8,7 @@
 #include "commands/ScoreCargo.h"
 #include "commands/CarriageClawDisengage.h"
 #include "commands/CarriagePuncherDisengage.h"
+#include "commands/CarriagePuncherEngage.h"
 
 ScoreCargo::ScoreCargo() {
   // Add Commands here:
@@ -15,6 +16,7 @@ ScoreCargo::ScoreCargo() {
   //      AddSequential(new Command2());
   // these will run in order.
   AddSequential(new CarriageClawDisengage());
+  AddSequential(new CarriagePuncherEngage());
   AddSequential(new CarriagePuncherDisengage());
 
   // To run multiple commands at the same time,
