@@ -16,7 +16,6 @@
 #include "subsystems/CargoIntake.h"
 
 ExampleSubsystem Robot::m_subsystem;
-OI Robot::m_oi;
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
@@ -27,6 +26,8 @@ void Robot::RobotInit() {
   HatchIntake::getInstance();
   Elevator::getInstance();
   CargoIntake::getInstance();
+  // Initialize the OI after all the subsystems have been setup
+  OI::getInstance();
 
 }
 

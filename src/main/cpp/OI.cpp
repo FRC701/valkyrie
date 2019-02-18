@@ -100,7 +100,7 @@ OI::OI()
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
   frc::SmartDashboard::PutData("3. Set Hatch Intake Angle", new SetHatchIntakeAngleValue());
-   frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
+  frc::SmartDashboard::PutData("Puncher Engage", new HatchPuncherEngage());
   frc::SmartDashboard::PutData("Puncher Disengage", new HatchPuncherDisengage());
   frc::SmartDashboard::PutData("Hatch Intake Engage", new HatchIntakeEngage());
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());

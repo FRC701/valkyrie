@@ -7,16 +7,24 @@
 
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "subsystems/HatchIntake.h"
-#include "commands/SetHatchIntakePositionDefaultCommand.h"
 
 
 SetHatchIntakePositionDefaultCommand::SetHatchIntakePositionDefaultCommand()
-: mCommand(new SetHatchIntakePositionDefaultCommand) {
+: mCommand(nullptr) {
   // Use Requires() here to declare subsystem dependencies
   Requires(HatchIntake::getInstance().get());
 }
 
+frc::Command* SetHatchIntakePositionDefaultCommand::getCommand()
+{
+  if ( ! mCommand)
+  {
+    mCommand = new SetHatchIntakePositionDefaultCommand;
+  }
+  return mCommand;
+}
+
 // Called once when the command executes
 void SetHatchIntakePositionDefaultCommand::Initialize() {
-  HatchIntake::getInstance()->SetDefaultCommand(mCommand);
+  HatchIntake::getInstance()->SetDefaultCommand(getCommand());
 }

@@ -13,6 +13,8 @@ class SetHatchIntakeSpeedDefaultCommand : public frc::InstantCommand {
  public:
   SetHatchIntakeSpeedDefaultCommand();
   void Initialize() override;
+
 private:
+  frc::Command* getCommand();
   Command* mCommand;
 };
