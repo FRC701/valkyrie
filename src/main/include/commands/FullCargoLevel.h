@@ -9,7 +9,7 @@
 
 #include <frc/commands/CommandGroup.h>
 
-class FullCargoLevel1 : public frc::CommandGroup {
+class FullCargoLevel : public frc::CommandGroup {
  public:
-  FullCargoLevel1();
+  FullCargoLevel(int value);
 };

@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/FullCargoLevel1.h"
+#include "commands/FullCargoLevel.h"
 #include "commands/SetElevator.h"
 #include "commands/SetCargoDeployerIn.h"
 #include "commands/SetCargoDeployerOut.h"
 
-FullCargoLevel1::FullCargoLevel1() {
+FullCargoLevel::FullCargoLevel(int value){
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
   AddSequential(new SetCargoDeployerOut());
-  AddSequential(new SetElevator(5000));
+  AddSequential(new SetElevator(value));
   AddSequential(new SetCargoDeployerIn());
   // To run multiple commands at the same time,
   // use AddParallel()
