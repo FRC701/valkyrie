@@ -48,5 +48,5 @@ class Elevator : public frc::Subsystem {
         double InchesToEncoderTicks(double inches);
         void SetElevatorPositionInches(double inches);
 
-
+       void ResetPosition();
 };
