@@ -11,12 +11,19 @@
 
 class LimeLight : public frc::Subsystem {
  private:
+ 
+  static const char kSubsystemName[];
+  static std::shared_ptr<LimeLight> self;
 
  public:
+
+  static std::shared_ptr<LimeLight> getInstance();
+
+
   LimeLight();
   void InitDefaultCommand() override;
-  void GetVariables();
+  void SetVariables();
   void GetDistanceToTargetInches();
-  double GetTargetAngle();
+  void GetTargetAngle();
   void SetPath();
 };
