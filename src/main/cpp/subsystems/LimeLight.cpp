@@ -11,11 +11,13 @@
 #include <vector>
 #include <pathfinder.h>
 #include <stdlib.h>
+#include <cmath>
 
 constexpr double angleCoefficiant = 75;
 double distanceFromTarget;
 double driveSpeed;
 
+constexpr double angleCoefficiant {75};
 double targetOffsetAngleHorizontal;
 double targetOffsetAngleHorizontalL;
 double targetOffsetAngleHorizontalS;
@@ -48,8 +50,14 @@ void LimeLight::GetDistanceToTargetInches() {
   distanceFromTargetInches = 69.291 * exp(-1.51 * targetArea);
 }
 
-double LimeLight::GetTargetAngle() {
-
+void LimeLight::GetTargetAngle() {
+  targetAngle = (targetAreaL - targetAreaS) * 75;
+  if (targetOffsetAngleHorizontalL < targetOffsetAngleHorizontalS) {
+    targetAngle = targetAngle * -1;
+  }
+  else {
+    targetAngle = targetAngle * 1;
+  }
 }
 
 void LimeLight::SetPath() {
