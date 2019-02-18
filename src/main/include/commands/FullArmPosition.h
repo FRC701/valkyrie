@@ -12,6 +12,4 @@
 class FullArmPosition : public frc::CommandGroup {
  public:
   FullArmPosition(int value);
- private:
-  int value;
 };

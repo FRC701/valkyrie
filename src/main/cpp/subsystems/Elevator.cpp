@@ -175,10 +175,6 @@ double Elevator::GetLeftVoltage() {
   return mLeftElevator.GetMotorOutputVoltage();
 }
 
-//bool Elevator::IsRevLimitSwitchClosed(){
-  //return mLeftElevator.GetSensorCollection().IsRevLimitSwitchClosed();
-//}
-
 double Elevator::InchesToEncoderTicks(double inches) {
   // TODO: get all of these values
   constexpr double encoderBottom {0.};
