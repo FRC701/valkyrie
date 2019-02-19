@@ -24,6 +24,11 @@ public:
   double slope() const { return mSlope; }
   double yIntercept() const { return mYIntercept; }
 
+  LineCalculator invert() const
+  {
+    return LineCalculator(1.0 / slope(), -1.0 * yIntercept() / slope());
+  }
+
   static double slopeFromPoints(double x1, double y1, double x2, double y2)
   {
     return (y2 - y1) / (x2 - x1);
