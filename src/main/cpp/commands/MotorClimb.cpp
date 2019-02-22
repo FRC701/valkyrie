@@ -16,5 +16,5 @@ MotorClimb::MotorClimb(double speed) : mClimberSpeed(speed)  {
 
 // Called just before this Command runs the first time
 void MotorClimb::Initialize() {
-  Climber::getInstance()->MotorClimber(mClimberSpeed);
+  Climber::getInstance()->DriveClimb(mClimberSpeed);
 }

@@ -19,7 +19,7 @@ void HatchIntakeSpeedDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchIntakeSpeedDefaultCommand::Execute() {
-  double right = OI::getInstance()->getDriverRightYAxis();  
+  double right = OI::getInstance()->getCoDriverRightYAxis();  
   HatchIntake::getInstance()->Pivot(right);
 }
 

@@ -28,12 +28,14 @@ Climber::Climber() : Subsystem("Climber"),
     mDriveMotorSpeed{0},
     mLiftMotorSpeed{0},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
-    mLiftMotor(RobotMap::kIDClimberLiftMotor),
+    mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
     mDriveMotor.Set(0.0);
     mLiftMotor.Set(0.0);
+    mDriveMotor.SetInverted(true);
+    mLiftMotor.SetInverted(true);
 }
 
 void Climber::InitDefaultCommand() {
