@@ -41,6 +41,8 @@
 #include "commands/ScoreCargo.h"
 #include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
+#include "commands/ClimberEngage.h"
+#include "commands/ClimberDisengage.h"
 
 std::shared_ptr<OI> OI::self;
 
@@ -98,6 +100,9 @@ OI::OI()
   coX.WhenPressed(new RunCargoRoller(0.3));
   coPOV0.WhenPressed(new FullArmPosition(0));
   coPOV90.WhenPressed(new FullArmPosition(6000));
+  coA.WhenPressed(new FullArmPosition(6000));
+  coB.WhenPressed(new FullArmPosition(0.0));
+  coY.WhenPressed(new FullArmPosition(-7000));
   //coPOV180.WhenPressed();
   coPOV270.WhenPressed(new FullArmPosition(-7000));
 
@@ -150,6 +155,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator: Speed Default", new SetElevatorSpeedDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Position Default", new SetHatchIntakePositionDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
+  frc::SmartDashboard::PutData("Climber Pneumatic Engage", new ClimberEngage());
+frc::SmartDashboard::PutData("Climber Pneumatic Disengage", new ClimberDisengage());
 
   HatchIntakeControls();
 }

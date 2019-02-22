@@ -19,7 +19,7 @@ void TankDrive::Execute() {
   double left = oi->getDriverLeftYAxis();
   double right = oi->getDriverRightYAxis();
 
-  chassis->SetTankDrive(left,right);
+  chassis->SetTankDrive(left* 0.5,right * 0.5);
 }
 
 bool TankDrive::IsFinished() {
