@@ -38,7 +38,7 @@ bool RunCargoRoller::IsFinished() {
 
 // Called once after isFinished returns true
 void RunCargoRoller::End() {
-  OI::getInstance()->CargoIntakeControls();
+  //OI::getInstance()->CargoIntakeControls();
 }
 
 // Called when another command which requires one or more of the same
