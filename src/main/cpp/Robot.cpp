@@ -14,6 +14,7 @@
 #include "subsystems/HatchIntake.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/CargoIntake.h"
+#include "subsystems/LimeLight.h"
 
 ExampleSubsystem Robot::m_subsystem;
 OI Robot::m_oi;
@@ -35,6 +36,8 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Right Encoder Position", Chassis::getInstance()->GetRightPosition());
     frc::SmartDashboard::PutNumber("Arm Encoder Value", HatchIntake::getInstance()->GetEncoderValue());
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
+    frc::SmartDashboard::PutNumber("Distance to Vision Target", LimeLight::getInstance()->GetDistanceToTargetInches());
+    frc::SmartDashboard::PutNumber("Vision Target Angle", LimeLight::getInstance()->GetTargetAngle());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use
