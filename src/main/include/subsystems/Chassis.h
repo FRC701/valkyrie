@@ -17,7 +17,7 @@ private:
   rev::CANEncoder leftEncoder;
   rev::CANEncoder rightEncoder;
 
-
+  bool mIsHighGear;
 
  public:
   
@@ -39,5 +39,8 @@ private:
   //double GetVelocity();
 
 
+  void SetHighGear() { mIsHighGear = true; }
+  void SetLowGear() { mIsHighGear = false; }
+  bool IsHighGear() { return mIsHighGear; }
 
 };
