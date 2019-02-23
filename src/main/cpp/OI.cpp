@@ -42,6 +42,8 @@
 #include "commands/ScoreCargo.h"
 #include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
+#include "commands/dlbPressed.h"
+#include "commands/dlbReleased.h"
 
 namespace 
 {
@@ -111,7 +113,9 @@ OI::OI()
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
 , mScoreCargo(new ScoreCargo())
 {
-  
+  dLB.WhenPressed(new dLBPressed());
+  dLB.WhenReleased(new dLBReleased());
+
   coLB.WhenPressed(new HatchIntakeToggle());
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
   coR3.WhenPressed(new SetElevator(0));
@@ -235,3 +239,4 @@ void OI::CargoIntakeControls(){
   coA.WhenPressed(mElevatorCargoLevel_2);
   coRB.WhenPressed(mScoreCargo);
 }
+

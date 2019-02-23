@@ -81,5 +81,4 @@ public:
 
   void HatchIntakeControls();
   void CargoIntakeControls();
-
 };
