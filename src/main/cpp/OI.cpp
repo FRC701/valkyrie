@@ -48,11 +48,6 @@
 namespace 
 {
 
-//constexpr double kPivot_0 = 0.;
-//constexpr double kPivotForward = 6500.;
-//constexpr double kPivotReverse = -7000.;
-//constexpr double kPivotGroundForward = 8000;  // TODO: What is this value?
-
 constexpr double kElevatorHatchLevel_1 = 0.;
 constexpr double kElevatorHatchLevel_2 = 31500.;
 constexpr double kElevatorHatchLevel_3 = 61500.;
