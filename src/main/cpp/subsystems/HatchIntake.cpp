@@ -149,7 +149,7 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis); 
 }
 
-int HatchIntake::GetPositionError() {
+double HatchIntake::GetPositionError() {
   return mPivot.GetClosedLoopError(kSlotIndex);
 }
 
