@@ -36,9 +36,11 @@ private:
   void DriveChassis(double speed);
   double GetRightPosition();
   double GetLeftPosition();
-  //double GetVelocity();
-
-
+  double GetLeftCurrent();
+  double GetRightCurrent();
+  double GetLeftVoltage();
+  double GetRightVoltage();
+  
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }
   bool IsHighGear() { return mIsHighGear; }
