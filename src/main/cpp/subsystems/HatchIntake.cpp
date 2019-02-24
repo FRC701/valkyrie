@@ -71,8 +71,7 @@ mMotorPosition{0}
 }
 
 void HatchIntake::InitDefaultCommand() {
-  SetDefaultCommand(new HatchIntakeSpeedDefaultCommand);
-  // SetDefaultCommand(new HatchIntakeDefaultCommand); // TODO: When we're happy with positions.
+   SetDefaultCommand(new HatchIntakeDefaultCommand);
 }
 
 void HatchIntake::Disengage() {
@@ -128,7 +127,7 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigNominalOutputReverse(0, kTimeout_10Millis);
   mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
-  constexpr double kF {0.128 /* calcFeedforward() */};
+  constexpr double kF {0}; // feedforward is 0 for position
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
@@ -188,9 +187,9 @@ void HatchIntake::SetSoftLimits() {
   encoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
   encoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
   mPivot.ConfigForwardSoftLimitEnable(true);
-  mPivot.ConfigForwardSoftLimitThreshold(7000);//encoderFwd);
+  mPivot.ConfigForwardSoftLimitThreshold(encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
-  mPivot.ConfigReverseSoftLimitThreshold(-8000);//encoderRev);
+  mPivot.ConfigReverseSoftLimitThreshold(encoderRev);
 }
 
 void HatchIntake::UpdateSpeed() {
