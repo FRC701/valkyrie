@@ -54,8 +54,8 @@ namespace
 //constexpr double kPivotGroundForward = 8000;  // TODO: What is this value?
 
 constexpr double kElevatorHatchLevel_1 = 0.;
-constexpr double kElevatorHatchLevel_2 = 22000.;
-constexpr double kElevatorHatchLevel_3 = 50000.;
+constexpr double kElevatorHatchLevel_2 = 31500.;
+constexpr double kElevatorHatchLevel_3 = 61500.;
 
 constexpr double kElevatorCargoLevel_1 = 5000;
 constexpr double kElevatorCargoLevel_Ship = 29000;
