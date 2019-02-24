@@ -91,6 +91,12 @@ void HatchIntake::PivotPosition(double position) {
   mMotorPosition = position;
   UpdatePosition();
 }
+
+void HatchIntake::PivotPositionByAngle(double angle)
+{
+  PivotPosition(GetEncoderFromAngle(angle));
+}
+
 void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
                                        kPID_PrimaryClosedLoop,

@@ -5,11 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/PivotPositionByAngle.h"
+#include "subsystems/HatchIntake.h"
 
-#include <frc/commands/CommandGroup.h>
+PivotPositionByAngle::PivotPositionByAngle(double angle) : mAngle(angle) {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+  Requires(HatchIntake::getInstance().get());
+}
 
-class FullArmPosition : public frc::CommandGroup {
- public:
-  FullArmPosition(double angle);
-};
+// Called once when the command executes
+void PivotPositionByAngle::Initialize() {
+  HatchIntake::getInstance()->PivotPositionByAngle(mAngle);
+}
