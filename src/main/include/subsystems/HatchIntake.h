@@ -42,6 +42,7 @@ class HatchIntake : public frc::Subsystem {
   void Disengage();
   void Pivot(double speed);
   void PivotPosition(double position);
+  void PivotPositionByAngle(double angle);
   int GetVelocity();
   int GetPosition();
   int GetPositionError();

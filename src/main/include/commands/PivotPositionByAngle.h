@@ -7,9 +7,12 @@
 
 #pragma once
 
-#include <frc/commands/CommandGroup.h>
+#include <frc/commands/InstantCommand.h>
 
-class FullArmPosition : public frc::CommandGroup {
+class PivotPositionByAngle : public frc::InstantCommand {
  public:
-  FullArmPosition(double angle);
+  PivotPositionByAngle(double angle);
+  void Initialize() override;
+private:
+  double mAngle;
 };

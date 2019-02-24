@@ -48,10 +48,10 @@
 namespace 
 {
 
-constexpr double kPivot_0 = 0.;
-constexpr double kPivotForward = 6500.;
-constexpr double kPivotReverse = -7000.;
-constexpr double kPivotGroundForward = 8000;  // TODO: What is this value?
+//constexpr double kPivot_0 = 0.;
+//constexpr double kPivotForward = 6500.;
+//constexpr double kPivotReverse = -7000.;
+//constexpr double kPivotGroundForward = 8000;  // TODO: What is this value?
 
 constexpr double kElevatorHatchLevel_1 = 0.;
 constexpr double kElevatorHatchLevel_2 = 22000.;
@@ -120,10 +120,11 @@ OI::OI()
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
   coR3.WhenPressed(new SetElevator(0));
   coX.WhenPressed(new RunCargoRoller(0.3));
-  coPOV0.WhenPressed(new FullArmPosition(kPivot_0));
-  coPOV90.WhenPressed(new FullArmPosition(kPivotForward));
-  //coPOV180.WhenPressed();
-  coPOV270.WhenPressed(new FullArmPosition(kPivotReverse));
+
+  coPOV0.WhenPressed(new FullArmPosition(0.));
+  coPOV90.WhenPressed(new FullArmPosition(90.));
+  coPOV180.WhenPressed(new FullArmPosition(130));
+  coPOV270.WhenPressed(new FullArmPosition(-90.));
   HatchIntakeControls();
   coRB.WhenPressed(mHatchIntakeEngage);
 
@@ -181,9 +182,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake: Position Default", new SetHatchIntakePositionDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Motion Default", new HatchIntakeDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
-  frc::SmartDashboard::PutData("Hatch Intake Scoring", new FullArmPosition(kPivotForward));
-  frc::SmartDashboard::PutData("Hatch Intake Retrieve", new FullArmPosition(kPivotReverse));
-  frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(kPivot_0));
+  frc::SmartDashboard::PutData("Hatch Intake Scoring", new FullArmPosition(90.));
+  frc::SmartDashboard::PutData("Hatch Intake Retrieve", new FullArmPosition(-90.));
+  frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(0.));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
