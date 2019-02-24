@@ -43,8 +43,8 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Left Elevator Current", Elevator::getInstance()->GetLeftCurrent());
     frc::SmartDashboard::PutNumber("Right Elevator Voltage", Elevator::getInstance()->GetRightVoltage());
     frc::SmartDashboard::PutNumber("Left Elevator Voltage", Elevator::getInstance()->GetLeftVoltage());
-    //frc::SmartDashboard::PutBoolean("Elevator Banner Sensor", Elevator::getInstance()->IsRevLimitSwitchClosed());
-    //frc::SmartDashboard::PutBoolean("Elevator Banner Sensor Maybe", Elevator::getInstance()->IsFwdLimitSwitchClosed());
+    frc::SmartDashboard::PutBoolean("Elevator Is Down", Elevator::getInstance()->IsElevatorDown());
+    frc::SmartDashboard::PutNumber("Elevator Error", Elevator::getInstance()->GetEncoderError());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use
