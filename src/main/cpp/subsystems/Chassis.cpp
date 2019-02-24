@@ -75,6 +75,20 @@ double Chassis::GetLeftPosition() {
 
 double Chassis::GetRightPosition() {
   return rightEncoder.GetPosition();
-
 }
 
+double Chassis::GetLeftCurrent() {
+  return left1Wheel.GetOutputCurrent();
+}
+
+double Chassis::GetRightCurrent() {
+  return right1Wheel.GetOutputCurrent();
+}
+
+double Chassis::GetLeftVoltage() {
+  return left1Wheel.GetAppliedOutput();
+}
+
+double Chassis::GetRightVoltage() {
+  return right2Wheel.GetAppliedOutput();
+}
