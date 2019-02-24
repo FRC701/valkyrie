@@ -5,11 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/dLBReleased.h"
+#include "subsystems/Chassis.h"
 
-#include <frc/commands/CommandGroup.h>
+dLBReleased::dLBReleased() {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+}
 
-class FullArmPosition : public frc::CommandGroup {
- public:
-  FullArmPosition(double angle);
-};
+// Called once when the command executes
+void dLBReleased::Initialize() {
+  Chassis::getInstance()->SetHighGear();
+}

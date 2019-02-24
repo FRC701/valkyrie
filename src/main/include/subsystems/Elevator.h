@@ -24,6 +24,9 @@ class Elevator : public frc::Subsystem {
         frc::Command* mPositionDefaultCommand;
         frc::Command* mSpeedDefaultCommand;
   
+       // Private functions -- use the abstraction 
+       bool IsFwdLimitSwitchClosed();
+       bool IsRevLimitSwitchClosed();
  public:
         static std::shared_ptr<Elevator> getInstance();
 
@@ -33,8 +36,7 @@ class Elevator : public frc::Subsystem {
         void SetSpeedDefaultCommand();
         void SetElevatorSpeed(double speed);
         void SetElevatorPosition(double position);
-        bool IsFwdLimitSwitchClosed();
-        //double GetPosError();
+        bool IsElevatorDown();
         void SetUpMotionMagic();
         void UpdateSpeed();
         void UpdatePos();
@@ -44,10 +46,9 @@ class Elevator : public frc::Subsystem {
         double GetLeftCurrent();
         double GetRightVoltage();
         double GetLeftVoltage();
-        bool IsRevLimitSwitchClosed();
         double InchesToEncoderTicks(double inches);
         void SetElevatorPositionInches(double inches);
        
-
        void ResetPosition();
+       double GetEncoderError();
 };

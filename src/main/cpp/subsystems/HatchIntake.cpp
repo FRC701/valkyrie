@@ -36,7 +36,7 @@ namespace
   {
     // TODO: What is the knob? What do we change to make this different.
     constexpr double kEigthUnitsPerRev {4096.0 / 1.0};
-    constexpr double kGainRatio {1.0};
+    constexpr double kGainRatio {2.0};
     constexpr double pGain = kGainRatio * 1023.0 / kEigthUnitsPerRev;
     return pGain;
   }
@@ -71,8 +71,7 @@ mMotorPosition{0}
 }
 
 void HatchIntake::InitDefaultCommand() {
-  SetDefaultCommand(new HatchIntakeSpeedDefaultCommand);
-  // SetDefaultCommand(new HatchIntakeDefaultCommand); // TODO: When we're happy with positions.
+   SetDefaultCommand(new HatchIntakeDefaultCommand);
 }
 
 void HatchIntake::Disengage() {
@@ -92,6 +91,12 @@ void HatchIntake::PivotPosition(double position) {
   mMotorPosition = position;
   UpdatePosition();
 }
+
+void HatchIntake::PivotPositionByAngle(double angle)
+{
+  PivotPosition(GetEncoderFromAngle(angle));
+}
+
 void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
                                        kPID_PrimaryClosedLoop,
@@ -128,13 +133,13 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigNominalOutputReverse(0, kTimeout_10Millis);
   mPivot.ConfigPeakOutputForward(1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-1, kTimeout_10Millis);
-  constexpr double kF {0.128 /* calcFeedforward() */};
+  constexpr double kF {0}; // feedforward is 0 for position
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
   const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
   const double kCruiseVelocity {800}; //Sensor Units per 100ms
-  const double kMotionAcceleration {800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
+  const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
@@ -144,7 +149,7 @@ void HatchIntake::SetupMotionMagic()
   mPivot.ConfigMotionAcceleration(kMotionAcceleration, kTimeout_10Millis); 
 }
 
-int HatchIntake::GetPositionError() {
+double HatchIntake::GetPositionError() {
   return mPivot.GetClosedLoopError(kSlotIndex);
 }
 
@@ -188,9 +193,9 @@ void HatchIntake::SetSoftLimits() {
   encoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
   encoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
   mPivot.ConfigForwardSoftLimitEnable(true);
-  mPivot.ConfigForwardSoftLimitThreshold(7000);//encoderFwd);
+  mPivot.ConfigForwardSoftLimitThreshold(encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
-  mPivot.ConfigReverseSoftLimitThreshold(-8000);//encoderRev);
+  mPivot.ConfigReverseSoftLimitThreshold(encoderRev);
 }
 
 void HatchIntake::UpdateSpeed() {

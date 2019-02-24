@@ -7,9 +7,10 @@
 
 #pragma once
 
-#include <frc/commands/CommandGroup.h>
+#include <frc/commands/InstantCommand.h>
 
-class FullArmPosition : public frc::CommandGroup {
+class dLBPressed : public frc::InstantCommand {
  public:
-  FullArmPosition(double angle);
+  dLBPressed();
+  void Initialize() override;
 };

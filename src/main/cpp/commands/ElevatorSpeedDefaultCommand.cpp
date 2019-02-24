@@ -20,8 +20,8 @@ void ElevatorSpeedDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorSpeedDefaultCommand::Execute() {
-  double left = OI::getInstance()->getCoDriverLeftYAxis();
-  Elevator::getInstance()->SetElevatorSpeed(left);
+  double left = -OI::getInstance()->getCoDriverLeftYAxis();
+  Elevator::getInstance()->SetElevatorSpeed(left*0.5);
 }
 
 // Make this return true when this Command no longer needs to run execute()

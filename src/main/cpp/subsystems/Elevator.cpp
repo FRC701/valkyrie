@@ -19,7 +19,7 @@ using RobotMap::kTimeout_10Millis;
 namespace
 {
 constexpr int kSlotIndex {0};
-constexpr int kForwardSoftLimit {48000}; // TODO, please fix this number or else interrupted
+constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
   constexpr double kMaxUnitsPer100ms {3675.0};
@@ -31,7 +31,7 @@ constexpr double calcFeedforward() {
 
 constexpr double calcP(){
   constexpr double kEigthUnitsPerRev {4096.0/ 1.0};
-  double pGain {1* 1023.0/kEigthUnitsPerRev};
+  double pGain {1.0 * 1023.0/kEigthUnitsPerRev};
   return pGain;
 }
 }
@@ -64,8 +64,7 @@ Elevator::Elevator() : Subsystem("Elevator"),
 void Elevator::InitDefaultCommand() {
     mPositionDefaultCommand = new ElevatorDefaultCommand;
     mSpeedDefaultCommand = new ElevatorSpeedDefaultCommand;
-    SetSpeedDefaultCommand();
-    // SetPositionDefaultCommand(); // TODO: Once we're happy with positions.
+    SetPositionDefaultCommand();
 }
 
 void Elevator::SetPositionDefaultCommand() {
@@ -82,13 +81,21 @@ void Elevator::SetElevatorSpeed(double speed) {
 }
 
 void Elevator::SetElevatorPosition(double position){
-  SetPositionDefaultCommand();
   mMotorPos = position;
   UpdatePos();
 }
 
 void Elevator::SetElevatorPositionInches(double inches) {
   SetElevatorPosition(InchesToEncoderTicks(inches));
+}
+
+bool Elevator::IsElevatorDown()
+{
+  return IsFwdLimitSwitchClosed();
+}
+
+bool Elevator::IsFwdLimitSwitchClosed(){
+  mLeftElevator.GetSensorCollection().IsFwdLimitSwitchClosed();
 }
 
 void Elevator::SetUpTalons(){
@@ -101,8 +108,8 @@ void Elevator::SetUpTalons(){
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mLeftElevator.SetSensorPhase(true);
 	mLeftElevator.SetInverted(true);
-	mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
-	mLeftElevator.ConfigPeakOutputReverse(-0.5, kTimeout_10Millis);
+	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
+	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
 
 	mRightElevator.SetInverted(false);
 	mRightElevator.Follow(mLeftElevator);
@@ -118,17 +125,16 @@ void Elevator::SetUpMotionMagic() {
 
   mLeftElevator.ConfigNominalOutputForward(0, kTimeout_10Millis);
   mLeftElevator.ConfigNominalOutputReverse(0, kTimeout_10Millis);
-  mLeftElevator.ConfigPeakOutputForward(0.5, kTimeout_10Millis);
-  mLeftElevator.ConfigPeakOutputReverse(-0.5, kTimeout_10Millis);
+  mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
+  mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
 
-  constexpr double kF {calcFeedforward()};
+  constexpr double kF {0};  // Feedforward should be 0 for position control
   constexpr double kP {calcP()};
-  //constexpr double kP{.05};
   constexpr double kI {0};
   constexpr double kD {0};
   constexpr double kMaxVelocity {3675};
-  constexpr double kCruiseVelocity {1600}; //Sensor Units per 100ms
-  constexpr double kMotionAcceleration {2300};//kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
+  constexpr double kCruiseVelocity {3000}; //Sensor Units per 100ms
+  constexpr double kMotionAcceleration {3675};//kCruiseVelocity * 2}; //Sensor Units per 100ms/sec
 
   mLeftElevator.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mLeftElevator.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
@@ -146,10 +152,6 @@ void Elevator::UpdateSpeed() {
 void Elevator::UpdatePos() {
   mLeftElevator.Set(ControlMode::MotionMagic, mMotorPos);
 }
-
-/*double Elevator::GetPosError() {
-	return RightElevator.GetClosedLoopError(kSlotIndex);
-}*/
 
 double Elevator::GetEncoderValue(){
 	return mLeftElevator.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
@@ -189,4 +191,12 @@ double Elevator::InchesToEncoderTicks(double inches) {
 void Elevator::ResetPosition() {
   double position = GetEncoderValue();
   SetElevatorPosition(position); 
+}
+
+bool Elevator::IsRevLimitSwitchClosed(){
+  mLeftElevator.GetSensorCollection().IsRevLimitSwitchClosed();
+}
+
+double Elevator::GetEncoderError(){
+  mLeftElevator.GetClosedLoopError();
 }
