@@ -36,7 +36,7 @@ namespace
   {
     // TODO: What is the knob? What do we change to make this different.
     constexpr double kEigthUnitsPerRev {4096.0 / 1.0};
-    constexpr double kGainRatio {1.0};
+    constexpr double kGainRatio {2.0};
     constexpr double pGain = kGainRatio * 1023.0 / kEigthUnitsPerRev;
     return pGain;
   }
@@ -139,7 +139,7 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kD {0};
   const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
   const double kCruiseVelocity {800}; //Sensor Units per 100ms
-  const double kMotionAcceleration {800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
+  const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
