@@ -38,6 +38,8 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Arm Encoder Value", HatchIntake::getInstance()->GetEncoderValue());
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
     frc::SmartDashboard::PutNumber("Arm Pot Voltage", HatchIntake::getInstance()->GetArmPotVoltage());
+    frc::SmartDashboard::PutNumber("Arm Set Point", HatchIntake::getInstance()->GetSetPoint());
+    frc::SmartDashboard::PutNumber("Arm Position Error", HatchIntake::getInstance()->GetPositionError());
     frc::SmartDashboard::PutNumber("Elevator Encoder Value", Elevator::getInstance()->GetEncoderValue());
     frc::SmartDashboard::PutNumber("Right Elevator Current", Elevator::getInstance()->GetRightCurrent());
     frc::SmartDashboard::PutNumber("Left Elevator Current", Elevator::getInstance()->GetLeftCurrent());
