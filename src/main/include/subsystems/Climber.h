@@ -11,6 +11,7 @@
 #include <frc/WPILib.h>
 #include <ctre/Phoenix.h>
 #include <frc/DoubleSolenoid.h>
+#include "rev/CANSparkMax.h"
 
 class Climber : public frc::Subsystem {
  private:
@@ -19,7 +20,7 @@ class Climber : public frc::Subsystem {
         static std::shared_ptr<Climber> self;
 
         WPI_TalonSRX mDriveMotor;
-        WPI_TalonSRX mLiftMotor;
+        rev::CANSparkMax  mLiftMotor;
         frc::DoubleSolenoid mLiftSolenoid;
         double mDriveMotorSpeed;
         double mLiftMotorSpeed;
