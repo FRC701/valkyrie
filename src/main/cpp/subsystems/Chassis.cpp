@@ -25,10 +25,10 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   rightEncoder{right1Wheel.GetEncoder()},
   mIsHighGear(true)
   {
-    left1Wheel.SetRampRate(0.2);
-    left2Wheel.SetRampRate(0.2);
-    right1Wheel.SetRampRate(0.2);
-    right2Wheel.SetRampRate(0.2);
+    left1Wheel.SetOpenLoopRampRate(0.2);
+    left2Wheel.SetOpenLoopRampRate(0.2);
+    right1Wheel.SetOpenLoopRampRate(0.2);
+    right2Wheel.SetOpenLoopRampRate(0.2);
 
     right1Wheel.SetInverted(true);
     right2Wheel.SetInverted(true);
