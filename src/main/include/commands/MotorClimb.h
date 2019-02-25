@@ -14,5 +14,5 @@ class MotorClimb : public frc::InstantCommand {
   MotorClimb(double speed);
   void Initialize() override;
   private:
-  double mClimberSpeed;
+  double mDriveSpeed;
 };
