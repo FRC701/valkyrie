@@ -135,8 +135,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
   frc::SmartDashboard::PutData("Run Climber Motor 50%", new SetClimber(0.5));
   frc::SmartDashboard::PutData("Run Climber Motor -50%", new SetClimber(-0.5));
-  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
   frc::SmartDashboard::PutData("Run Climber 0%", new SetClimber(0.));
+  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
   frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
   frc::SmartDashboard::PutData("1. Reset Encoder", new ResetHatchIntakePosition());
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
