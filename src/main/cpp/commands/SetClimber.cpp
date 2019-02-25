@@ -16,6 +16,6 @@ SetClimber::SetClimber(double speed) : mSpeed(speed) {
 
 // Called just before this Command runs the first time
 void SetClimber::Initialize() {
-  Climber::getInstance()->MotorClimber(mSpeed);
+  Climber::getInstance()->DriveClimb(mSpeed);
 }
 
