@@ -23,6 +23,12 @@ class LimeLight : public frc::Subsystem {
   LimeLight();
   void InitDefaultCommand() override;
   void SetVariables();
+  double GetTargetArea();
+  double GetLargeTargetArea();
+  double GetSmallTargetArea();
+  double GetTargetOffset();
+  double GetLargeTargetOffset();
+  double GetSmallTargetOffset();
   double GetDistanceToTargetInches();
   double GetTargetAngle();
   void SetPath();

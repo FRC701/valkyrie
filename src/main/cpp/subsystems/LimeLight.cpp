@@ -59,12 +59,37 @@ void LimeLight::SetVariables() {
   double targetAreaS = table->GetNumber("ta1", 0.0);
 }
 
+double LimeLight::GetTargetArea() {
+  return table->GetNumber("ta", 0.0);
+}
+double LimeLight::GetLargeTargetArea() {
+  return table->GetNumber("ta0", 0.0);
+}
+double LimeLight::GetSmallTargetArea() {
+  return table->GetNumber("ta1", 0.0);
+}
+double LimeLight::GetTargetOffset() {
+  return table->GetNumber("tx", 0.0);
+}
+double LimeLight::GetLargeTargetOffset() {
+  return table->GetNumber("tx0", 0.0);
+}
+double LimeLight::GetSmallTargetOffset() {
+  return table->GetNumber("tx1", 0.0);
+}
+
 double LimeLight::GetDistanceToTargetInches() {
-  distanceFromTargetInches = 69.291 * exp(-1.51 * targetArea);
+  targetArea = table->GetNumber("ta", 0.0);
+  distanceFromTargetInches = 106.79 * exp(-2.087 * targetArea);
   return distanceFromTargetInches;
 }
 
 double LimeLight::GetTargetAngle() {
+  targetAreaL = table->GetNumber("ta0", 0.0);
+  targetAreaS = table->GetNumber("ta1", 0.0);
+  targetOffsetAngleHorizontalL = table->GetNumber("tx0", 0.0);
+  targetOffsetAngleHorizontalS = table->GetNumber("tx1", 0.0);
+  distanceFromTargetInches = 106.79 * exp(-2.087 * targetArea);
   targetAngle = (targetAreaL - targetAreaS) * (2.08 * distanceFromTargetInches);
   if (targetOffsetAngleHorizontalL < targetOffsetAngleHorizontalS) {
     targetAngle = targetAngle * -1;

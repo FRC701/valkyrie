@@ -28,6 +28,7 @@ void Robot::RobotInit() {
   HatchIntake::getInstance();
   Elevator::getInstance();
   CargoIntake::getInstance();
+  LimeLight::getInstance();
 
 }
 
@@ -38,6 +39,12 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
     frc::SmartDashboard::PutNumber("Distance to Vision Target", LimeLight::getInstance()->GetDistanceToTargetInches());
     frc::SmartDashboard::PutNumber("Vision Target Angle", LimeLight::getInstance()->GetTargetAngle());
+    frc::SmartDashboard::PutNumber("Vision Target Area", LimeLight::getInstance()->GetTargetArea());
+    frc::SmartDashboard::PutNumber("Vision Target Small Area", LimeLight::getInstance()->GetLargeTargetArea());
+    frc::SmartDashboard::PutNumber("Vision Target Large Area", LimeLight::getInstance()->GetSmallTargetArea());
+    frc::SmartDashboard::PutNumber("Vision Target Offset", LimeLight::getInstance()->GetTargetOffset());
+    frc::SmartDashboard::PutNumber("Vision Target Angle", LimeLight::getInstance()->GetLargeTargetOffset());
+    frc::SmartDashboard::PutNumber("Vision Target Angle", LimeLight::getInstance()->GetSmallTargetOffset());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use
