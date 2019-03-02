@@ -1,6 +1,9 @@
 #include "subsystems/Chassis.h"
-#include "RobotMap.h"
+
 #include "commands/TankDrive.h"
+#include "RobotMap.h"
+
+#include <networktables/NetworkTableInstance.h>
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
@@ -13,8 +16,6 @@ std::shared_ptr<Chassis> Chassis::getInstance() {
   return self;
 }
 
-
-
 Chassis::Chassis() : Subsystem(kSubsystemName),
   //defaultCommand(nullptr),
   right1Wheel{RobotMap::kIDRight1Wheel, rev::CANSparkMax::MotorType::kBrushless},
@@ -26,6 +27,7 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   m_left{left1Wheel, left2Wheel},
   m_right{right1Wheel, right2Wheel},
   m_drive{m_left, m_right},
+  mLimeLightTable{nt::NetworkTableInstance::GetDefault().GetTable("limelight")},
   mIsHighGear(true)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
@@ -60,6 +62,13 @@ void Chassis::SetTankDrive(double left, double right) {
 
 void Chassis::SetArcadeDrive(double speed, double rotation) {
   m_drive.ArcadeDrive(speed, rotation);
+}
+
+double Chassis::GetVisionRotation() {
+  constexpr double pRotation = 1 / 27;
+  constexpr double setPoint = 0;
+  double measuredValue = mLimeLightTable->GetNumber("tx",0.0);
+  return pRotation * (setPoint - measuredValue);
 }
 
 void Chassis::DriveChassis(double speed) {
