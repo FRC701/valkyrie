@@ -51,14 +51,9 @@ void Chassis::SetTankDrive(double left, double right) {
   constexpr auto kHighGear = 0.75;
   constexpr auto kLowGear = 0.25;
 
-  if (IsHighGear())
-  {
-    left *= kHighGear;
-    right *= kHighGear;
-  } else {
-    left *= kLowGear;
-    right *= kLowGear;
- }
+  auto gear = IsHighGear() ? kHighGear : kLowGear;
+  left *= gear;
+  right *= gear;
 
   m_drive.TankDrive(left, right);
 }
