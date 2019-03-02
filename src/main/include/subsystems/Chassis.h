@@ -24,6 +24,8 @@ private:
   frc::SpeedControllerGroup m_right;
   frc::DifferentialDrive m_drive;
 
+  std::shared_ptr<NetworkTable> mLimeLightTable;
+
 
   bool mIsHighGear;
 
@@ -49,7 +51,7 @@ private:
   double GetLeftVoltage();
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
-  double SetRotation();
+  double GetVisionRotation();
   
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }
