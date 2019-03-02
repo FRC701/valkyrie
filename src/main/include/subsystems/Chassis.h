@@ -20,8 +20,8 @@ private:
   rev::CANEncoder rightEncoder;
 
   
-	frc::SpeedControllerGroup m_left;
-	frc::SpeedControllerGroup m_right;
+  frc::SpeedControllerGroup m_left;
+  frc::SpeedControllerGroup m_right;
   frc::DifferentialDrive m_drive;
 
 
