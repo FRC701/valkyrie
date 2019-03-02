@@ -1,8 +1,8 @@
 #include "subsystems/Chassis.h"
 #include "RobotMap.h"
 #include "commands/TankDrive.h"
-#include "networktables/NetworkTable.h"
-#include "networktables/NetworkTableInstance.h"
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 const char Chassis::kSubsystemName[] = "Chassis";
 

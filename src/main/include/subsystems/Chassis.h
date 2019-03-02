@@ -5,6 +5,8 @@
 #include "rev/CANEncoder.h"
 #include <frc/Drive/DifferentialDrive.h>
 #include <frc/SpeedControllerGroup.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
 
 class Chassis: public frc::Subsystem {
 private:
