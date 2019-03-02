@@ -49,6 +49,7 @@ private:
   double GetLeftVoltage();
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
+  double SetRotation();
   
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }

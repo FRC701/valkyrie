@@ -1,6 +1,8 @@
 #include "subsystems/Chassis.h"
 #include "RobotMap.h"
 #include "commands/TankDrive.h"
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableInstance.h"
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
@@ -13,6 +15,7 @@ std::shared_ptr<Chassis> Chassis::getInstance() {
   return self;
 }
 
+std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 
 
 Chassis::Chassis() : Subsystem(kSubsystemName),
@@ -60,6 +63,13 @@ void Chassis::SetTankDrive(double left, double right) {
 
 void Chassis::SetArcadeDrive(double speed, double rotation) {
   m_drive.ArcadeDrive(speed, rotation);
+}
+
+double Chassis::SetRotation() {
+  constexpr double pRotation = 1 / 27;
+  constexpr double setPoint = 0;
+  double measuredValue = table->GetNumber("tx",0.0);
+  return pRotation * (setPoint - measuredValue);
 }
 
 void Chassis::DriveChassis(double speed) {
