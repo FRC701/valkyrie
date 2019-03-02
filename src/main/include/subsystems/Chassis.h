@@ -1,10 +1,11 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
-#include "rev/CANSparkMax.h"
-#include "rev/CANEncoder.h"
 #include <frc/Drive/DifferentialDrive.h>
 #include <frc/SpeedControllerGroup.h>
+#include <networktables/NetworkTable.h>
+#include <rev/CANEncoder.h>
+#include <rev/CANSparkMax.h>
 
 class Chassis: public frc::Subsystem {
 private:
@@ -23,6 +24,8 @@ private:
   frc::SpeedControllerGroup m_left;
   frc::SpeedControllerGroup m_right;
   frc::DifferentialDrive m_drive;
+
+  std::shared_ptr<NetworkTable> mLimeLightTable;
 
 
   bool mIsHighGear;
@@ -49,6 +52,7 @@ private:
   double GetLeftVoltage();
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
+  double GetVisionRotation();
   
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }

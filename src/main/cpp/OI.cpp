@@ -44,6 +44,8 @@
 #include "commands/FullArmPosition.h"
 #include "commands/dlbPressed.h"
 #include "commands/dlbReleased.h"
+#include "commands/VisionDrive.h"
+#include "commands/TankDrive.h"
 
 namespace 
 {
@@ -110,6 +112,8 @@ OI::OI()
 {
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
+  dStart.WhenPressed(new VisionDrive());
+  dBack.WhenPressed(new TankDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
