@@ -24,7 +24,7 @@ void VisionDrive::Execute() {
   std::shared_ptr<OI> oi = OI::getInstance();
   std::shared_ptr<Chassis> chassis = Chassis::getInstance();
 
-  Chassis::getInstance()->SetArcadeDrive(oi->getDriverLeftYAxis(), chassis->GetVisionRotation());
+  chassis->SetArcadeDrive(oi->getDriverLeftYAxis(), chassis->GetVisionRotation());
 }
 
 // Make this return true when this Command no longer needs to run execute()
