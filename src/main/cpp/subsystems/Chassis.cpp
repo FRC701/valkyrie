@@ -38,6 +38,8 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
 
     //right2Wheel.Follow(right1Wheel);
     //left2Wheel.Follow(left1Wheel); 
+
+    m_drive.SetRightSideInverted(false);
   }
 
 void Chassis::InitDefaultCommand() {
@@ -58,11 +60,7 @@ void Chassis::SetTankDrive(double left, double right) {
     right *= kLowGear;
  }
 
-  left1Wheel.Set(left);
-  right1Wheel.Set(right);
-  left2Wheel.Set(left);
-  right2Wheel.Set(right);
-
+  m_drive.TankDrive(left, right);
 }
 
 void Chassis::SetArcadeDrive(double speed, double rotation) {
@@ -70,10 +68,7 @@ void Chassis::SetArcadeDrive(double speed, double rotation) {
 }
 
 void Chassis::DriveChassis(double speed) {
-  left1Wheel.Set(speed*.75);
-  left2Wheel.Set(speed*.75);
-  right1Wheel.Set(speed*.75);
-  right2Wheel.Set(speed*.75);
+  m_drive.TankDrive(speed, speed);
 }
 
 double Chassis::GetLeftPosition() {
