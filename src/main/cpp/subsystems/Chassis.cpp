@@ -23,6 +23,9 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   left2Wheel{RobotMap::kIDLeft2Wheel, rev::CANSparkMax::MotorType::kBrushless},
   leftEncoder{left1Wheel.GetEncoder()},
   rightEncoder{right1Wheel.GetEncoder()},
+  m_left{left1Wheel, left2Wheel},
+  m_right{right1Wheel, right2Wheel},
+  m_drive{m_left, m_right},
   mIsHighGear(true)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
@@ -60,6 +63,10 @@ void Chassis::SetTankDrive(double left, double right) {
   left2Wheel.Set(left);
   right2Wheel.Set(right);
 
+}
+
+void Chassis::SetArcadeDrive(double speed, double rotation) {
+  m_drive.ArcadeDrive(speed, rotation);
 }
 
 void Chassis::DriveChassis(double speed) {

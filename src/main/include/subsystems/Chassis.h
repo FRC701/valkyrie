@@ -3,6 +3,8 @@
 #include <frc/commands/Subsystem.h>
 #include "rev/CANSparkMax.h"
 #include "rev/CANEncoder.h"
+#include <frc/Drive/DifferentialDrive.h>
+#include <frc/SpeedControllerGroup.h>
 
 class Chassis: public frc::Subsystem {
 private:
@@ -16,6 +18,12 @@ private:
   rev::CANSparkMax left2Wheel;
   rev::CANEncoder leftEncoder;
   rev::CANEncoder rightEncoder;
+
+  
+	frc::SpeedControllerGroup m_left;
+	frc::SpeedControllerGroup m_right;
+  frc::DifferentialDrive m_drive;
+
 
   bool mIsHighGear;
 
@@ -40,6 +48,7 @@ private:
   double GetRightCurrent();
   double GetLeftVoltage();
   double GetRightVoltage();
+  void SetArcadeDrive(double speed, double rotation);
   
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }
