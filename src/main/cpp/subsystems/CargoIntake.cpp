@@ -7,8 +7,8 @@
 #include "commands/RunCargoRoller.h"
 #include "subsystems/CargoIntake.h"
 
-constexpr frc::DoubleSolenoid::Value kDeployerOut = frc::DoubleSolenoid::kForward;
-constexpr frc::DoubleSolenoid::Value kDeployerIn = frc::DoubleSolenoid::kReverse;
+constexpr frc::DoubleSolenoid::Value kSqueeze = frc::DoubleSolenoid::kForward;
+constexpr frc::DoubleSolenoid::Value kOpenSqueeze = frc::DoubleSolenoid::kReverse;
 
 const char CargoIntake::kSubsystemName[] = "CargoIntake";
 
@@ -22,7 +22,7 @@ std::shared_ptr<CargoIntake> CargoIntake::getInstance() {
 }
 
 CargoIntake::CargoIntake() : Subsystem("CargoIntake"),
-deployer(RobotMap::kIDCargoPneumaticForward, RobotMap::kIDCargoPneumaticReverse), 
+squeezer(RobotMap::kIDCargoPneumaticForward, RobotMap::kIDCargoPneumaticReverse), 
 roller(RobotMap::kIDCargoRoller)
 {}
 
@@ -32,14 +32,14 @@ void CargoIntake::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
   SetDefaultCommand(new RunCargoRoller(0));
 }
-void CargoIntake::DeployIn()
+void CargoIntake::Squeeze()
 {
-  deployer.Set(kDeployerIn);
+  squeezer.Set(kOpenSqueeze);
 }
 
-void CargoIntake::DeployOut()
+void CargoIntake::OpenSqueeze()
 {
-  deployer.Set(kDeployerOut);
+  squeezer.Set(kSqueeze);
 }
 
 void CargoIntake::SetCargoRoller(double speed)

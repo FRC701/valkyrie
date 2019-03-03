@@ -5,17 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SetCargoDeployerOut.h"
+#include "commands/SetCargoSqueeze.h"
 #include "subsystems/CargoIntake.h"
 
-SetCargoDeployerOut::SetCargoDeployerOut() {
+SetCargoSqueeze::SetCargoSqueeze() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(CargoIntake::getInstance().get());
 }
 
 // Called once when the command executes
-void SetCargoDeployerOut::Initialize() 
-{
-  CargoIntake::getInstance()->DeployOut();
+void SetCargoSqueeze::Initialize() {
+  CargoIntake::getInstance()->Squeeze();
 }

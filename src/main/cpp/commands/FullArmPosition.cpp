@@ -6,12 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullArmPosition.h"
-#include "commands/SetCargoDeployerIn.h"
+#include "commands/SetCargoSqueeze.h"
 #include "commands/PivotPositionByAngle.h"
 
 
 FullArmPosition::FullArmPosition(double angle) {
-  AddSequential(new SetCargoDeployerIn());
+  AddSequential(new SetCargoSqueeze());
   AddSequential(new PivotPositionByAngle(angle));
   
 

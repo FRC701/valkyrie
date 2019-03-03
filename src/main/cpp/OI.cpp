@@ -26,8 +26,8 @@
 #include "commands/PivotHatch.h"
 #include "commands/RunCargoRoller.h"
 #include "commands/TestingCargoIntake.h"
-#include "commands/SetCargoDeployerIn.h"
-#include "commands/SetCargoDeployerOut.h"
+#include "commands/SetCargoSqueeze.h"
+#include "commands/OpenCargoSqueeze.h"
 #include "commands/SetHatchIntakeAngleValue.h"
 #include "commands/SetElevator.h"
 #include "commands/ResetElevatorPosition.h"
@@ -160,8 +160,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Run Cargo Roller -30%", new RunCargoRoller(-0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller 30%", new TestingCargoIntake(0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
-  frc::SmartDashboard::PutData("Cargo Deployer In", new SetCargoDeployerIn());
-  frc::SmartDashboard::PutData("Cargo Deployer out", new SetCargoDeployerOut());
+  frc::SmartDashboard::PutData("Squeeze Cargo", new SetCargoSqueeze());
+  frc::SmartDashboard::PutData("Open Squeezer", new OpenCargoSqueeze());
   frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.3));
   frc::SmartDashboard::PutData("Elevator Run reverse", new SetElevatorSpeed(-0.3));
   frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
