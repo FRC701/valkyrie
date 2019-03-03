@@ -34,12 +34,12 @@ void CargoIntake::InitDefaultCommand() {
 }
 void CargoIntake::Squeeze()
 {
-  squeezer.Set(kOpenSqueeze);
+  squeezer.Set(kSqueeze);
 }
 
 void CargoIntake::OpenSqueeze()
 {
-  squeezer.Set(kSqueeze);
+  squeezer.Set(kOpenSqueeze);
 }
 
 void CargoIntake::SetCargoRoller(double speed)
