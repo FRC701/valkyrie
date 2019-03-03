@@ -18,15 +18,15 @@ class CargoIntake : public frc::Subsystem {
   // for methods that implement subsystem capabilities
     static const char kSubsystemName[];
   static std::shared_ptr<CargoIntake> self;
- frc::DoubleSolenoid deployer;
-  WPI_TalonSRX roller;
+ frc::DoubleSolenoid squeezer;
+ WPI_TalonSRX roller;
 
  public:
   CargoIntake();
   static std::shared_ptr<CargoIntake> getInstance();
   void InitDefaultCommand() override;
-  void DeployIn();
-  void DeployOut();
+  void Squeeze();
+  void OpenSqueeze();
   void SetCargoRoller(double speed);
   bool IsCargoIn();
 };

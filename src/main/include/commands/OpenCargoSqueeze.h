@@ -9,8 +9,8 @@
 
 #include <frc/commands/InstantCommand.h>
 
-class SetCargoDeployerIn : public frc::InstantCommand {
+class OpenCargoSqueeze : public frc::InstantCommand {
  public:
-  SetCargoDeployerIn();
+  OpenCargoSqueeze();
   void Initialize() override;
 };
