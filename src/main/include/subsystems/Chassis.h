@@ -53,6 +53,8 @@ private:
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
   double GetVisionRotation();
+  void SetCamDriverCam();
+  void SetCamVisionProcessing();
   
   void SetHighGear() { mIsHighGear = true; }
   void SetLowGear() { mIsHighGear = false; }

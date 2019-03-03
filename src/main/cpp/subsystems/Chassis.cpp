@@ -1,6 +1,6 @@
 #include "subsystems/Chassis.h"
 
-#include "commands/TankDrive.h"
+#include "commands/SetControlDrive.h"
 #include "RobotMap.h"
 
 #include <networktables/NetworkTableInstance.h>
@@ -46,7 +46,7 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
 
 void Chassis::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  SetDefaultCommand(new TankDrive);
+  SetDefaultCommand(new SetControlDrive());
 }
 
 void Chassis::SetTankDrive(double left, double right) {
@@ -65,8 +65,10 @@ void Chassis::SetArcadeDrive(double speed, double rotation) {
 }
 
 double Chassis::GetVisionRotation() {
-  constexpr double pRotation = 1 / 27;
-  constexpr double setPoint = 0;
+  constexpr double maxSpeed {0.5};
+  constexpr double maxAngle {27.0};
+  constexpr double pRotation {maxSpeed / maxAngle};
+  constexpr double setPoint {0};
   double measuredValue = mLimeLightTable->GetNumber("tx",0.0);
   return pRotation * (setPoint - measuredValue);
 }
@@ -97,4 +99,12 @@ double Chassis::GetLeftVoltage() {
 
 double Chassis::GetRightVoltage() {
   return right2Wheel.GetAppliedOutput();
+}
+
+void Chassis::SetCamVisionProcessing() {
+  mLimeLightTable->PutNumber("camMode", 0);
+}
+
+void Chassis::SetCamDriverCam() {
+  mLimeLightTable->PutNumber("camMode", 1);
 }
