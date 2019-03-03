@@ -19,8 +19,8 @@ class Climber : public frc::Subsystem {
         static const char kSubsystemName[];
         static std::shared_ptr<Climber> self;
 
-        WPI_TalonSRX mDriveMotor;
-        rev::CANSparkMax  mLiftMotor;
+       //  WPI_TalonSRX mDriveMotor;
+       //  rev::CANSparkMax  mLiftMotor;
         frc::DoubleSolenoid mLiftSolenoid;
         double mDriveMotorSpeed;
         double mLiftMotorSpeed;

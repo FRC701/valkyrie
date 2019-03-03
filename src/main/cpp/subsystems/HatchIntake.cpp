@@ -19,16 +19,16 @@ using frc::Preferences;
 
 namespace
 {
-  constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
-  constexpr frc::DoubleSolenoid::Value kMotorDisengage {frc::DoubleSolenoid::kReverse};
-  constexpr int kSlotIndex {0};
+  static constexpr frc::DoubleSolenoid::Value kMotorEngage {frc::DoubleSolenoid::kForward};
+  static constexpr frc::DoubleSolenoid::Value kMotorDisengage {frc::DoubleSolenoid::kReverse};
+  static constexpr int kSlotIndex {0};
 
   constexpr double calcFeedforward() 
   {
    constexpr double kMaxUnitsPer100ms {3675.0};
     // static const double kUnitsPerRev = 4096.0;
     // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
-    double feedforward = 1023.0 / kMaxUnitsPer100ms;
+    constexpr double feedforward = 1023.0 / kMaxUnitsPer100ms;
     return feedforward;
   }
 
@@ -137,9 +137,9 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
-  const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {800}; //Sensor Units per 100ms
-  const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
+  constexpr double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  constexpr double kCruiseVelocity {800}; //Sensor Units per 100ms
+  constexpr double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
@@ -184,9 +184,10 @@ int HatchIntake::GetEncoderValue() {
 void HatchIntake::SetArmValue() {
   double armSlope = Preferences::GetInstance()->GetDouble(kArmSlope);
   double armYIntercept = Preferences::GetInstance()->GetDouble(kArmYIntercept);
-  mPivot.SetSelectedSensorPosition(
-    LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
-    kPID_PrimaryClosedLoop, kTimeout_10Millis);
+  // mPivot.SetSelectedSensorPosition(
+  //   LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
+  //   kPID_PrimaryClosedLoop, kTimeout_10Millis);
+  mPivot.SetSelectedSensorPosition(0);
 }
 
 void HatchIntake::SetSoftLimits() {
@@ -208,7 +209,7 @@ void HatchIntake::UpdatePosition() {
 
 void HatchIntake::SetAngleValue() {
   encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
-  LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
+  LineCalculator angleToEncoder(90, encoderFwd, -90, encoderRev);
   Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
   Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
 }

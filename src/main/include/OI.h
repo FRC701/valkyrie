@@ -42,11 +42,14 @@ private:
   frc::Command* mElevatorCargoLevel_0;
   frc::Command* mElevatorCargoLevel_1;
   frc::Command* mElevatorCargoLevel_2;
-  frc::Command* mScoreCargo;
+  // frc::Command* mScoreCargo;
 
 	static std::shared_ptr<OI> self;
 
+  bool hatchMode = false;
+
 public:
+  bool getHatchMode();
 
 	double getDriverLeftXAxis() const;
 	double getDriverLeftYAxis() const;

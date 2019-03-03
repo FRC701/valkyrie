@@ -10,8 +10,8 @@
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
-#include "subsystems/CargoCarriage.h"
-#include "subsystems/CargoIntake.h"
+// #include "subsystems/CargoCarriage.h"
+// #include "subsystems/CargoIntake.h"
 #include "subsystems/Chassis.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/HatchIntake.h"
@@ -22,11 +22,11 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-  CargoCarriage::getInstance();
+  // CargoCarriage::getInstance();
   Chassis::getInstance();
   HatchIntake::getInstance();
   Elevator::getInstance();
-  CargoIntake::getInstance();
+  // CargoIntake::getInstance();
   // Initialize the OI after all the subsystems have been setup
   OI::getInstance();
 

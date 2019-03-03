@@ -12,9 +12,9 @@
 
 namespace
 {
-constexpr frc::DoubleSolenoid::Value kClimberEngage {frc::DoubleSolenoid::kForward};
-constexpr frc::DoubleSolenoid::Value kClimberDisengage {frc::DoubleSolenoid::kReverse};
-constexpr int kPCMID1 {1};
+    static constexpr frc::DoubleSolenoid::Value kClimberEngage {frc::DoubleSolenoid::kForward};
+    static constexpr frc::DoubleSolenoid::Value kClimberDisengage {frc::DoubleSolenoid::kReverse};
+    static constexpr int kPCMID1 {1};
 }
 
 std::shared_ptr<Climber> Climber::self;
@@ -27,15 +27,15 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"), 
     mDriveMotorSpeed{0},
     mLiftMotorSpeed{0},
-    mDriveMotor(RobotMap::kIDClimberDriveMotor),
-    mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
+    // mDriveMotor(RobotMap::kIDClimberDriveMotor),
+    // mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
-    mDriveMotor.Set(0.0);
-    mLiftMotor.Set(0.0);
-    mDriveMotor.SetInverted(true);
-    mLiftMotor.SetInverted(true);
+    // mDriveMotor.Set(0.0);
+    // mLiftMotor.Set(0.0);
+    // mDriveMotor.SetInverted(true);
+    // mLiftMotor.SetInverted(true);
 }
 
 void Climber::InitDefaultCommand() {
@@ -61,6 +61,6 @@ void Climber::DriveClimb(double speed) {
 }
 
 void Climber::Update() {
-    mDriveMotor.Set(mDriveMotorSpeed);
-    mLiftMotor.Set(mLiftMotorSpeed);
+    //mDriveMotor.Set(mDriveMotorSpeed);
+    //mLiftMotor.Set(mLiftMotorSpeed);
 }

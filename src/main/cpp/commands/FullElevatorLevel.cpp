@@ -7,17 +7,15 @@
 
 #include "commands/FullElevatorLevel.h"
 #include "commands/SetElevator.h"
-#include "commands/SetCargoDeployerIn.h"
-#include "commands/SetCargoDeployerOut.h"
 
 FullElevatorLevel::FullElevatorLevel(int height){
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
-  AddSequential(new SetCargoDeployerOut());
+  // AddSequential(new SetCargoDeployerOut());
   AddSequential(new SetElevator(height));
-  AddSequential(new SetCargoDeployerIn());
+  // AddSequential(new SetCargoDeployerIn());
   // To run multiple commands at the same time,
   // use AddParallel()
   // e.g. AddParallel(new Command1());

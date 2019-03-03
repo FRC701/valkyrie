@@ -5,17 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SetCargoDeployerIn.h"
-#include "subsystems/CargoIntake.h"
+#include "commands/SetCODriverControl.h"
+#include "OI.h"
 
-SetCargoDeployerIn::SetCargoDeployerIn() {
+SetCODriverControl::SetCODriverControl() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(CargoIntake::getInstance().get());
 }
 
 // Called once when the command executes
-void SetCargoDeployerIn::Initialize() 
-{
-  CargoIntake::getInstance()->DeployIn();
+void SetCODriverControl::Initialize() {
+  if (OI::getInstance()->getHatchMode()) {
+    OI::getInstance()->CargoIntakeControls();
+  } else {
+    OI::getInstance()->HatchIntakeControls();
+  }
 }

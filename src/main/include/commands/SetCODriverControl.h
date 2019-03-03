@@ -5,17 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/CarriagePuncherDisengage.h"
-#include "subsystems/CargoCarriage.h"
+#pragma once
 
-CarriagePuncherDisengage::CarriagePuncherDisengage() {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(CargoCarriage::getInstance().get());
-}
+#include <frc/commands/InstantCommand.h>
 
-// Called once when the command executes
-void CarriagePuncherDisengage::Initialize() 
-{
-  CargoCarriage::getInstance()->PullBack();
-}
+class SetCODriverControl : public frc::InstantCommand {
+ public:
+  SetCODriverControl();
+  void Initialize() override;
+};

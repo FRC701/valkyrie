@@ -18,24 +18,24 @@ using RobotMap::kTimeout_10Millis;
 
 namespace
 {
-constexpr int kSlotIndex {0};
-constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
+static constexpr int kSlotIndex {0};
+static constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
-  constexpr double kMaxUnitsPer100ms {3675.0};
+  constexpr double kMaxUnitsPer100ms {4096.0};
   // constexpr double kUnitsPerRev = 4096.0;
   // double rpm = (kMaxUnitsPer100ms * 600.0) / kUnitsPerRev;
-  double feedforward {1023.0 / kMaxUnitsPer100ms};
+  constexpr double feedforward {1023.0 / kMaxUnitsPer100ms};
   return feedforward;
 }
 
 constexpr double calcP(){
   constexpr double kEigthUnitsPerRev {4096.0/ 1.0};
-  double pGain {1.0 * 1023.0/kEigthUnitsPerRev};
+  constexpr double pGain {1.0 * 1023.0/kEigthUnitsPerRev};
   return pGain;
 }
 }
-constexpr char Elevator::kSubsystemName[] = "Elevator";
+const char Elevator::kSubsystemName[] = "Elevator";
 
 std::shared_ptr<Elevator> Elevator::self;
 
