@@ -29,4 +29,5 @@ class CargoIntake : public frc::Subsystem {
   void OpenSqueeze();
   void SetCargoRoller(double speed);
   bool IsCargoIn();
+  double RollerCurrent();
 };
