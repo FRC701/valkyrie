@@ -63,4 +63,7 @@ class HatchIntake : public frc::Subsystem {
   void ResetPosition();
 
   double GetSetPoint() { return mMotorPosition; }
+
+  static const std::string kHatchOrientation;
+
 };

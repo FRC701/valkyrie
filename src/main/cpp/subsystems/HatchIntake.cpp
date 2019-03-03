@@ -50,6 +50,8 @@ namespace
 }
 
 const char HatchIntake::kSubsystemName[] { "HatchIntake" };
+const std::string HatchIntake::kHatchOrientation { "HatchOrientation" };
+
 std::shared_ptr<HatchIntake> HatchIntake::self;
 
 std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
@@ -92,8 +94,7 @@ void HatchIntake::PivotPosition(double position) {
   UpdatePosition();
 }
 
-void HatchIntake::PivotPositionByAngle(double angle)
-{
+void HatchIntake::PivotPositionByAngle(double angle) {
   PivotPosition(GetEncoderFromAngle(angle));
 }
 
@@ -106,7 +107,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
-  mPivot.SetInverted(true);
+  mPivot.SetInverted(frc::Preferences::GetInstance()->GetBoolean(kHatchOrientation));
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
 
