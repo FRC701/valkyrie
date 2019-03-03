@@ -10,7 +10,7 @@
 #include "commands/VisionDrive.h"
 
 SetVisionDrive::SetVisionDrive() {
-  AddParallel(new SetCamModeVision());
+  AddSequential(new SetCamModeVision());
   AddSequential(new VisionDrive());
   // Add Commands here:
   // e.g. AddSequential(new Command1());

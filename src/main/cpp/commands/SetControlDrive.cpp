@@ -10,7 +10,7 @@
 #include "commands/SetCamModeDriver.h"
 
 SetControlDrive::SetControlDrive() {
-  AddParallel(new SetCamModeDriver());
+  AddSequential(new SetCamModeDriver());
   AddSequential(new TankDrive());
   // Add Commands here:
   // e.g. AddSequential(new Command1());
