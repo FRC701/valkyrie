@@ -19,10 +19,6 @@
 #include "commands/HatchIntakeEngage.h"
 #include "commands/HatchPuncherEngage.h"
 #include "commands/HatchPuncherDisengage.h"
-#include "commands/CarriageClawEngage.h"
-#include "commands/CarriageClawDisengage.h"
-#include "commands/CarriagePuncherDisengage.h"
-#include "commands/CarriagePuncherEngage.h"
 #include "commands/PivotHatch.h"
 #include "commands/RunCargoRoller.h"
 #include "commands/TestingCargoIntake.h"
@@ -39,7 +35,6 @@
 #include "commands/SetElevatorSpeedDefaultCommand.h"
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "commands/SetHatchIntakeSpeedDefaultCommand.h"
-#include "commands/ScoreCargo.h"
 #include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
 #include "commands/dlbPressed.h"
@@ -108,7 +103,6 @@ OI::OI()
 , mElevatorCargoLevel_0(new FullElevatorLevel(kElevatorCargoLevel_1))
 , mElevatorCargoLevel_1(new FullElevatorLevel(kElevatorCargoLevel_2))
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
-, mScoreCargo(new ScoreCargo())
 {
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
@@ -152,10 +146,6 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
   frc::SmartDashboard::PutData("Pivot fwd", new PivotHatch(0.3));
   frc::SmartDashboard::PutData("Pivot rev", new PivotHatch(-0.3));
-  frc::SmartDashboard::PutData("Carriage Claw Engage", new CarriageClawEngage());
-  frc::SmartDashboard::PutData("Carriage Claw Disengage", new CarriageClawDisengage());
-  frc::SmartDashboard::PutData("Carriage Puncher Engage", new CarriagePuncherEngage());
-  frc::SmartDashboard::PutData("Carriage Puncher Disengage", new CarriagePuncherDisengage());
   frc::SmartDashboard::PutData("Run Cargo Roller 30%", new RunCargoRoller(0.3));
   frc::SmartDashboard::PutData("Run Cargo Roller -30%", new RunCargoRoller(-0.3));
   frc::SmartDashboard::PutData("Running Test Cargo Roller 30%", new TestingCargoIntake(0.3));
@@ -237,6 +227,5 @@ void OI::CargoIntakeControls(){
   coY.WhenPressed(mElevatorCargoLevel_0);
   coB.WhenPressed(mElevatorCargoLevel_1);
   coA.WhenPressed(mElevatorCargoLevel_2);
-  coRB.WhenPressed(mScoreCargo);
 }
 
