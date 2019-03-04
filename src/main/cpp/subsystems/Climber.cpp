@@ -15,6 +15,96 @@ namespace
 constexpr frc::DoubleSolenoid::Value kClimberEngage {frc::DoubleSolenoid::kForward};
 constexpr frc::DoubleSolenoid::Value kClimberDisengage {frc::DoubleSolenoid::kReverse};
 constexpr int kPCMID1 {1};
+
+constexpr double calcP()
+{
+    // Assumption: Acheive max speed when the target is 10 revolutions
+    // Tuning: 
+    // * Adjust kTargetMaxRevolutions for the maximum speed at a distance in revolutions
+    // * Set kMaxRPM to the maximum speed you want the motor to move
+    //   (or the maximum speed the motor *can* go.)
+    constexpr auto kTargetMaxRevolutions = 10.;
+    constexpr auto kMaxRPM = 1000;
+    constexpr auto kMaxRPS = kMaxRPM / 60.;
+
+    constexpr auto kTargetProportion = kMaxRPS / kTargetMaxRevolutions;
+    return kTargetProportion;
+}
+
+using AccelStrategy = rev::CANPIDController::AccelStrategy;
+struct ConfigPIDController
+{
+    int pidSlot;
+    double p;
+    double i;
+    double d;
+    double f;
+    double dFilter;
+    double iZone;
+    double outputRangeMinimum;
+    double outputRangeMaximum;
+    double maxVelocity_RPM;
+    double maxAcceleration_RPMPM;
+    double minOutputVelocity_RPM;
+    double allowedClosedLoopError;
+    AccelStrategy accelStrategy;
+    double maxIAccumulator;
+};
+
+ConfigPIDController kConfig =
+{
+    /* .pidSlot = */ 0,
+    /* .p = */ calcP(),
+    /* .i = */ 0,
+    /* .d = */ 0,
+    /* .f = */ 0, // feedforward should be 0 for position
+    /* .dFilter = */ 0, // TODO how is dFilter set
+    /* .iZone = */ 0, // TODO how is iZone set
+    /* .outputRangeMaximum = */ 12,
+    /* .outputRangeMinimum = */ -12,
+    /* .maxVelocity_RPM = */ 4000,
+    /* .maxAcceleration_RPMPM = */ 4000,
+    /* .minOutputVelocity_RPM = */ 0,
+    /* .allowedClosedLoopError = */ 0.1,
+    /* .accelStrategy = */ AccelStrategy::kTrapezoidal,
+    /* .maxIAccumulator = */ 0.0
+};
+
+void configurePIDController(
+    rev::CANPIDController& controller
+    , const ConfigPIDController& config)
+{
+    auto pidSlot = config.pidSlot;
+    controller.SetP(config.p, pidSlot);
+    controller.SetI(config.i, pidSlot);
+    controller.SetD(config.d, pidSlot);
+    controller.SetFF(config.f, pidSlot);
+    controller.SetDFilter(config.dFilter, pidSlot);
+    controller.SetIZone(config.iZone, pidSlot);
+    controller.SetOutputRange(
+        config.outputRangeMinimum, 
+        config.outputRangeMaximum,
+        pidSlot);
+    controller.SetSmartMotionMaxVelocity(
+        config.maxVelocity_RPM,
+        pidSlot);
+    controller.SetSmartMotionMaxAccel(
+        config.maxAcceleration_RPMPM,
+        pidSlot);
+    controller.SetSmartMotionMinOutputVelocity(
+        config.minOutputVelocity_RPM,
+        pidSlot);
+    controller.SetSmartMotionAllowedClosedLoopError(
+        config.allowedClosedLoopError,
+        pidSlot);
+    controller.SetSmartMotionAccelStrategy(
+        config.accelStrategy,
+        pidSlot);
+    controller.SetIMaxAccum(
+        config.maxIAccumulator,
+        pidSlot);
+}
+
 }
 
 std::shared_ptr<Climber> Climber::self;
@@ -37,6 +127,8 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotor.Set(0.0);
     mDriveMotor.SetInverted(true);
     mLiftMotor.SetInverted(true);
+
+    configurePIDController(mLiftMotorController, kConfig);
 }
 
 void Climber::InitDefaultCommand() {
