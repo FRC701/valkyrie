@@ -12,7 +12,7 @@
 #include "commands/MotorClimb.h"
 
 Climb::Climb() {
-  AddSequential(new MotorClimb());
-  AddSequential(new DriveClimb());
-  AddSequential(new MotorClimb());
+  AddSequential(new MotorClimb(0.));
+  AddSequential(new DriveClimb(0.));
+  AddSequential(new MotorClimb(0.));
 }

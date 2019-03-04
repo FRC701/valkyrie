@@ -9,8 +9,8 @@
 #include "commands/MotorClimb.h"
 
 StageOneClimb::StageOneClimb() {
-  AddSequential(new MotorClimb());
-  AddSequential(new MotorClimb());
-  AddSequential(new MotorClimb());
+  AddSequential(new MotorClimb(0.));
+  AddSequential(new MotorClimb(0.));
+  AddSequential(new MotorClimb(0.));
 
 }
