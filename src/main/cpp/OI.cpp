@@ -58,6 +58,8 @@ constexpr double kElevatorCargoLevel_Ship = 29000;
 constexpr double kElevatorCargoLevel_2 = 35000;
 constexpr double kElevatorCargoLevel_3 = 55000;
 
+constexpr double kRunCargoRoller = -1.0;
+
 }
 
 
@@ -107,6 +109,7 @@ OI::OI()
 , mElevatorCargoLevel_0(new FullElevatorLevel(kElevatorCargoLevel_1))
 , mElevatorCargoLevel_1(new FullElevatorLevel(kElevatorCargoLevel_2))
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
+, mScoreCargo(new RunCargoRoller(kRunCargoRoller))
 {
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
@@ -114,16 +117,17 @@ OI::OI()
   dBack.WhenPressed(new SetControlDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
+  
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
-  coR3.WhenPressed(new SetElevator(0));
-  coX.WhenPressed(new RunCargoRoller(0.3));
+
+  coX.WhenPressed(new RunCargoRoller(0.7));
 
   coPOV0.WhenPressed(new FullArmPosition(0.));
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
   HatchIntakeControls();
-  coRB.WhenPressed(mHatchIntakeEngage);
+  //coRB.WhenPressed(mHatchIntakeEngage);
 
 
   // Process operator interface input here.
@@ -150,10 +154,10 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake Disengage", new HatchIntakeDisengage());
   frc::SmartDashboard::PutData("Pivot fwd", new PivotHatch(0.3));
   frc::SmartDashboard::PutData("Pivot rev", new PivotHatch(-0.3));
-  frc::SmartDashboard::PutData("Run Cargo Roller 30%", new RunCargoRoller(0.3));
-  frc::SmartDashboard::PutData("Run Cargo Roller -30%", new RunCargoRoller(-0.3));
-  frc::SmartDashboard::PutData("Running Test Cargo Roller 30%", new TestingCargoIntake(0.3));
-  frc::SmartDashboard::PutData("Running Test Cargo Roller -30%", new TestingCargoIntake(-0.3));
+  frc::SmartDashboard::PutData("Run Cargo Roller 70%", new RunCargoRoller(0.7));
+  frc::SmartDashboard::PutData("Run Cargo Roller -100%", new RunCargoRoller(-1.));
+  frc::SmartDashboard::PutData("Running Test Cargo Roller 70%", new TestingCargoIntake(0.7));
+  frc::SmartDashboard::PutData("Running Test Cargo Roller -70%", new TestingCargoIntake(-0.7));
   frc::SmartDashboard::PutData("Squeeze Cargo", new SetCargoSqueeze());
   frc::SmartDashboard::PutData("Open Squeezer", new OpenCargoSqueeze());
   frc::SmartDashboard::PutData("Elevator Run forward", new SetElevatorSpeed(0.3));
@@ -233,5 +237,6 @@ void OI::CargoIntakeControls(){
   coY.WhenPressed(mElevatorCargoLevel_0);
   coB.WhenPressed(mElevatorCargoLevel_1);
   coA.WhenPressed(mElevatorCargoLevel_2);
+  coRB.WhileHeld(mScoreCargo);
 }
 

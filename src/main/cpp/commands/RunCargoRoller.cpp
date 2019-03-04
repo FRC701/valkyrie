@@ -27,10 +27,12 @@ void RunCargoRoller::Execute()
 // Make this return true when this Command no longer needs to run execute()
 bool RunCargoRoller::IsFinished() {
   if(mSpeed < 0){
-    return ! CargoIntake::getInstance()->IsCargoIn();
+    return false;//! CargoIntake::getInstance()->IsCargoIn();
   }
-  else{
-    return CargoIntake::getInstance()->IsCargoIn();
+  else {
+    bool finished = CargoIntake::getInstance()->RollerCurrent()>25;
+    if (finished) OI::getInstance()->CargoIntakeControls();
+    return finished;
   }
 
 
@@ -43,4 +45,6 @@ void RunCargoRoller::End() {
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RunCargoRoller::Interrupted() {}
+void RunCargoRoller::Interrupted() {
+  OI::getInstance()->HatchIntakeControls();
+}

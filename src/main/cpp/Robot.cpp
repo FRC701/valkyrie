@@ -49,6 +49,7 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Right Drive Current", Chassis::getInstance()->GetRightCurrent());
     frc::SmartDashboard::PutNumber("Left Drive Voltage", Chassis::getInstance()->GetLeftVoltage());
     frc::SmartDashboard::PutNumber("Right Drive Voltage", Chassis::getInstance()->GetRightVoltage());
+    frc::SmartDashboard::PutNumber("Roller current", CargoIntake::getInstance()->RollerCurrent());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use

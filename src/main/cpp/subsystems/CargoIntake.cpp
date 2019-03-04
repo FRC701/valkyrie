@@ -49,5 +49,9 @@ void CargoIntake::SetCargoRoller(double speed)
 bool CargoIntake::IsCargoIn() {
   return roller.GetSensorCollection().IsRevLimitSwitchClosed();
 }
+
+double CargoIntake::RollerCurrent(){
+  return roller.GetOutputCurrent();
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
