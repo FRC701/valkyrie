@@ -5,17 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SetClimber.h"
-#include "subsystems/Climber.h"
+#pragma once
 
-SetClimber::SetClimber(double speed) : mSpeed(speed) {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(Climber::getInstance().get());
-}
+#include <frc/commands/InstantCommand.h>
 
-// Called just before this Command runs the first time
-void SetClimber::Initialize() {
-  Climber::getInstance()->MotorClimber(mSpeed);
-}
-
+class DriveClimb : public frc::InstantCommand {
+ public:
+  DriveClimb(double speed);
+  void Initialize() override;
+private:
+  double mDriveMotorSpeed;
+};
