@@ -117,6 +117,7 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"), 
     mDriveMotorSpeed{0},
     mLiftMotorSpeed{0},
+    mLiftMotorPosition_revs{0.},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
@@ -153,7 +154,18 @@ void Climber::DriveClimb(double speed) {
     Update();
 }
 
+void Climber::ClimbPosition(double position_revs)
+{
+    mLiftMotorPosition_revs = position_revs;
+    UpdatePosition();
+}
+
 void Climber::Update() {
     mDriveMotor.Set(mDriveMotorSpeed);
     mLiftMotor.Set(mLiftMotorSpeed);
+}
+
+void Climber::UpdatePosition() {
+    mDriveMotor.Set(mDriveMotorSpeed);
+    mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kSmartMotion);
 }
