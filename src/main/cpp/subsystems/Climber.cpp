@@ -51,12 +51,12 @@ void Climber::Disengage() {
 }
 
 void Climber::MotorClimber(double speed) {
-    mDriveMotorSpeed = speed;
+    mLiftMotorSpeed = speed;
     Update();
 }
 
 void Climber::DriveClimb(double speed) {
-    mLiftMotorSpeed = speed;
+    mDriveMotorSpeed = speed;
     Update();
 }
 

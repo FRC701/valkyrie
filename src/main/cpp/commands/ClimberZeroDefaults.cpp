@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ClimberZeroDefaults.h"
-#include "commands/SetClimber.h"
+#include "commands/DriveClimb.h"
 #include "commands/MotorClimb.h"
 
 ClimberZeroDefaults::ClimberZeroDefaults() {
@@ -15,7 +15,7 @@ ClimberZeroDefaults::ClimberZeroDefaults() {
   //      AddSequential(new Command2());
   // these will run in order.
   AddSequential(new MotorClimb(0));
-  AddSequential(new SetClimber(0));
+  AddSequential(new DriveClimb(0));
   // To run multiple commands at the same time,
   // use AddParallel()
   // e.g. AddParallel(new Command1());
