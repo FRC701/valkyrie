@@ -21,6 +21,7 @@ class Climber : public frc::Subsystem {
 
         WPI_TalonSRX mDriveMotor;
         rev::CANSparkMax  mLiftMotor;
+        rev::CANPIDController mLiftMotorController;
         frc::DoubleSolenoid mLiftSolenoid;
         double mDriveMotorSpeed;
         double mLiftMotorSpeed;

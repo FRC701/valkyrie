@@ -29,6 +29,7 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotorSpeed{0},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
+    mLiftMotorController{mLiftMotor.GetPIDController()},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
 {
     mLiftSolenoid.Set(kClimberDisengage);
