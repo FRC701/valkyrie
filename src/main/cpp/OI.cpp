@@ -47,6 +47,7 @@
 #include "commands/SetCamModeVision.h"
 #include "commands/CargoRollerOuttake.h"
 #include "commands/CargoRollerIdle.h"
+#include "commands/HatchCargoSelector.h"
 
 namespace 
 {
@@ -112,6 +113,7 @@ OI::OI()
 , mElevatorCargoLevel_1(new FullElevatorLevel(kElevatorCargoLevel_2))
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
 , mScoreCargo(new CargoRollerOuttake(kCargoOuttakeTimeout))
+, mIsHatch(true)
 {
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
@@ -128,9 +130,11 @@ OI::OI()
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
-  HatchIntakeControls();
-  //coRB.WhenPressed(mHatchIntakeEngage);
 
+  coA.WhenPressed(new HatchCargoSelector(mElevatorHatchLevel_0, mElevatorCargoLevel_0));
+  coB.WhenPressed(new HatchCargoSelector(mElevatorHatchLevel_1, mElevatorCargoLevel_1));
+  coY.WhenPressed(new HatchCargoSelector(mElevatorHatchLevel_2, mElevatorCargoLevel_2));
+  coRB.WhenPressed(new HatchCargoSelector(mHatchIntakeEngage, mScoreCargo));
 
   // Process operator interface input here.
   frc::SmartDashboard::PutData("Drive 25", new Drive(.25));
@@ -228,17 +232,4 @@ double OI::getCoDriverRightYAxis() const{
   return coDriver->GetRawAxis(kRightYAxis_ID);
 }
 
-void OI::HatchIntakeControls(){
-  coA.WhenPressed(mElevatorHatchLevel_0);
-  coB.WhenPressed(mElevatorHatchLevel_1);
-  coY.WhenPressed(mElevatorHatchLevel_2);
-  coRB.WhenPressed(mHatchIntakeEngage);
-}
-
-void OI::CargoIntakeControls(){
-  coA.WhenPressed(mElevatorCargoLevel_0);
-  coB.WhenPressed(mElevatorCargoLevel_1);
-  coY.WhenPressed(mElevatorCargoLevel_2);
-  coRB.WhenPressed(mScoreCargo);
-}
 
