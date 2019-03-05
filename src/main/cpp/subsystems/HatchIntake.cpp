@@ -68,6 +68,8 @@ mMotorPosition{0}
 {
   SetUpTalons();
   SetupMotionMagic();
+
+  SetArmValue();
 }
 
 void HatchIntake::InitDefaultCommand() {
@@ -101,8 +103,6 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
                                        kPID_PrimaryClosedLoop,
                                        kTimeout_10Millis);
-  mPivot.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
-  mPivot.ConfigReverseSoftLimitEnable(false, kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
@@ -110,7 +110,6 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
 
-  SetArmValue();
   SetSoftLimits();
 }
 
@@ -162,23 +161,19 @@ int HatchIntake::GetArmPotValue() {
 }
 
 void HatchIntake::GetArmValuesFwd() {
-  potFwd = armPot.GetValue();
-  encoderFwd = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  potFwd = GetArmPotValue();
+  encoderFwd = GetPosition();
 }
 
 void HatchIntake::GetArmValuesRev() {
-  potRev = armPot.GetValue();
-  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  potRev = GetArmPotValue();
+  encoderRev = GetPosition();
   Preferences::GetInstance()->PutInt(kHatchFwdSoftLimit, encoderFwd);
   Preferences::GetInstance()->PutInt(kHatchRevSoftLimit, encoderRev);
   SetSoftLimits();
   LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
   Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
   Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
-}
-
-int HatchIntake::GetEncoderValue() {
-  return mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
 }
 
 void HatchIntake::SetArmValue() {
@@ -207,7 +202,7 @@ void HatchIntake::UpdatePosition() {
 }
 
 void HatchIntake::SetAngleValue() {
-  encoderRev = mPivot.GetSelectedSensorPosition(kPID_PrimaryClosedLoop);
+  encoderRev = GetPosition();
   LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
   Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
   Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
