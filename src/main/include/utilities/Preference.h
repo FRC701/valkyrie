@@ -2,8 +2,6 @@
 
 #include <frc/Preferences.h>
 
-#include <string>
-
 template <typename T>
 struct PreferenceTraits
 {
@@ -43,6 +41,7 @@ template <typename T>
 class Preference
 {
   public:
+    explicit 
     Preference(const wpi::StringRef& key) : mKey(key) { }
     T get() const { return PreferenceTraits<T>::get(mKey); }
     void put(const T& value) { PreferenceTraits<T>::put(mKey, value); }
