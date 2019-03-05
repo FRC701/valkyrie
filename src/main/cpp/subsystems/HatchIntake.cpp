@@ -68,6 +68,8 @@ mMotorPosition{0}
 {
   SetUpTalons();
   SetupMotionMagic();
+
+  SetArmValue();
 }
 
 void HatchIntake::InitDefaultCommand() {
@@ -110,7 +112,6 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
 
-  SetArmValue();
   SetSoftLimits();
 }
 
