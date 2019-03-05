@@ -45,6 +45,8 @@
 #include "commands/SetControlDrive.h"
 #include "commands/SetCamModeDriver.h"
 #include "commands/SetCamModeVision.h"
+#include "commands/CargoRollerOuttake.h"
+#include "commands/CargoRollerIdle.h"
 
 namespace 
 {
@@ -58,7 +60,7 @@ constexpr double kElevatorCargoLevel_Ship = 29000;
 constexpr double kElevatorCargoLevel_2 = 35000;
 constexpr double kElevatorCargoLevel_3 = 55000;
 
-constexpr double kRunCargoRoller = -1.0;
+constexpr double kCargoOuttakeTimeout = 1.0;
 
 }
 
@@ -109,7 +111,7 @@ OI::OI()
 , mElevatorCargoLevel_0(new FullElevatorLevel(kElevatorCargoLevel_1))
 , mElevatorCargoLevel_1(new FullElevatorLevel(kElevatorCargoLevel_2))
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
-, mScoreCargo(new RunCargoRoller(kRunCargoRoller))
+, mScoreCargo(new CargoRollerOuttake(kCargoOuttakeTimeout))
 {
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
