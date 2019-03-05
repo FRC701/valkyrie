@@ -40,13 +40,6 @@ namespace
     constexpr double pGain = kGainRatio * 1023.0 / kEigthUnitsPerRev;
     return pGain;
   }
-
-  const std::string kArmSlope { "ArmSlope" };
-  const std::string kArmYIntercept { "ArmYIntercept" };
-  const std::string kHatchFwdSoftLimit { "HatchFwdSoftLimit" };
-  const std::string kHatchRevSoftLimit { "HatchRevSoftLimit" };
-  const std::string kAngleSlope { "AngleSlope" };
-  const std::string kAngleYIntercept { "AngleYIntercept" };
 }
 
 const char HatchIntake::kSubsystemName[] { "HatchIntake" };
@@ -64,7 +57,13 @@ mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse),
 mPivot(RobotMap::kIDHatchPivot),
 armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0},
-mMotorPosition{0}
+mMotorPosition{0},
+mArmSlope{"ArmSlope"},
+mArmYIntercept{"ArmYIntercept"},
+mHatchFwdSoftLimit{"HatchFwdSoftLimit"},
+mHatchRevSoftLimit{"HatchRevSoftLimit"},
+mAngleSlope{"AngleSlope"},
+mAngleYIntercept{"AngleYIntercept"}
 {
   SetUpTalons();
   SetupMotionMagic();
@@ -168,25 +167,24 @@ void HatchIntake::GetArmValuesFwd() {
 void HatchIntake::GetArmValuesRev() {
   potRev = GetArmPotValue();
   encoderRev = GetPosition();
-  Preferences::GetInstance()->PutInt(kHatchFwdSoftLimit, encoderFwd);
-  Preferences::GetInstance()->PutInt(kHatchRevSoftLimit, encoderRev);
+  mHatchFwdSoftLimit = encoderFwd;
+  mHatchRevSoftLimit = encoderRev;
   SetSoftLimits();
   LineCalculator potToEncoder(potFwd, encoderFwd, potRev, encoderRev);
-  Preferences::GetInstance()->PutDouble(kArmSlope, potToEncoder.slope());
-  Preferences::GetInstance()->PutDouble(kArmYIntercept, potToEncoder.yIntercept());
+  mArmSlope = potToEncoder.slope();
+  mArmYIntercept = potToEncoder.yIntercept();
 }
 
 void HatchIntake::SetArmValue() {
-  double armSlope = Preferences::GetInstance()->GetDouble(kArmSlope);
-  double armYIntercept = Preferences::GetInstance()->GetDouble(kArmYIntercept);
   mPivot.SetSelectedSensorPosition(
-    LineCalculator(armSlope, armYIntercept)(armPot.GetValue()), 
+    LineCalculator(mArmSlope, mArmYIntercept)(armPot.GetValue()), 
     kPID_PrimaryClosedLoop, kTimeout_10Millis);
 }
 
 void HatchIntake::SetSoftLimits() {
-  encoderFwd = Preferences::GetInstance()->GetInt(kHatchFwdSoftLimit);
-  encoderRev = Preferences::GetInstance()->GetInt(kHatchRevSoftLimit);
+  // TODO: Is this side affect on purpose?
+  encoderFwd = mHatchFwdSoftLimit;
+  encoderRev = mHatchRevSoftLimit;
   mPivot.ConfigForwardSoftLimitEnable(true);
   mPivot.ConfigForwardSoftLimitThreshold(encoderFwd);
   mPivot.ConfigReverseSoftLimitEnable(true);
@@ -204,14 +202,12 @@ void HatchIntake::UpdatePosition() {
 void HatchIntake::SetAngleValue() {
   encoderRev = GetPosition();
   LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
-  Preferences::GetInstance()->PutInt(kAngleSlope, angleToEncoder.slope());
-  Preferences::GetInstance()->PutInt(kAngleYIntercept, angleToEncoder.yIntercept());
+  mAngleSlope = angleToEncoder.slope();
+  mAngleYIntercept = angleToEncoder.yIntercept();
 }
 
 double HatchIntake::GetEncoderFromAngle(double angle) {
-  int angleSlope = Preferences::GetInstance()->GetInt(kAngleSlope);
-  int angleYIntercept = Preferences::GetInstance()->GetInt(kAngleYIntercept);
-  double encoder = LineCalculator(angleSlope, angleYIntercept)(angle);
+  double encoder = LineCalculator(mAngleSlope, mAngleYIntercept)(angle);
   return encoder;
 }
 
