@@ -236,9 +236,9 @@ void OI::HatchIntakeControls(){
 }
 
 void OI::CargoIntakeControls(){
-  coY.WhenPressed(mElevatorCargoLevel_0);
+  coA.WhenPressed(mElevatorCargoLevel_0);
   coB.WhenPressed(mElevatorCargoLevel_1);
-  coA.WhenPressed(mElevatorCargoLevel_2);
+  coY.WhenPressed(mElevatorCargoLevel_2);
   coRB.WhileHeld(mScoreCargo);
 }
 
