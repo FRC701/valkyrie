@@ -4,8 +4,8 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-#include "commands/RunCargoRoller.h"
 #include "subsystems/CargoIntake.h"
+#include "commands/CargoRollerIdle.h"
 
 constexpr frc::DoubleSolenoid::Value kSqueeze = frc::DoubleSolenoid::kForward;
 constexpr frc::DoubleSolenoid::Value kOpenSqueeze = frc::DoubleSolenoid::kReverse;
@@ -30,7 +30,7 @@ roller(RobotMap::kIDCargoRoller)
 void CargoIntake::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
-  SetDefaultCommand(new RunCargoRoller(0));
+  SetDefaultCommand(new CargoRollerIdle(self));
 }
 void CargoIntake::Squeeze()
 {

@@ -5,37 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/RunCargoRoller.h"
+#include "commands/CargoRollerIdle.h"
 #include "subsystems/CargoIntake.h"
-#include "OI.h"
 
-RunCargoRoller::RunCargoRoller(double speed): mSpeed(speed) {
+CargoRollerIdle::CargoRollerIdle(
+  const std::shared_ptr<CargoIntake>& subsystem)
+: mCargoIntake(subsystem) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(CargoIntake::getInstance().get());
+  Requires(mCargoIntake.get());
 }
 
 // Called just before this Command runs the first time
-void RunCargoRoller::Initialize() {}
+void CargoRollerIdle::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunCargoRoller::Execute() 
-{
-  CargoIntake::getInstance()->SetCargoRoller(mSpeed);
+void CargoRollerIdle::Execute() {
+  mCargoIntake->SetCargoRoller(0.);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool RunCargoRoller::IsFinished() {
-  return CargoIntake::getInstance()->RollerCurrent() > 25;
-}
+bool CargoRollerIdle::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void RunCargoRoller::End() {
-  OI::getInstance()->CargoIntakeControls();
-}
+void CargoRollerIdle::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RunCargoRoller::Interrupted() {
-  OI::getInstance()->CargoIntakeControls();
-}
+void CargoRollerIdle::Interrupted() {}

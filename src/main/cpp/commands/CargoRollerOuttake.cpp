@@ -5,37 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/RunCargoRoller.h"
+#include "commands/CargoRollerOuttake.h"
 #include "subsystems/CargoIntake.h"
 #include "OI.h"
 
-RunCargoRoller::RunCargoRoller(double speed): mSpeed(speed) {
+CargoRollerOuttake::CargoRollerOuttake(double timeout)
+    : TimedCommand(timeout) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(CargoIntake::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void RunCargoRoller::Initialize() {}
+void CargoRollerOuttake::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void RunCargoRoller::Execute() 
-{
-  CargoIntake::getInstance()->SetCargoRoller(mSpeed);
+void CargoRollerOuttake::Execute() {
+  CargoIntake::getInstance()->SetCargoRoller(-1.0);
 }
 
-// Make this return true when this Command no longer needs to run execute()
-bool RunCargoRoller::IsFinished() {
-  return CargoIntake::getInstance()->RollerCurrent() > 25;
-}
-
-// Called once after isFinished returns true
-void RunCargoRoller::End() {
-  OI::getInstance()->CargoIntakeControls();
+// Called once after command times out
+void CargoRollerOuttake::End() {
+  OI::getInstance()->HatchIntakeControls();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void RunCargoRoller::Interrupted() {
-  OI::getInstance()->CargoIntakeControls();
+void CargoRollerOuttake::Interrupted() {
+  OI::getInstance()->HatchIntakeControls();
 }
