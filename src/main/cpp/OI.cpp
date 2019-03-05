@@ -239,6 +239,6 @@ void OI::CargoIntakeControls(){
   coA.WhenPressed(mElevatorCargoLevel_0);
   coB.WhenPressed(mElevatorCargoLevel_1);
   coY.WhenPressed(mElevatorCargoLevel_2);
-  coRB.WhileHeld(mScoreCargo);
+  coRB.WhenPressed(mScoreCargo);
 }
 
