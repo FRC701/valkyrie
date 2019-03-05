@@ -103,8 +103,6 @@ void HatchIntake::SetUpTalons() {
   mPivot.ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,
                                        kPID_PrimaryClosedLoop,
                                        kTimeout_10Millis);
-  mPivot.ConfigForwardSoftLimitEnable(false, kTimeout_10Millis);
-  mPivot.ConfigReverseSoftLimitEnable(false, kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.SetSensorPhase(true);
