@@ -79,6 +79,9 @@ public:
   static constexpr int kButtonL3_ID { 9 };
   static constexpr int kButtonR3_ID { 10 };
 
-  void HatchIntakeControls();
-  void CargoIntakeControls();
+  void HatchIntakeControls() { mIsHatch = true; }
+  void CargoIntakeControls() { mIsHatch = false; }
+  bool isHatch(){ return mIsHatch; }
+  private: 
+  bool mIsHatch;
 };
