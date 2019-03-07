@@ -14,6 +14,7 @@
 #include "subsystems/Chassis.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/HatchIntake.h"
+#include "subsystems/Climber.h"
 
 ExampleSubsystem Robot::m_subsystem;
 
@@ -34,6 +35,7 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Left Encoder Position", Chassis::getInstance()->GetLeftPosition());
     frc::SmartDashboard::PutNumber("Right Encoder Position", Chassis::getInstance()->GetRightPosition());
     frc::SmartDashboard::PutNumber("Arm Encoder Value", HatchIntake::getInstance()->GetPosition());
+    frc::SmartDashboard::PutNumber("LiftMotor Encoder Value", Climber::getInstance()->GetLiftMotorEncoderValue());
     frc::SmartDashboard::PutNumber("Arm Pot Value", HatchIntake::getInstance()->GetArmPotValue());
     frc::SmartDashboard::PutNumber("Arm Pot Voltage", HatchIntake::getInstance()->GetArmPotVoltage());
     frc::SmartDashboard::PutNumber("Arm Set Point", HatchIntake::getInstance()->GetSetPoint());
