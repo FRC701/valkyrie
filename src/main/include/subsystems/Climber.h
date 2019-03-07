@@ -28,6 +28,8 @@ class Climber : public frc::Subsystem {
         double mDriveMotorSpeed;
         double mLiftMotorSpeed;
         double mLiftMotorPosition_revs;
+        frc::Command* mPositionDefaultCommand;
+        frc::Command* mSpeedDefaultCommand;
         
        
   // It's desirable that everything possible under private except
@@ -38,6 +40,9 @@ class Climber : public frc::Subsystem {
 
         Climber();
         void InitDefaultCommand() override;
+        void SetPositionDefaultCommand();
+        void SetSpeedDefaultCommand();
+        
         void Engage();
         void Disengage();
         void MotorClimber(double speed);
