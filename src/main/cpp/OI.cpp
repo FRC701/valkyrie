@@ -34,6 +34,12 @@
 #include "commands/SetElevatorSpeedDefaultCommand.h"
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "commands/SetHatchIntakeSpeedDefaultCommand.h"
+#include "commands/ScoreCargo.h"
+#include "commands/StageOneClimb.h"
+#include "commands/StageTwoClimb.h"
+#include "commands/StageThreeClimb.h"
+#include "commands/StageFourClimb.h"
+#include "commands/StageFiveClimb.h"
 #include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
 #include "commands/dlbPressed.h"
@@ -117,7 +123,12 @@ OI::OI()
 , mScoreCargo(new CargoRollerOuttake(kCargoOuttakeTimeout))
 , mIsHatch(true)
 {
-  dLB.WhenPressed(new dLBPressed());
+
+  dStart.WhenPressed(new StageOneClimb());
+  dA.WhenPressed(new StageTwoClimb());
+  dX.WhenPressed(new StageThreeClimb());
+  dY.WhenPressed(new StageFiveClimb());
+  dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
   dStart.WhenPressed(new SetVisionDrive());
   dBack.WhenPressed(new SetControlDrive());
@@ -192,6 +203,11 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(0.));
   frc::SmartDashboard::PutData("Set Camera Driver Mode", new SetCamModeDriver());
   frc::SmartDashboard::PutData("Set Camera Vision Mode", new SetCamModeVision());
+  frc::SmartDashboard::PutData("Stage One Climb", new StageOneClimb());
+  frc::SmartDashboard::PutData("Stage Two Climb", new StageTwoClimb());
+  frc::SmartDashboard::PutData("Stage Three Climb", new StageThreeClimb());
+  frc::SmartDashboard::PutData("Stage Four Climb", new StageFourClimb());
+  frc::SmartDashboard::PutData("Stage Five Climb", new StageFiveClimb());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
