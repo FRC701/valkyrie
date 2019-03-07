@@ -39,6 +39,11 @@
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "commands/SetHatchIntakeSpeedDefaultCommand.h"
 #include "commands/ScoreCargo.h"
+#include "commands/StageOneClimb.h"
+#include "commands/StageTwoClimb.h"
+#include "commands/StageThreeClimb.h"
+#include "commands/StageFourClimb.h"
+#include "commands/StageFiveClimb.h"
 #include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
 #include "commands/dlbPressed.h"
@@ -109,13 +114,18 @@ OI::OI()
 , mElevatorCargoLevel_2(new FullElevatorLevel(kElevatorCargoLevel_3))
 , mScoreCargo(new ScoreCargo())
 {
-  dLB.WhenPressed(new dLBPressed());
+
+  dStart.WhenPressed(new StageOneClimb());
+  dA.WhenPressed(new StageTwoClimb());
+  dX.WhenPressed(new StageThreeClimb());
+  dY.WhenPressed(new StageFiveClimb());
+  dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
-  dStart.WhenPressed(new VisionDrive());
+  //dStart.WhenPressed(new VisionDrive());
   dBack.WhenPressed(new TankDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
-  coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
+  //coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
   coR3.WhenPressed(new SetElevator(0));
   coX.WhenPressed(new RunCargoRoller(0.3));
 
@@ -183,6 +193,11 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake Scoring", new FullArmPosition(90.));
   frc::SmartDashboard::PutData("Hatch Intake Retrieve", new FullArmPosition(-90.));
   frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(0.));
+  frc::SmartDashboard::PutData("Stage One Climb", new StageOneClimb());
+  frc::SmartDashboard::PutData("Stage Two Climb", new StageTwoClimb());
+  frc::SmartDashboard::PutData("Stage Three Climb", new StageThreeClimb());
+  frc::SmartDashboard::PutData("Stage Four Climb", new StageFourClimb());
+  frc::SmartDashboard::PutData("Stage Five Climb", new StageFiveClimb());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
