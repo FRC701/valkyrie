@@ -124,7 +124,7 @@ OI::OI()
   
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
 
-  coX.WhenPressed(new RunCargoRoller(0.7));
+  coX.WhileHeld(new RunCargoRoller(0.7));
 
   coPOV0.WhenPressed(new FullArmPosition(0.));
   coPOV90.WhenPressed(new FullArmPosition(90.));
