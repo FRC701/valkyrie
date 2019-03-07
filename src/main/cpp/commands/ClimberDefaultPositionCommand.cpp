@@ -5,29 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ClimberDefaultCommand.h"
+#include "commands/ClimberDefaultPositionCommand.h"
 #include "subsystems/Climber.h"
 
-ClimberDefaultCommand::ClimberDefaultCommand() {
+ClimberDefaultPositionCommand::ClimberDefaultPositionCommand() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
   Requires(Climber::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void ClimberDefaultCommand::Initialize() {}
+void ClimberDefaultPositionCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ClimberDefaultCommand::Execute() {
-  Climber::getInstance()->Update();
+void ClimberDefaultPositionCommand::Execute() {
+   Climber::getInstance()->UpdatePosition();
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ClimberDefaultCommand::IsFinished() { return false; }
+bool ClimberDefaultPositionCommand::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ClimberDefaultCommand::End() {}
+void ClimberDefaultPositionCommand::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ClimberDefaultCommand::Interrupted() {}
+void ClimberDefaultPositionCommand::Interrupted() {}
