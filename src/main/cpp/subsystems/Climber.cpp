@@ -6,7 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Climber.h"
-#include "commands/ClimberDefaultCommand.h"
+#include "commands/ClimberDefaultPositionCommand.h"
+#include "commands/ClimberDefaultSpeedCommand.h"
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 
@@ -134,9 +135,19 @@ Climber::Climber() : Subsystem("Climber"),
 }
 
 void Climber::InitDefaultCommand() {
-      SetDefaultCommand(new ClimberDefaultCommand());
+    //mPositionDefaultCommand = new ClimberDefaultPositionCommand;
+    mSpeedDefaultCommand = new ClimberDefaultSpeedCommand;
+    //SetPositionDefaultCommand();
+    SetSpeedDefaultCommand();
 }
 
+void Climber::SetPositionDefaultCommand() {
+    SetDefaultCommand(mPositionDefaultCommand);
+}
+
+void Climber::SetSpeedDefaultCommand() {
+    SetDefaultCommand(mSpeedDefaultCommand);
+}
 void Climber::Engage() {
     mLiftSolenoid.Set(kClimberEngage);
 }
