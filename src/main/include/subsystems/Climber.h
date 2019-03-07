@@ -42,7 +42,6 @@ class Climber : public frc::Subsystem {
         void InitDefaultCommand() override;
         void SetPositionDefaultCommand();
         void SetSpeedDefaultCommand();
-        
         void Engage();
         void Disengage();
         void MotorClimber(double speed);
