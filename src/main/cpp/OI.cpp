@@ -22,6 +22,7 @@
 #include "commands/CarriageClawDisengage.h"
 #include "commands/CarriagePuncherDisengage.h"
 #include "commands/CarriagePuncherEngage.h"
+#include "commands/ClimbPosition.h"
 #include "commands/PivotHatch.h"
 #include "commands/RunCargoRoller.h"
 #include "commands/TestingCargoIntake.h"
@@ -198,6 +199,7 @@ OI::OI()
   frc::SmartDashboard::PutData("Stage Three Climb", new StageThreeClimb());
   frc::SmartDashboard::PutData("Stage Four Climb", new StageFourClimb());
   frc::SmartDashboard::PutData("Stage Five Climb", new StageFiveClimb());
+  frc::SmartDashboard::PutData("Climb Postion", new ClimbPosition(2.0));
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
