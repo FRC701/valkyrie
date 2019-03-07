@@ -121,7 +121,8 @@ Climber::Climber() : Subsystem("Climber"),
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
-    mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse)
+    mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
+    mLiftMotorEncoder{mLiftMotor.GetEncoder()}
 {
     mLiftSolenoid.Set(kClimberDisengage);
     mDriveMotor.Set(0.0);
@@ -168,4 +169,12 @@ void Climber::Update() {
 void Climber::UpdatePosition() {
     mDriveMotor.Set(mDriveMotorSpeed);
     mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kSmartMotion);
+}
+
+bool Climber::IsCommandFinished() {
+    return false;
+}
+
+int Climber::GetLiftMotorEncoderValue() {
+    return mLiftMotorEncoder.GetPosition();
 }
