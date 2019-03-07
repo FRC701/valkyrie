@@ -9,9 +9,9 @@
 
 #include <frc/commands/Command.h>
 
-class ClimberDefaultCommand : public frc::Command {
+class ClimberDefaultSpeedCommand : public frc::Command {
  public:
-  ClimberDefaultCommand();
+  ClimberDefaultSpeedCommand();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
