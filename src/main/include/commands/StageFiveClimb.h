@@ -5,13 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/StageThreeClimb.h"
-#include "commands/DriveClimb.h"
-#include "commands/ClimberEngage.h"
-#include "commands/ClimberDisengage.h"
-#include "commands/MotorClimb.h"
+#pragma once
 
-StageThreeClimb::StageThreeClimb() {
-  AddSequential(new MotorClimb(-0.1));
-  AddSequential(new DriveClimb(0.));
-}
+#include <frc/commands/CommandGroup.h>
+
+class StageFiveClimb : public frc::CommandGroup {
+ public:
+  StageFiveClimb();
+};

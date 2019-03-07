@@ -7,10 +7,10 @@
 
 #include "commands/StageOneClimb.h"
 #include "commands/MotorClimb.h"
+#include "commands/Delay.h"
 
 StageOneClimb::StageOneClimb() {
+  AddSequential(new MotorClimb(-0.));
+  AddSequential(new Delay(1));
   AddSequential(new MotorClimb(0.));
-  AddSequential(new MotorClimb(0.));
-  AddSequential(new MotorClimb(0.));
-
 }

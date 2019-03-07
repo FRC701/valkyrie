@@ -5,13 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/StageThreeClimb.h"
+#include "commands/StageFiveClimb.h"
 #include "commands/DriveClimb.h"
 #include "commands/ClimberEngage.h"
 #include "commands/ClimberDisengage.h"
 #include "commands/MotorClimb.h"
 
-StageThreeClimb::StageThreeClimb() {
-  AddSequential(new MotorClimb(-0.1));
-  AddSequential(new DriveClimb(0.));
+StageFiveClimb::StageFiveClimb() {
+  AddSequential(new ClimberDisengage());
 }
