@@ -51,6 +51,8 @@
 #include "commands/dlbReleased.h"
 #include "commands/VisionDrive.h"
 #include "commands/TankDrive.h"
+#include "commands/ClimberDefaultPositionCommand.h"
+#include "commands/ClimberDefaultSpeedCommand.h"
 
 namespace 
 {
@@ -200,6 +202,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Stage Four Climb", new StageFourClimb());
   frc::SmartDashboard::PutData("Stage Five Climb", new StageFiveClimb());
   frc::SmartDashboard::PutData("Climb Postion", new ClimbPosition(2.0));
+  frc::SmartDashboard::PutData("Climber Speed Default", new ClimberDefaultSpeedCommand());
+  frc::SmartDashboard::PutData("Climber Speed Default", new ClimberDefaultPositionCommand());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
