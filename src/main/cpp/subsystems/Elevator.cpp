@@ -106,7 +106,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	mLeftElevator.SetSensorPhase(true);
+	mLeftElevator.SetSensorPhase(false); // TODO Preference for inverting the sensor phase on the elevator
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
