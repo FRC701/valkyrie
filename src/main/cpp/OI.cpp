@@ -55,12 +55,14 @@ namespace
 
 constexpr double kElevatorHatchLevel_1 = 0.;
 constexpr double kElevatorHatchLevel_2 = 31500.;
-constexpr double kElevatorHatchLevel_3 = 61500.;
+constexpr double kElevatorHatchLevel_3 = 31500.;
+//constexpr double kElevatorHatchLevel_3 = 61500.;
 
-constexpr double kElevatorCargoLevel_1 = 5000;
-constexpr double kElevatorCargoLevel_Ship = 29000;
-constexpr double kElevatorCargoLevel_2 = 35000;
-constexpr double kElevatorCargoLevel_3 = 55000;
+constexpr double kElevatorCargoLevel_1 = 23500;
+constexpr double kElevatorCargoLevel_Ship = 32000;
+constexpr double kElevatorCargoLevel_2 = 50000;
+constexpr double kElevatorCargoLevel_3 = 50000;
+//constexpr double kElevatorCargoLevel_3 = 55000;
 
 constexpr double kCargoOuttakeTimeout = 1.0;
 
@@ -172,9 +174,9 @@ OI::OI()
   frc::SmartDashboard::PutData("Elevator Pos 25%", new SetElevator(0.005));
   frc::SmartDashboard::PutData("Elevator Pos 50%", new SetElevator(-0.005));
   frc::SmartDashboard::PutData("Reset Elevator Encoder", new ResetElevatorPosition());
-  frc::SmartDashboard::PutData("Level 1", new SetElevator(kElevatorHatchLevel_1));
-  frc::SmartDashboard::PutData("Level 2", new SetElevator(kElevatorHatchLevel_2));
-  frc::SmartDashboard::PutData("Level 3", new SetElevator(kElevatorHatchLevel_3));
+  frc::SmartDashboard::PutData("Hatch Level 1", new SetElevator(kElevatorHatchLevel_1));
+  frc::SmartDashboard::PutData("Hatch Level 2", new SetElevator(kElevatorHatchLevel_2));
+  frc::SmartDashboard::PutData("Hatch Level 3", new SetElevator(kElevatorHatchLevel_3));
   frc::SmartDashboard::PutData("Cargo Level 1", new SetElevator(kElevatorCargoLevel_1));
   frc::SmartDashboard::PutData("Cargo Level 2", new SetElevator(kElevatorCargoLevel_2));
   frc::SmartDashboard::PutData("Cargo Level 3", new SetElevator(kElevatorCargoLevel_3));

@@ -19,7 +19,8 @@ using RobotMap::kTimeout_10Millis;
 namespace
 {
 constexpr int kSlotIndex {0};
-constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
+//constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
+constexpr int kForwardSoftLimit {72000 - 55000 + 50000}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
   constexpr double kMaxUnitsPer100ms {3675.0};
