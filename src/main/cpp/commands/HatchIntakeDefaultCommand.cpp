@@ -8,10 +8,11 @@
 #include "commands/HatchIntakeDefaultCommand.h"
 #include "subsystems/HatchIntake.h"
 
-HatchIntakeDefaultCommand::HatchIntakeDefaultCommand() {
+HatchIntakeDefaultCommand::HatchIntakeDefaultCommand() 
+: mHatchIntake(HatchIntake::getInstance()) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(HatchIntake::getInstance().get());
+  Requires(mHatchIntake.get());
 }
 
 // Called just before this Command runs the first time
@@ -19,7 +20,12 @@ void HatchIntakeDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchIntakeDefaultCommand::Execute() {
-  HatchIntake::getInstance()->UpdatePosition();
+  constexpr double kMaxArmCurrent = 25;
+  if (mHatchIntake->GetCurrent() > kMaxArmCurrent) {
+    mHatchIntake->ResetPosition();
+  } else {
+    mHatchIntake->UpdatePosition();
+  }
 }
 
 // Make this return true when this Command no longer needs to run execute()

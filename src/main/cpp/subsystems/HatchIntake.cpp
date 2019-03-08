@@ -227,5 +227,9 @@ void HatchIntake::ResetPosition() {
   double encoder = GetPosition();
   PivotPosition(encoder);
 }
+
+double HatchIntake::GetCurrent() {
+  return mPivot.GetOutputCurrent();
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
