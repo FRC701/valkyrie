@@ -48,6 +48,7 @@
 #include "commands/CargoRollerOuttake.h"
 #include "commands/CargoRollerIdle.h"
 #include "commands/HatchCargoSelector.h"
+#include "commands/FullCargoIntake.h"
 
 namespace 
 {
@@ -124,7 +125,7 @@ OI::OI()
   
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
 
-  coX.WhileHeld(new RunCargoRoller(0.7));
+  coX.WhileHeld(new FullCargoIntake());
 
   coPOV0.WhenPressed(new FullArmPosition(0.));
   coPOV90.WhenPressed(new FullArmPosition(90.));
