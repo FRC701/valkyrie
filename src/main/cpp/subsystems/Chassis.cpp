@@ -103,8 +103,11 @@ double Chassis::GetRightVoltage() {
 
 void Chassis::SetCamVisionProcessing() {
   mLimeLightTable->PutNumber("camMode", 0);
+  mLimeLightTable->PutNumber("ledMode", 0);
 }
 
 void Chassis::SetCamDriverCam() {
   mLimeLightTable->PutNumber("camMode", 1);
+  mLimeLightTable->PutNumber("ledMode", 1);
+
 }
