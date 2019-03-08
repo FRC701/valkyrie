@@ -105,7 +105,7 @@ void HatchIntake::SetUpTalons() {
                                        kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-  mPivot.SetSensorPhase(true);
+  mPivot.SetSensorPhase(false); // TODO This is different from practice bot. Add a preferene to set this.
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
