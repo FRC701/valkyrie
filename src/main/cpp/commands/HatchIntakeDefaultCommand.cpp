@@ -20,7 +20,7 @@ void HatchIntakeDefaultCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchIntakeDefaultCommand::Execute() {
-  constexpr double kMaxArmCurrent = 25;
+  constexpr double kMaxArmCurrent { 25 };
   if (mHatchIntake->GetCurrent() > kMaxArmCurrent) {
     mHatchIntake->ResetPosition();
   } else {

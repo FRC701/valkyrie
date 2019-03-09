@@ -50,8 +50,8 @@ void Chassis::InitDefaultCommand() {
 }
 
 void Chassis::SetTankDrive(double left, double right) {
-  constexpr auto kHighGear = 0.75;
-  constexpr auto kLowGear = 0.25;
+  constexpr auto kHighGear {0.75};
+  constexpr auto kLowGear {0.50};
 
   auto gear = IsHighGear() ? kHighGear : kLowGear;
   left *= gear;
