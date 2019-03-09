@@ -133,8 +133,8 @@ OI::OI()
   dStart.WhenPressed(new StageOneClimb());
   dA.WhenPressed(new StageTwoClimb());
   dX.WhenPressed(new StageThreeClimb());
-  dY.WhenPressed(new StageFiveClimb());
-  dB.WhenPressed(new StageFiveClimb());
+  //dY.WhenPressed(new StageFiveClimb());
+  //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
   dStart.WhenPressed(new SetVisionDrive());
   dBack.WhenPressed(new SetControlDrive());
