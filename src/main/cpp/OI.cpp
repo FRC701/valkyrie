@@ -57,6 +57,9 @@
 #include "commands/FullCargoIntake.h"
 #include "commands/ClimberDefaultPositionCommand.h"
 #include "commands/ClimberDefaultSpeedCommand.h"
+#include "commands/DriveClimb.h"
+#include "commands/ClimberDisengage.h"
+#include "commands/ClimberEngage.h"
 
 namespace 
 {
@@ -161,11 +164,11 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
-  frc::SmartDashboard::PutData("Run Climber Motor 50%", new MotorClimb(0.5));
-  frc::SmartDashboard::PutData("Run Climber Motor -50%", new MotorClimb(-0.5));
-  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8));
-  frc::SmartDashboard::PutData("Run Climber 0%", new MotorClimb(0.));
-  frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0.));
+  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(0.3, 0));
+  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(-0.5, 0));
+  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8, 0.));
+  frc::SmartDashboard::PutData("Run Climber 0%", new MotorClimb(0., 0.));
+  frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0., 0.));
   frc::SmartDashboard::PutData("1. Reset Encoder", new ResetHatchIntakePosition());
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
@@ -212,8 +215,13 @@ OI::OI()
   frc::SmartDashboard::PutData("Stage Four Climb", new StageFourClimb());
   frc::SmartDashboard::PutData("Stage Five Climb", new StageFiveClimb());
   frc::SmartDashboard::PutData("Climb Postion", new ClimbPosition(2.0));
-  frc::SmartDashboard::PutData("Climber Speed Default", new ClimberDefaultSpeedCommand());
-  frc::SmartDashboard::PutData("Climber Speed Default", new ClimberDefaultPositionCommand());
+  frc::SmartDashboard::PutData("Climber Speed Default", new SetClimberSpeedDefaultCommand());
+  frc::SmartDashboard::PutData("Climber Position Default", new SetClimberPositionDefaultCommand());
+  frc::SmartDashboard::PutData("Drive Climb Motor 50%", new DriveClimb(.5));
+  frc::SmartDashboard::PutData("Drive Climb Motor -50%", new DriveClimb(-.5));
+  frc::SmartDashboard::PutData("Drive Climb Motor 0", new DriveClimb(0));
+  frc::SmartDashboard::PutData("Climber Disengage", new ClimberDisengage());
+  frc::SmartDashboard::PutData("CLimber Engage", new ClimberEngage());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
