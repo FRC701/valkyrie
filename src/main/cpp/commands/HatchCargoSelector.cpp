@@ -9,7 +9,7 @@
 
 #include "OI.h"
 
-#include "Commands/Scheduler.h"
+#include "frc/Commands/Scheduler.h"
 
 HatchCargoSelector::HatchCargoSelector(
  frc::Command* hatchControls,
