@@ -132,6 +132,8 @@ OI::OI()
   dStart.WhenPressed(new StageOneClimb());
   dA.WhenPressed(new StageTwoClimb());
   dX.WhenPressed(new StageThreeClimb());
+  dY.WhenPressed(new ClimberEngage);
+  dB.WhenPressed(new ClimberDisengage);
   //dY.WhenPressed(new StageFiveClimb());
   //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
