@@ -7,6 +7,8 @@
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
+constexpr double kDefaultHighGear {0.75};
+
 std::shared_ptr<Chassis> Chassis::self;
 
 std::shared_ptr<Chassis> Chassis::getInstance() {
@@ -28,7 +30,9 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   m_right{right1Wheel, right2Wheel},
   m_drive{m_left, m_right},
   mLimeLightTable{nt::NetworkTableInstance::GetDefault().GetTable("limelight")},
-  mIsHighGear(true)
+  mIsHighGear(true),
+  mHighGear(0.75),
+  mLowGear(0.50)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
     left2Wheel.SetOpenLoopRampRate(0.2);
@@ -50,8 +54,8 @@ void Chassis::InitDefaultCommand() {
 }
 
 void Chassis::SetTankDrive(double left, double right) {
-  constexpr auto kHighGear {0.75};
-  constexpr auto kLowGear {0.50};
+  auto elevator = Elevator::getInstance();
+  auto gear = IsHighGear() ? mHighGear : mLowGear;
 
   auto gear = IsHighGear() ? kHighGear : kLowGear;
   left *= gear;
