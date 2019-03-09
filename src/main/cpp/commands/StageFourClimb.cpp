@@ -10,8 +10,9 @@
 #include "commands/ClimberEngage.h"
 #include "commands/ClimberDisengage.h"
 #include "commands/MotorClimb.h"
+#include "subsystems/Chassis.h"
 
 StageFourClimb::StageFourClimb() {
   AddSequential(new DriveClimb(0));
-  AddSequential(new MotorClimb(0));
+  AddSequential(new MotorClimb(0, 0));
 }

@@ -11,8 +11,19 @@
 #include "commands/ClimberDisengage.h"
 #include "commands/MotorClimb.h"
 #include "commands/Delay.h"
+#include "commands/Drive.h"
+#include "commands/ClimberDrive.h"
 
 StageTwoClimb::StageTwoClimb() {
+  constexpr double kDownSpeed = 0.2;
+  constexpr int kDownEncoder = 59;
+
   AddSequential(new ClimberEngage());
-  AddSequential(new DriveClimb(-0.1));
+  AddSequential(new MotorClimb(kDownSpeed, kDownEncoder));
+  // stall the lift motor
+  // so far stalling the motor is not needed
+  // brake mode is strong
+  //AddSequential(new DriveClimb(0.2));
+  AddSequential(new Drive(0.0));
+  AddSequential(new ClimberDrive());
 }
