@@ -136,8 +136,8 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
-  const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {800}; //Sensor Units per 100ms
+  const double kMaxVelocity {1000};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  const double kCruiseVelocity {1000}; //Sensor Units per 100ms
   const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
