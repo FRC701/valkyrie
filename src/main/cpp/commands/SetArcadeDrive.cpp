@@ -20,9 +20,9 @@ void SetArcadeDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void SetArcadeDrive::Execute() {
-  constexpr double kMaxSpeed {0.5};
+  constexpr double kMaxSpeed {0.75};
   double left = OI::getInstance()->getDriverLeftYAxis();
-  Chassis::getInstance()->SetArcadeDrive(-left * kMaxSpeed, 0);
+  Chassis::getInstance()->SetArcadeDrive(left * kMaxSpeed, 0);
 }
 
 // Make this return true when this Command no longer needs to run execute()
