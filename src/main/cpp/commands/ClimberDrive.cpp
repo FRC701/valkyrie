@@ -20,8 +20,8 @@ void ClimberDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void ClimberDrive::Execute() {  
- // double right = OI::getInstance()->getDriverRightYAxis();
-  //Climber::getInstance()->DriveClimb(right);
+  double left = OI::getInstance()->getDriverLeftYAxis();
+  Climber::getInstance()->DriveClimb(left);
 }
 
 // Make this return true when this Command no longer needs to run execute()
