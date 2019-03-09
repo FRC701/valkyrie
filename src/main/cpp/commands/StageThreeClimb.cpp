@@ -10,8 +10,11 @@
 #include "commands/ClimberEngage.h"
 #include "commands/ClimberDisengage.h"
 #include "commands/MotorClimb.h"
+#include "subsystems/Chassis.h"
 
 StageThreeClimb::StageThreeClimb() {
-  AddSequential(new MotorClimb(-0.1));
+  // Murphy is an idiot make this a commamd
+  // Chassis::getInstance()->GetCurrentCommand()->Cancel();
+  //AddSequential(new ClimberDisengage());
   AddSequential(new DriveClimb(0.));
 }

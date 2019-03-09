@@ -10,7 +10,9 @@
 #include "commands/Delay.h"
 
 StageOneClimb::StageOneClimb() {
-  AddSequential(new MotorClimb(-0.));
-  AddSequential(new Delay(1));
-  AddSequential(new MotorClimb(0.));
+  constexpr double kUpSpeed = -0.3;
+  constexpr int kUpEncoder = -24;
+
+  AddSequential(new MotorClimb(kUpSpeed, kUpEncoder));
+
 }
