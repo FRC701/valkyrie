@@ -2,6 +2,7 @@
 
 #include "commands/SetControlDrive.h"
 #include "RobotMap.h"
+#include "subsystems/Elevator.h"
 
 #include <networktables/NetworkTableInstance.h>
 
@@ -54,10 +55,10 @@ void Chassis::InitDefaultCommand() {
 }
 
 void Chassis::SetTankDrive(double left, double right) {
-  auto elevator = Elevator::getInstance();
+  // auto elevator = Elevator::getInstance();
   auto gear = IsHighGear() ? mHighGear : mLowGear;
+  // gear = elevator->IsElevatorDown() ? gear : mLowGear; // Driver does not want this feature
 
-  auto gear = IsHighGear() ? kHighGear : kLowGear;
   left *= gear;
   right *= gear;
 
