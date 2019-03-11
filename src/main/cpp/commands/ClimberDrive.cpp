@@ -5,50 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/MotorClimb.h"
+#include "commands/ClimberDrive.h"
 #include "subsystems/Climber.h"
+#include "OI.h"
 
-MotorClimb::MotorClimb(double speed, double encoderFinish)
-: mSpeed(speed)
-, mEncoderFinish(encoderFinish)
-, mClimber(Climber::getInstance())
-{
+ClimberDrive::ClimberDrive() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(mClimber.get());
+  Requires(Climber::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void MotorClimb::Initialize() {
-  mClimber->MotorClimber(mSpeed);
-}
+void ClimberDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void MotorClimb::Execute() {
-  mClimber->Update();
+void ClimberDrive::Execute() {  
+  double left = OI::getInstance()->getDriverLeftYAxis();
+  Climber::getInstance()->DriveClimb(left);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MotorClimb::IsFinished() {
-  if (mSpeed == 0) return true;
-
-  if (mSpeed > 0) 
-  {
-    return mClimber->GetLiftMotorEncoderValue() >= mEncoderFinish; 
-  }
-  else
-  {
-    return mClimber->GetLiftMotorEncoderValue() <= mEncoderFinish; 
-  }
-}
+bool ClimberDrive::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void MotorClimb::End() {
-  mClimber->MotorClimber(0);
-}
+void ClimberDrive::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MotorClimb::Interrupted() {
-  mClimber->MotorClimber(0);
-}
+void ClimberDrive::Interrupted() {}

@@ -5,16 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/StageFourClimb.h"
+#include "commands/DriveClimb.h"
+#include "commands/ClimberEngage.h"
+#include "commands/ClimberDisengage.h"
+#include "commands/MotorClimb.h"
+#include "subsystems/Chassis.h"
 
-#include <frc/commands/Command.h>
-
-class ClimberDefaultCommand : public frc::Command {
- public:
-  ClimberDefaultCommand();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-};
+StageFourClimb::StageFourClimb() {
+  AddSequential(new DriveClimb(0));
+  AddSequential(new MotorClimb(0, 0));
+}

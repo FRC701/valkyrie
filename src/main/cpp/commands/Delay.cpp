@@ -5,39 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchCargoSelector.h"
+#include "commands/Delay.h"
 
-#include "OI.h"
-
-#include "frc/Commands/Scheduler.h"
-
-HatchCargoSelector::HatchCargoSelector(
- frc::Command* hatchControls,
- frc::Command* cargoControls):
- mHatchCommand(hatchControls),
- mCargoCommand(cargoControls)
-{
+Delay::Delay(double timeout)
+    : TimedCommand(timeout) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void HatchCargoSelector::Initialize() {
-  Command* command 
-    = OI::getInstance()->isHatch()
-    ? mHatchCommand : mCargoCommand;
-  frc::Scheduler::GetInstance()->AddCommand(command);
-}
+void Delay::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void HatchCargoSelector::Execute() {}
+void Delay::Execute() {}
 
-// Make this return true when this Command no longer needs to run execute()
-bool HatchCargoSelector::IsFinished() { return true; }
-
-// Called once after isFinished returns true
-void HatchCargoSelector::End() {}
+// Called once after command times out
+void Delay::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void HatchCargoSelector::Interrupted() {}
+void Delay::Interrupted() {}

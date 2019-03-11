@@ -5,50 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/MotorClimb.h"
-#include "subsystems/Climber.h"
+#include "commands/SetArcadeDrive.h"
+#include "subsystems/Chassis.h"
+#include "OI.h"
 
-MotorClimb::MotorClimb(double speed, double encoderFinish)
-: mSpeed(speed)
-, mEncoderFinish(encoderFinish)
-, mClimber(Climber::getInstance())
-{
+SetArcadeDrive::SetArcadeDrive() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(mClimber.get());
+  Requires(Chassis::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void MotorClimb::Initialize() {
-  mClimber->MotorClimber(mSpeed);
-}
+void SetArcadeDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void MotorClimb::Execute() {
-  mClimber->Update();
+void SetArcadeDrive::Execute() {
+  constexpr double kMaxSpeed {0.75};
+  double left = OI::getInstance()->getDriverLeftYAxis();
+  Chassis::getInstance()->SetArcadeDrive(left * kMaxSpeed, 0);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MotorClimb::IsFinished() {
-  if (mSpeed == 0) return true;
-
-  if (mSpeed > 0) 
-  {
-    return mClimber->GetLiftMotorEncoderValue() >= mEncoderFinish; 
-  }
-  else
-  {
-    return mClimber->GetLiftMotorEncoderValue() <= mEncoderFinish; 
-  }
-}
+bool SetArcadeDrive::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void MotorClimb::End() {
-  mClimber->MotorClimber(0);
-}
+void SetArcadeDrive::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MotorClimb::Interrupted() {
-  mClimber->MotorClimber(0);
-}
+void SetArcadeDrive::Interrupted() {}

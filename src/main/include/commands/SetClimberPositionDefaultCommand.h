@@ -9,10 +9,8 @@
 
 #include <frc/commands/InstantCommand.h>
 
-class SetClimber : public frc::InstantCommand {
+class SetClimberPositionDefaultCommand : public frc::InstantCommand {
  public:
-  SetClimber(double speed);
-  void Initialize();
-  private:
-  double mSpeed;
+  SetClimberPositionDefaultCommand();
+  void Initialize() override;
 };

@@ -5,22 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/StageFiveClimb.h"
+#include "commands/DriveClimb.h"
+#include "commands/ClimberEngage.h"
+#include "commands/ClimberDisengage.h"
+#include "commands/MotorClimb.h"
 
-#include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
-
-class MotorClimb : public frc::Command {
- public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
-};
+StageFiveClimb::StageFiveClimb() {
+  AddSequential(new ClimberDisengage());
+}

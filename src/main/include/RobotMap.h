@@ -43,8 +43,8 @@ constexpr int kIDCargoPneumaticForward {2};
 constexpr int kIDCargoPneumaticReverse {5};
 
 //Climber Pnuematics
-constexpr int kIDClimberForward {0};
-constexpr int kIDClimberReverse {7}; 
+constexpr int kIDClimberForward {3};// These have moved from practrice bot
+constexpr int kIDClimberReverse {4}; 
 
 constexpr int kIDArmPot {3};
 constexpr int kPID_PrimaryClosedLoop {0};

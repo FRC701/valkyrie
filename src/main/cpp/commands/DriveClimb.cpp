@@ -5,22 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
-
-#include <frc/commands/Command.h>
+#include "commands/DriveClimb.h"
 #include "subsystems/Climber.h"
 
-class MotorClimb : public frc::Command {
- public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+DriveClimb::DriveClimb(double speed) : mDriveMotorSpeed(speed)  {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+  Requires(Climber::getInstance().get());
+}
 
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
-};
+// Called just before this Command runs the first time
+void DriveClimb::Initialize() {
+  Climber::getInstance()->MotorClimber(mDriveMotorSpeed);
+}

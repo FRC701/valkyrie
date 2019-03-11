@@ -7,20 +7,9 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
+#include <frc/commands/CommandGroup.h>
 
-class MotorClimb : public frc::Command {
+class StageFourClimb : public frc::CommandGroup {
  public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
+  StageFourClimb();
 };
