@@ -57,6 +57,7 @@ class HatchIntake : public frc::Subsystem {
   void SetAngleValue();
   double GetEncoderFromAngle(double angle);
   double GetArmPotVoltage();
+  double GetCurrent();
   bool IsEngage();
   
   void ResetPosition();

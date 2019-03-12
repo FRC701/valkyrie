@@ -7,20 +7,13 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
+#include <frc/commands/TimedCommand.h>
 
-class MotorClimb : public frc::Command {
+class Delay : public frc::TimedCommand {
  public:
-  MotorClimb(double speed, double encoderFinish);
+  explicit Delay(double timeout);
   void Initialize() override;
   void Execute() override;
-  bool IsFinished() override;
   void End() override;
   void Interrupted() override;
-
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
 };

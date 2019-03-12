@@ -5,22 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
-
-#include <frc/commands/Command.h>
+#include "commands/SetClimberPositionDefaultCommand.h"
 #include "subsystems/Climber.h"
 
-class MotorClimb : public frc::Command {
- public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+SetClimberPositionDefaultCommand::SetClimberPositionDefaultCommand() {
+  // Use Requires() here to declare subsystem dependencies
+  Requires(Climber::getInstance().get());
+}
 
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
-};
+// Called once when the command executes
+void SetClimberPositionDefaultCommand::Initialize() {
+  Climber::getInstance()->SetPositionDefaultCommand();
+}

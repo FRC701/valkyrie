@@ -5,22 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/StageThreeClimb.h"
+#include "commands/DriveClimb.h"
+#include "commands/ClimberEngage.h"
+#include "commands/ClimberDisengage.h"
+#include "commands/MotorClimb.h"
+#include "subsystems/Chassis.h"
 
-#include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
-
-class MotorClimb : public frc::Command {
- public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
-};
+StageThreeClimb::StageThreeClimb() {
+  // Murphy is an idiot make this a commamd
+  // Chassis::getInstance()->GetCurrentCommand()->Cancel();
+  //AddSequential(new ClimberDisengage());
+  AddSequential(new DriveClimb(0.));
+}

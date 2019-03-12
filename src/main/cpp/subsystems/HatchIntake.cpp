@@ -105,7 +105,7 @@ void HatchIntake::SetUpTalons() {
                                        kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-  mPivot.SetSensorPhase(true);
+  mPivot.SetSensorPhase(false); // TODO This is different from practice bot. Add a preferene to set this.
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
@@ -136,8 +136,8 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kP {calcP()};
   constexpr double kI {0};
   constexpr double kD {0};
-  const double kMaxVelocity {800};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {800}; //Sensor Units per 100ms
+  const double kMaxVelocity {1000};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  const double kCruiseVelocity {1000}; //Sensor Units per 100ms
   const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
@@ -226,6 +226,10 @@ bool HatchIntake::IsEngage() {
 void HatchIntake::ResetPosition() {
   double encoder = GetPosition();
   PivotPosition(encoder);
+}
+
+double HatchIntake::GetCurrent() {
+  return mPivot.GetOutputCurrent();
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

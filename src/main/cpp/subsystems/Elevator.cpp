@@ -19,7 +19,8 @@ using RobotMap::kTimeout_10Millis;
 namespace
 {
 constexpr int kSlotIndex {0};
-constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
+//constexpr int kForwardSoftLimit {72000}; // TODO, please fix this number or else interrupted
+constexpr int kForwardSoftLimit {72000 - 55000 + 50000}; // TODO, please fix this number or else interrupted
 
 constexpr double calcFeedforward() {
   constexpr double kMaxUnitsPer100ms {3675.0};
@@ -106,7 +107,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	mLeftElevator.SetSensorPhase(true);
+	mLeftElevator.SetSensorPhase(false); // TODO Preference for inverting the sensor phase on the elevator
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);

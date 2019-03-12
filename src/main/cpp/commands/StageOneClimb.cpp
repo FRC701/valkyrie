@@ -5,22 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/StageOneClimb.h"
+#include "commands/MotorClimb.h"
+#include "commands/Delay.h"
 
-#include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
+StageOneClimb::StageOneClimb() {
+  constexpr double kUpSpeed = -0.3;
+  constexpr int kUpEncoder = -24;
 
-class MotorClimb : public frc::Command {
- public:
-  MotorClimb(double speed, double encoderFinish);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  AddSequential(new MotorClimb(kUpSpeed, kUpEncoder));
 
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
-};
+}

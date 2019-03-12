@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include "subsystems/HatchIntake.h"
 
 class HatchIntakeDefaultCommand : public frc::Command {
  public:
@@ -17,4 +18,6 @@ class HatchIntakeDefaultCommand : public frc::Command {
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+ private:
+  std::shared_ptr<HatchIntake> mHatchIntake;
 };

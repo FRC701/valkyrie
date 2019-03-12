@@ -8,19 +8,13 @@
 #pragma once
 
 #include <frc/commands/Command.h>
-#include "subsystems/Climber.h"
 
-class MotorClimb : public frc::Command {
+class ClimberDefaultPositionCommand : public frc::Command {
  public:
-  MotorClimb(double speed, double encoderFinish);
+  ClimberDefaultPositionCommand();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
-
-private:
-  double mSpeed;
-  double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
 };

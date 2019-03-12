@@ -29,6 +29,8 @@ private:
 
 
   bool mIsHighGear;
+  double mHighGear;
+  double mLowGear;
 
  public:
   

@@ -12,6 +12,7 @@
 #include <ctre/Phoenix.h>
 #include <frc/DoubleSolenoid.h>
 #include "rev/CANSparkMax.h"
+#include <frc/AnalogInput.h>
 
 class Climber : public frc::Subsystem {
  private:
@@ -21,9 +22,15 @@ class Climber : public frc::Subsystem {
 
         WPI_TalonSRX mDriveMotor;
         rev::CANSparkMax  mLiftMotor;
+        rev::CANPIDController mLiftMotorController;
         frc::DoubleSolenoid mLiftSolenoid;
+        rev::CANEncoder mLiftMotorEncoder;
         double mDriveMotorSpeed;
         double mLiftMotorSpeed;
+        double mLiftMotorPosition_revs;
+        frc::Command* mPositionDefaultCommand;
+        frc::Command* mSpeedDefaultCommand;
+        
        
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
@@ -33,9 +40,15 @@ class Climber : public frc::Subsystem {
 
         Climber();
         void InitDefaultCommand() override;
+        void SetPositionDefaultCommand();
+        void SetSpeedDefaultCommand();
         void Engage();
         void Disengage();
         void MotorClimber(double speed);
         void DriveClimb(double speed);
+        void ClimbPosition(double position_revs);
         void Update();
+        void UpdatePosition();
+        int GetLiftMotorEncoderValue();
+        bool IsCommandFinished();
 };
