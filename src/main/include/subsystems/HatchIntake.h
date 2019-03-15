@@ -12,6 +12,7 @@
 #include "frc/DoubleSolenoid.h"
 #include "ctre/Phoenix.h"
 #include <frc/AnalogInput.h>
+#include <frc/Preferences.h>
 
 class HatchIntake : public frc::Subsystem {
  private:
@@ -35,12 +36,12 @@ class HatchIntake : public frc::Subsystem {
   double mMotorSpeed;
   double mMotorPosition;
 
-  Preference<double> mArmSlope;
-  Preference<double> mArmYIntercept;
-  Preference<int> mHatchFwdSoftLimit;
-  Preference<int> mHatchRevSoftLimit;
-  Preference<double> mAngleSlope;
-  Preference<double> mAngleYIntercept;
+  Preference<frc::Preferences, double> mArmSlope;
+  Preference<frc::Preferences, double> mArmYIntercept;
+  Preference<frc::Preferences, int> mHatchFwdSoftLimit;
+  Preference<frc::Preferences, int> mHatchRevSoftLimit;
+  Preference<frc::Preferences, double> mAngleSlope;
+  Preference<frc::Preferences, double> mAngleYIntercept;
  public:
 
   HatchIntake();

@@ -11,8 +11,6 @@
 #include "utilities/LineCalculator.h"
 #include "commands/PivotHatch.h"
 
-#include <frc/Preferences.h>
-
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
 using frc::Preferences;
@@ -58,12 +56,12 @@ mPivot(RobotMap::kIDHatchPivot),
 armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0},
 mMotorPosition{0},
-mArmSlope{"ArmSlope"},
-mArmYIntercept{"ArmYIntercept"},
-mHatchFwdSoftLimit{"HatchFwdSoftLimit"},
-mHatchRevSoftLimit{"HatchRevSoftLimit"},
-mAngleSlope{"AngleSlope"},
-mAngleYIntercept{"AngleYIntercept"}
+mArmSlope{*frc::Preferences::GetInstance(), "ArmSlope"},
+mArmYIntercept{*frc::Preferences::GetInstance(), "ArmYIntercept"},
+mHatchFwdSoftLimit{*frc::Preferences::GetInstance(), "HatchFwdSoftLimit"},
+mHatchRevSoftLimit{*frc::Preferences::GetInstance(), "HatchRevSoftLimit"},
+mAngleSlope{*frc::Preferences::GetInstance(), "AngleSlope"},
+mAngleYIntercept{*frc::Preferences::GetInstance(), "AngleYIntercept"}
 {
   SetUpTalons();
   SetupMotionMagic();
