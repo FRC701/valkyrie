@@ -36,12 +36,15 @@ class HatchIntake : public frc::Subsystem {
   double mMotorSpeed;
   double mMotorPosition;
 
-  Preference<frc::Preferences, double> mArmSlope;
-  Preference<frc::Preferences, double> mArmYIntercept;
-  Preference<frc::Preferences, int> mHatchFwdSoftLimit;
-  Preference<frc::Preferences, int> mHatchRevSoftLimit;
-  Preference<frc::Preferences, double> mAngleSlope;
-  Preference<frc::Preferences, double> mAngleYIntercept;
+  using DoublePreference = Preference<frc::Preferences, double>;
+  using IntPreference = Preference<frc::Preferences, int>;
+
+  DoublePreference mArmSlope;
+  DoublePreference mArmYIntercept;
+  IntPreference mHatchFwdSoftLimit;
+  IntPreference mHatchRevSoftLimit;
+  DoublePreference mAngleSlope;
+  DoublePreference mAngleYIntercept;
  public:
 
   HatchIntake();
