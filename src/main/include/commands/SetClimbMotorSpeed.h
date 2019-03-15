@@ -5,12 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/StageOneClimb.h"
-#include "commands/SetClimbMotorSpeed.h"
-#include "commands/Delay.h"
+#pragma once
 
-StageOneClimb::StageOneClimb() {
-  constexpr double kUpSpeed = -0.3;
+#include <frc/commands/Command.h>
 
-  AddSequential(new SetClimbMotorSpeed(kUpSpeed));
-}
+class SetClimbMotorSpeed : public frc::Command {
+ public:
+  SetClimbMotorSpeed(double speed);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
+private:
+  double mSpeed;
+};

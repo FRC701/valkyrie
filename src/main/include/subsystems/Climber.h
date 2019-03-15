@@ -23,6 +23,7 @@ class Climber : public frc::Subsystem {
         WPI_TalonSRX mDriveMotor;
         rev::CANSparkMax  mLiftMotor;
         rev::CANPIDController mLiftMotorController;
+        rev::CANDigitalInput mLiftMotorLimit;
         frc::DoubleSolenoid mLiftSolenoid;
         rev::CANEncoder mLiftMotorEncoder;
         double mDriveMotorSpeed;
@@ -51,4 +52,5 @@ class Climber : public frc::Subsystem {
         void UpdatePosition();
         int GetLiftMotorEncoderValue();
         bool IsCommandFinished();
+        bool IsClimberUp();
 };
