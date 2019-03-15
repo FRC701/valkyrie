@@ -29,6 +29,8 @@ void Robot::RobotInit() {
   // Initialize the OI after all the subsystems have been setup
   OI::getInstance();
 
+  frc::CameraServer::GetInstance()->StartAutomaticCapture().SetFPS(20);
+
 }
 
 const void EncoderValues() {
