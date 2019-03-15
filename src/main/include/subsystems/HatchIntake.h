@@ -39,8 +39,8 @@ class HatchIntake : public frc::Subsystem {
   Preference<double> mArmYIntercept;
   Preference<int> mHatchFwdSoftLimit;
   Preference<int> mHatchRevSoftLimit;
-  Preference<int> mAngleSlope;
-  Preference<int> mAngleYIntercept;
+  Preference<double> mAngleSlope;
+  Preference<double> mAngleYIntercept;
  public:
 
   HatchIntake();
