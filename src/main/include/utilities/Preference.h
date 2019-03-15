@@ -1,54 +1,55 @@
 #pragma once
 
-#include <frc/Preferences.h>
+#include <wpi/StringRef.h>
 
-template <typename T>
+template <typename Preferences, typename T>
 struct PreferenceTraits
 {
-  static T get(const wpi::StringRef& key);
-  static void put(const wpi::StringRef& key, T value);
+  static T get(Preferences& prefs, const wpi::StringRef& key);
+  static void put(Preferences& prefs, const wpi::StringRef& key, T value);
 };
 
-template <>
-struct PreferenceTraits<int>
+template <typename Preferences>
+struct PreferenceTraits<Preferences, int>
 {
-  static int get(const wpi::StringRef& key) 
+  static int get(Preferences& prefs, const wpi::StringRef& key) 
   {
-      return frc::Preferences::GetInstance()->GetInt(key); 
+      return prefs.GetInt(key); 
   }
 
-  static void put(const wpi::StringRef& key, int value)
+  static void put(Preferences& prefs, const wpi::StringRef& key, int value)
   {
-    frc::Preferences::GetInstance()->PutInt(key, value); 
+    prefs.PutInt(key, value); 
   }
 };
 
-template <>
-struct PreferenceTraits<double>
+template <typename Preferences>
+struct PreferenceTraits<Preferences, double>
 {
-  static double get(const wpi::StringRef& key) 
+  static double get(Preferences& prefs, const wpi::StringRef& key) 
   {
-      return frc::Preferences::GetInstance()->GetDouble(key); 
+      return prefs.GetDouble(key); 
   }
 
-  static void put(const wpi::StringRef& key, double value)
+  static void put(Preferences& prefs, const wpi::StringRef& key, double value)
   {
-    frc::Preferences::GetInstance()->PutDouble(key, value); 
+    prefs.PutDouble(key, value); 
   }
 };
 
-template <typename T>
+template <typename Preferences, typename T>
 class Preference
 {
   public:
     explicit 
-    Preference(const wpi::StringRef& key) : mKey(key) { }
-    T get() const { return PreferenceTraits<T>::get(mKey); }
-    void put(const T& value) { PreferenceTraits<T>::put(mKey, value); }
+    Preference(Preferences& prefs, const wpi::StringRef& key) : mPrefs(prefs), mKey(key) { }
+    T get() const { return PreferenceTraits<Preferences, T>::get(mPrefs, mKey); }
+    void put(const T& value) { PreferenceTraits<Preferences, T>::put(mPrefs, mKey, value); }
     operator T() const { get(); }
     T operator=(const T& value) { put(value); return value; }
 
   private:
+    Preferences& mPrefs;
     wpi::StringRef mKey;
 };
 
