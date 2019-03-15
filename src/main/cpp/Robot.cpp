@@ -53,6 +53,7 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Right Drive Voltage", Chassis::getInstance()->GetRightVoltage());
     frc::SmartDashboard::PutNumber("Roller current", CargoIntake::getInstance()->RollerCurrent());
     frc::SmartDashboard::PutNumber("HatchIntake Current", HatchIntake::getInstance()->GetCurrent());
+    frc::SmartDashboard::PutNumber("Climber Lift Limit Switch (reverse)", Climber::getInstance()->IsClimberUp());
 }
 /**
  * This function is called every robot packet, no matter the mode. Use
