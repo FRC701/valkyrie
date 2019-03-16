@@ -31,6 +31,7 @@ class Climber : public frc::Subsystem {
         double mLiftMotorPosition_revs;
         frc::Command* mPositionDefaultCommand;
         frc::Command* mSpeedDefaultCommand;
+        double mEncoderOffset;
         
        
   // It's desirable that everything possible under private except
@@ -53,4 +54,5 @@ class Climber : public frc::Subsystem {
         int GetLiftMotorEncoderValue();
         bool IsCommandFinished();
         bool IsClimberUp();
+        void ResetEncoder();
 };
