@@ -124,7 +124,8 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotorController{mLiftMotor.GetPIDController()},
     mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyOpen)},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
-    mLiftMotorEncoder{mLiftMotor.GetEncoder()}
+    mLiftMotorEncoder{mLiftMotor.GetEncoder()},
+    mEncoderOffset{mLiftMotorEncoder.GetPosition()}
 {
     mLiftSolenoid.Set(kClimberDisengage);
     mDriveMotor.Set(0.0);
@@ -193,5 +194,9 @@ bool Climber::IsClimberUp() {
 }
 
 int Climber::GetLiftMotorEncoderValue() {
-    return mLiftMotorEncoder.GetPosition();
+    return mLiftMotorEncoder.GetPosition() - mEncoderOffset;
+}
+
+void Climber::ResetEncoder() {
+    mEncoderOffset = mLiftMotorEncoder.GetPosition();
 }

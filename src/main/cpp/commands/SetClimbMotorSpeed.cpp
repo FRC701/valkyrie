@@ -31,6 +31,7 @@ bool SetClimbMotorSpeed::IsFinished() {
 // Called once after isFinished returns true
 void SetClimbMotorSpeed::End() {
   Climber::getInstance()->DriveClimb(0);
+  Climber::getInstance()->ResetEncoder();
 }
 
 // Called when another command which requires one or more of the same
