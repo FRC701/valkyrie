@@ -198,5 +198,5 @@ int Climber::GetLiftMotorEncoderValue() {
 }
 
 void Climber::ResetEncoder() {
-    mEncoderOffset = GetLiftMotorEncoderValue();
+    mEncoderOffset = mLiftMotorEncoder.GetPosition();
 }
