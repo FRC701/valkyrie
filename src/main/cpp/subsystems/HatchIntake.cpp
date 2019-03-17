@@ -133,7 +133,7 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kF {0}; // feedforward is 0 for position
   constexpr double kP {calcP()};
   constexpr double kI {0};
-  constexpr double kD {0};
+  constexpr double kD {40};
   const double kMaxVelocity {1200};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
   const double kCruiseVelocity {2400}; //Sensor Units per 100ms
   const double kMotionAcceleration {1800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
