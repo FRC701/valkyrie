@@ -7,10 +7,12 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
+#include "utilities/Preference.h"
 #include "RobotMap.h"
 #include "frc/DoubleSolenoid.h"
 #include "ctre/Phoenix.h"
 #include <frc/AnalogInput.h>
+#include <frc/Preferences.h>
 
 class HatchIntake : public frc::Subsystem {
  private:
@@ -33,6 +35,16 @@ class HatchIntake : public frc::Subsystem {
 
   double mMotorSpeed;
   double mMotorPosition;
+
+  using DoublePreference = Preference<frc::Preferences, double>;
+  using IntPreference = Preference<frc::Preferences, int>;
+
+  DoublePreference mArmSlope;
+  DoublePreference mArmYIntercept;
+  IntPreference mHatchFwdSoftLimit;
+  IntPreference mHatchRevSoftLimit;
+  DoublePreference mAngleSlope;
+  DoublePreference mAngleYIntercept;
  public:
 
   HatchIntake();
