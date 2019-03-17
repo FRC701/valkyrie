@@ -37,6 +37,20 @@ struct PreferenceTraits<Preferences, double>
   }
 };
 
+template <typename Preferences>
+struct PreferenceTraits<Preferences, bool>
+{
+  static bool get(Preferences& prefs, const wpi::StringRef& key) 
+  {
+      return prefs.GetBoolean(key); 
+  }
+
+  static void put(Preferences& prefs, const wpi::StringRef& key, bool value)
+  {
+    prefs.PutBoolean(key, value);
+  }
+};
+
 template <typename Preferences, typename T>
 class Preference
 {

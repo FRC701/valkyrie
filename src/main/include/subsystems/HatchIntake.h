@@ -38,6 +38,7 @@ class HatchIntake : public frc::Subsystem {
 
   using DoublePreference = Preference<frc::Preferences, double>;
   using IntPreference = Preference<frc::Preferences, int>;
+  using BoolPreference = Preference<frc::Preferences, bool>;
 
   DoublePreference mArmSlope;
   DoublePreference mArmYIntercept;
@@ -45,6 +46,7 @@ class HatchIntake : public frc::Subsystem {
   IntPreference mHatchRevSoftLimit;
   DoublePreference mAngleSlope;
   DoublePreference mAngleYIntercept;
+  BoolPreference mSensorPhase;
  public:
 
   HatchIntake();
@@ -75,4 +77,6 @@ class HatchIntake : public frc::Subsystem {
   void ResetPosition();
 
   double GetSetPoint() { return mMotorPosition; }
+
+  double GetAngle();
 };

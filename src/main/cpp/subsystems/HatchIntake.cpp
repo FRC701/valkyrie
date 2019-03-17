@@ -61,7 +61,8 @@ mArmYIntercept{*frc::Preferences::GetInstance(), "ArmYIntercept"},
 mHatchFwdSoftLimit{*frc::Preferences::GetInstance(), "HatchFwdSoftLimit"},
 mHatchRevSoftLimit{*frc::Preferences::GetInstance(), "HatchRevSoftLimit"},
 mAngleSlope{*frc::Preferences::GetInstance(), "AngleSlope"},
-mAngleYIntercept{*frc::Preferences::GetInstance(), "AngleYIntercept"}
+mAngleYIntercept{*frc::Preferences::GetInstance(), "AngleYIntercept"},
+mSensorPhase{*frc::Preferences::GetInstance(), "HatchIntakeSensorPhase"}
 {
   SetUpTalons();
   SetupMotionMagic();
@@ -102,10 +103,11 @@ void HatchIntake::SetUpTalons() {
                                        kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-  mPivot.SetSensorPhase(false); // TODO This is different from practice bot. Add a preferene to set this.
+  mPivot.SetSensorPhase(mSensorPhase); 
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
+  mPivot.SetNeutralMode(NeutralMode::Brake);
 
   SetSoftLimits();
 }
@@ -132,10 +134,10 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kF {0}; // feedforward is 0 for position
   constexpr double kP {calcP()};
   constexpr double kI {0};
-  constexpr double kD {0};
-  const double kMaxVelocity {1000};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {1000}; //Sensor Units per 100ms
-  const double kMotionAcceleration {400};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
+  constexpr double kD {40};
+  const double kMaxVelocity {1200};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
+  const double kCruiseVelocity {2400}; //Sensor Units per 100ms
+  const double kMotionAcceleration {1800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);
@@ -224,6 +226,11 @@ void HatchIntake::ResetPosition() {
 
 double HatchIntake::GetCurrent() {
   return mPivot.GetOutputCurrent();
+}
+
+double HatchIntake::GetAngle(){
+  return LineCalculator(mAngleSlope, mAngleYIntercept)
+          .invert()(GetPosition());
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

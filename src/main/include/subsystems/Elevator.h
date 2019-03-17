@@ -8,6 +8,8 @@
 #pragma once
 #include <frc/commands/Subsystem.h>
 #include <ctre/Phoenix.h>
+#include "utilities/Preference.h"
+#include <frc/Preferences.h>
 
 class Elevator : public frc::Subsystem {
  private:
@@ -27,6 +29,10 @@ class Elevator : public frc::Subsystem {
        // Private functions -- use the abstraction 
        bool IsFwdLimitSwitchClosed();
        bool IsRevLimitSwitchClosed();
+
+       using BoolPreference = Preference<frc::Preferences, bool>;
+
+       BoolPreference mSensorPhase;
  public:
         static std::shared_ptr<Elevator> getInstance();
 
