@@ -61,7 +61,8 @@ mArmYIntercept{*frc::Preferences::GetInstance(), "ArmYIntercept"},
 mHatchFwdSoftLimit{*frc::Preferences::GetInstance(), "HatchFwdSoftLimit"},
 mHatchRevSoftLimit{*frc::Preferences::GetInstance(), "HatchRevSoftLimit"},
 mAngleSlope{*frc::Preferences::GetInstance(), "AngleSlope"},
-mAngleYIntercept{*frc::Preferences::GetInstance(), "AngleYIntercept"}
+mAngleYIntercept{*frc::Preferences::GetInstance(), "AngleYIntercept"},
+mSensorPhase{*frc::Preferences::GetInstance(), "HatchIntakeSensorPhase"}
 {
   SetUpTalons();
   SetupMotionMagic();
@@ -102,7 +103,7 @@ void HatchIntake::SetUpTalons() {
                                        kTimeout_10Millis);
   mPivot.ConfigForwardLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
   mPivot.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-  mPivot.SetSensorPhase(true); // TODO This is different from practice bot. Add a preferene to set this.
+  mPivot.SetSensorPhase(mSensorPhase); 
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
