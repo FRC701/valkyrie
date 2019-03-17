@@ -146,7 +146,7 @@ OI::OI()
 
   coX.WhileHeld(new FullCargoIntake());
 
-  coPOV0.WhenPressed(new FullArmPosition(0.));
+  coPOV0.WhenPressed(new FullArmPosition(-21.));
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
@@ -207,7 +207,7 @@ OI::OI()
   frc::SmartDashboard::PutData("Hatch Intake: Speed Default", new SetHatchIntakeSpeedDefaultCommand());
   frc::SmartDashboard::PutData("Hatch Intake Scoring", new FullArmPosition(90.));
   frc::SmartDashboard::PutData("Hatch Intake Retrieve", new FullArmPosition(-90.));
-  frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(0.));
+  frc::SmartDashboard::PutData("Hatch Intake Top", new FullArmPosition(-21.));
   frc::SmartDashboard::PutData("Set Camera Driver Mode", new SetCamModeDriver());
   frc::SmartDashboard::PutData("Set Camera Vision Mode", new SetCamModeVision());
   frc::SmartDashboard::PutData("Stage One Climb", new StageOneClimb());
