@@ -199,7 +199,7 @@ void HatchIntake::UpdatePosition() {
 
 void HatchIntake::SetAngleValue() {
   encoderRev = GetPosition();
-  LineCalculator angleToEncoder(90., encoderFwd, -90, encoderRev);
+  LineCalculator angleToEncoder(90.0, encoderFwd, -90.0, encoderRev);
   mAngleSlope = angleToEncoder.slope();
   mAngleYIntercept = angleToEncoder.yIntercept();
 }
