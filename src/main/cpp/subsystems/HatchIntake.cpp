@@ -107,6 +107,7 @@ void HatchIntake::SetUpTalons() {
   mPivot.SetInverted(true);
   mPivot.ConfigPeakOutputForward(0.1, kTimeout_10Millis);
   mPivot.ConfigPeakOutputReverse(-0.1, kTimeout_10Millis);
+  mPivot.SetNeutralMode(NeutralMode::Brake);
 
   SetSoftLimits();
 }
