@@ -45,7 +45,7 @@ class Preference
     Preference(Preferences& prefs, const wpi::StringRef& key) : mPrefs(prefs), mKey(key) { }
     T get() const { return PreferenceTraits<Preferences, T>::get(mPrefs, mKey); }
     void put(const T& value) { PreferenceTraits<Preferences, T>::put(mPrefs, mKey, value); }
-    operator T() const { get(); }
+    operator T() const { return get(); }
     T operator=(const T& value) { put(value); return value; }
 
   private:
