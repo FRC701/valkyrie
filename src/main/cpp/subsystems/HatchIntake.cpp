@@ -227,5 +227,10 @@ void HatchIntake::ResetPosition() {
 double HatchIntake::GetCurrent() {
   return mPivot.GetOutputCurrent();
 }
+
+double HatchIntake::GetAngle(){
+  return LineCalculator(mAngleSlope, mAngleYIntercept)
+          .invert()(GetPosition());
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

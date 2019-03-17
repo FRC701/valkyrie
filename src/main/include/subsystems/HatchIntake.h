@@ -77,4 +77,6 @@ class HatchIntake : public frc::Subsystem {
   void ResetPosition();
 
   double GetSetPoint() { return mMotorPosition; }
+
+  double GetAngle();
 };
