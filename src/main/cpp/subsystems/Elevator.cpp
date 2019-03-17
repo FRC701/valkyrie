@@ -56,7 +56,8 @@ Elevator::Elevator() : Subsystem("Elevator"),
   mMotorSpeed{0},
   mMotorPos{0},
   mPositionDefaultCommand(nullptr),
-  mSpeedDefaultCommand(nullptr)
+  mSpeedDefaultCommand(nullptr),
+  mSensorPhase(*frc::Preferences::GetInstance(), "ElevatorSensorPhase")
 {
   SetUpTalons();
   SetUpMotionMagic();
@@ -107,7 +108,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigForwardSoftLimitThreshold(kForwardSoftLimit);
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
-	mLeftElevator.SetSensorPhase(false); // TODO Preference for inverting the sensor phase on the elevator
+	mLeftElevator.SetSensorPhase(mSensorPhase);
 	mLeftElevator.SetInverted(true);
 	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
