@@ -19,6 +19,8 @@
 ExampleSubsystem Robot::m_subsystem;
 
 void Robot::RobotInit() {
+  constexpr int kFrontCam {0};
+  constexpr int kBackCam {1};
   m_chooser.SetDefaultOption("Default Auto", &m_defaultAuto);
   m_chooser.AddOption("My Auto", &m_myAuto);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
@@ -28,6 +30,8 @@ void Robot::RobotInit() {
   CargoIntake::getInstance();
   // Initialize the OI after all the subsystems have been setup
   OI::getInstance();
+  frc::CameraServer::GetInstance()->StartAutomaticCapture(kFrontCam).SetFPS(20);
+  frc::CameraServer::GetInstance()->StartAutomaticCapture(kBackCam).SetFPS(20);
 
 }
 
