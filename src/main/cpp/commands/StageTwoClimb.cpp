@@ -17,7 +17,7 @@
 
 StageTwoClimb::StageTwoClimb() {
   constexpr double kDownSpeed = 0.2;
-  constexpr int kDownEncoder = 59;
+  constexpr int kDownEncoder = 83;  // 83 was determined by experiment
 
   // Don't engage the climber for level 2
   // AddSequential(new ClimberEngage()); 
