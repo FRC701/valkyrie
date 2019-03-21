@@ -106,6 +106,9 @@ void configurePIDController(
         pidSlot);
 }
 
+constexpr auto kNormallyClosed = rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed;
+constexpr auto kNormallyOpen = rev::CANDigitalInput::LimitSwitchPolarity::kNormallyOpen;
+
 }
 
 std::shared_ptr<Climber> Climber::self;
@@ -122,7 +125,7 @@ Climber::Climber() : Subsystem("Climber"),
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
-    mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyOpen)},
+    mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(kNormallyOpen)},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
     mLiftMotorEncoder{mLiftMotor.GetEncoder()},
     mEncoderOffset{mLiftMotorEncoder.GetPosition()}
@@ -133,6 +136,8 @@ Climber::Climber() : Subsystem("Climber"),
     mDriveMotor.SetInverted(true);
     mLiftMotor.SetInverted(true);
     mLiftMotorLimit.EnableLimitSwitch(true);
+    mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)
+        .EnableLimitSwitch(false);
 
     configurePIDController(mLiftMotorController, kConfig);
 }
