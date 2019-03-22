@@ -126,6 +126,7 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
     mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(kNormallyOpen)},
+    mLiftMotorLimitOther{mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
     mLiftMotorEncoder{mLiftMotor.GetEncoder()},
     mEncoderOffset{mLiftMotorEncoder.GetPosition()}
@@ -134,10 +135,9 @@ Climber::Climber() : Subsystem("Climber"),
     mDriveMotor.Set(0.0);
     mLiftMotor.Set(0.0);
     mDriveMotor.SetInverted(true);
-    mLiftMotor.SetInverted(true);
+    mLiftMotor.SetInverted(false);
     mLiftMotorLimit.EnableLimitSwitch(true);
-    mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)
-        .EnableLimitSwitch(false);
+    mLiftMotorLimitOther.EnableLimitSwitch(true);
 
     configurePIDController(mLiftMotorController, kConfig);
 }
@@ -196,6 +196,10 @@ bool Climber::IsCommandFinished() {
 
 bool Climber::IsClimberUp() {
     return mLiftMotorLimit.Get();
+}
+
+bool Climber::IsOtherLimitSwitch() {
+    return mLiftMotorLimitOther.Get();
 }
 
 int Climber::GetLiftMotorEncoderValue() {
