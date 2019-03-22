@@ -6,11 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/StageOneClimb.h"
-#include "commands/SetClimbMotorSpeed.h"
+#include "commands/MotorClimb.h"
 #include "commands/Delay.h"
 
 StageOneClimb::StageOneClimb() {
   constexpr double kUpSpeed = -0.3;
+  constexpr int kUpEncoder = -24;
 
-  AddSequential(new SetClimbMotorSpeed(kUpSpeed));
+  AddSequential(new MotorClimb(kUpSpeed, kUpEncoder));
+
 }
