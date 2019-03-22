@@ -118,10 +118,8 @@ std::shared_ptr<Climber> Climber::getInstance() {
   }
   return self;
 }
+
 Climber::Climber() : Subsystem("Climber"), 
-    mDriveMotorSpeed{0},
-    mLiftMotorSpeed{0},
-    mLiftMotorPosition_revs{0.},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
@@ -129,21 +127,26 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotorLimitOther{mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
     mLiftMotorEncoder{mLiftMotor.GetEncoder()},
+    mDriveMotorSpeed{0},
+    mLiftMotorSpeed{0},
+    mLiftMotorPosition_revs{0.},
+    mPositionDefaultCommand{nullptr},
+    mSpeedDefaultCommand{nullptr},
     mEncoderOffset{mLiftMotorEncoder.GetPosition()}
 {
     mLiftSolenoid.Set(kClimberDisengage);
-    mDriveMotor.Set(0.0);
-    mLiftMotor.Set(0.0);
     mDriveMotor.SetInverted(true);
     mLiftMotor.SetInverted(false);
     mLiftMotorLimit.EnableLimitSwitch(true);
     mLiftMotorLimitOther.EnableLimitSwitch(true);
 
     configurePIDController(mLiftMotorController, kConfig);
+
+    Update();
 }
 
 void Climber::InitDefaultCommand() {
-    //mPositionDefaultCommand = new ClimberDefaultPositionCommand;
+    mPositionDefaultCommand = new ClimberDefaultPositionCommand;
     mSpeedDefaultCommand = new ClimberDefaultSpeedCommand;
     //SetPositionDefaultCommand();
     SetSpeedDefaultCommand();
@@ -156,6 +159,7 @@ void Climber::SetPositionDefaultCommand() {
 void Climber::SetSpeedDefaultCommand() {
     SetDefaultCommand(mSpeedDefaultCommand);
 }
+
 void Climber::Engage() {
     mLiftSolenoid.Set(kClimberEngage);
 }
