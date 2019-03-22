@@ -61,8 +61,8 @@ ConfigPIDController kConfig =
     /* .f = */ 0, // feedforward should be 0 for position
     /* .dFilter = */ 0, // TODO how is dFilter set
     /* .iZone = */ 0, // TODO how is iZone set
-    /* .outputRangeMaximum = */ 12,
-    /* .outputRangeMinimum = */ -12,
+    /* .outputRangeMaximum = */ 1,
+    /* .outputRangeMinimum = */ -1,
     /* .maxVelocity_RPM = */ 4000,
     /* .maxAcceleration_RPMPM = */ 4000,
     /* .minOutputVelocity_RPM = */ 0,
@@ -191,7 +191,7 @@ void Climber::Update() {
 
 void Climber::UpdatePosition() {
     mDriveMotor.Set(mDriveMotorSpeed);
-    mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kSmartMotion);
+    mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kPosition);
 }
 
 bool Climber::IsCommandFinished() {
