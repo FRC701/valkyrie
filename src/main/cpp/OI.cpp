@@ -147,7 +147,7 @@ OI::OI()
 
   coX.WhileHeld(new FullCargoIntake());
 
-  coPOV0.WhenPressed(new FullArmPosition(-21.));
+  coPOV0.WhenPressed(new FullArmPosition(0.)); //-21 for new HatchIntake 
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
