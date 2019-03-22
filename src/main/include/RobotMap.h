@@ -20,8 +20,8 @@ constexpr int kIDLeftElevator {5};
 constexpr int kIDRightElevator {6};
 
 //Climber motors
-constexpr int kIDClimberDriveMotor {7};
-constexpr int kIDClimberLiftMotor {8};
+constexpr int kIDClimberDriveMotor {8};
+constexpr int kIDClimberLiftMotor {7};
 
 //Cargo Motors
 constexpr int kIDCargoRoller {9};

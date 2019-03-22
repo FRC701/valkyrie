@@ -59,6 +59,7 @@
 #include "commands/DriveClimb.h"
 #include "commands/ClimberDisengage.h"
 #include "commands/ClimberEngage.h"
+#include "commands/SetClimbMotorSpeed.h"
 
 namespace 
 {
@@ -165,11 +166,11 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
-  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(0.3, 0));
-  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(-0.5, 0));
-  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8, 0.));
-  frc::SmartDashboard::PutData("Run Climber 0%", new MotorClimb(0., 0.));
-  frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0., 0.));
+  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(-0.3, -80));
+  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(0.5, 0));
+  frc::SmartDashboard::PutData("Run Climber Up", new SetClimbMotorSpeed(.3));
+  frc::SmartDashboard::PutData("Run Climber Down", new SetClimbMotorSpeed(-.3));
+  frc::SmartDashboard::PutData("Stop Climber Drive", new SetClimbMotorSpeed(0.));
   frc::SmartDashboard::PutData("1. Reset Encoder", new ResetHatchIntakePosition());
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());

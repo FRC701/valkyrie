@@ -20,7 +20,7 @@ void SetClimbMotorSpeed::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void SetClimbMotorSpeed::Execute() {
-  Climber::getInstance()->DriveClimb(mSpeed);
+  Climber::getInstance()->MotorClimber(mSpeed);
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +30,7 @@ bool SetClimbMotorSpeed::IsFinished() {
 
 // Called once after isFinished returns true
 void SetClimbMotorSpeed::End() {
-  Climber::getInstance()->DriveClimb(0);
+  Climber::getInstance()->MotorClimber(0);
   Climber::getInstance()->ResetEncoder();
 }
 
