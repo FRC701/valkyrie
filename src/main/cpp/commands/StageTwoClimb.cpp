@@ -13,6 +13,7 @@
 #include "commands/Delay.h"
 #include "commands/Drive.h"
 #include "commands/ClimberDrive.h"
+#include "commands/ClimbAndDrive.h"
 #include "commands/SetArcadeDrive.h"
 
 StageTwoClimb::StageTwoClimb() {
@@ -20,8 +21,8 @@ StageTwoClimb::StageTwoClimb() {
   constexpr int kDownEncoder = 59;
 
   // Don't engage the climber for level 2
-  // AddSequential(new ClimberEngage()); 
-  AddSequential(new MotorClimb(kDownSpeed, kDownEncoder));
+  AddSequential(new ClimbAndDrive(kDownSpeed, kDownEncoder));
+  AddSequential(new ClimberEngage());
   // stall the lift motor
   // so far stalling the motor is not needed
   // brake mode is strong
