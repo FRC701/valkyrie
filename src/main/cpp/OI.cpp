@@ -66,15 +66,15 @@ namespace
 {
 
 constexpr double kElevatorHatchLevel_1 = 0.;
-constexpr double kElevatorHatchLevel_2 = 31500.;
-constexpr double kElevatorHatchLevel_3 = 31500.;
-//constexpr double kElevatorHatchLevel_3 = 57500.;
+constexpr double kElevatorHatchLevel_2 = 29000.;
+//constexpr double kElevatorHatchLevel_3 = 31500.;
+constexpr double kElevatorHatchLevel_3 = 57500.;
 
 constexpr double kElevatorCargoLevel_1 = 23500;
 constexpr double kElevatorCargoLevel_Ship = 32000;
 constexpr double kElevatorCargoLevel_2 = 50000;
-constexpr double kElevatorCargoLevel_3 = 50000;
-//constexpr double kElevatorCargoLevel_3 = 71000;
+//constexpr double kElevatorCargoLevel_3 = 50000;
+constexpr double kElevatorCargoLevel_3 = 71000;
 
 constexpr double kCargoOuttakeTimeout = 1.0;
 
@@ -149,7 +149,7 @@ OI::OI()
 
   coX.WhileHeld(new FullCargoIntake());
 
-  coPOV0.WhenPressed(new FullArmPosition(0.)); //-21 for new HatchIntake 
+  coPOV0.WhenPressed(new FullArmPosition(21)); //-21 for new HatchIntake 
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
