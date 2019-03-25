@@ -60,6 +60,7 @@
 #include "commands/ClimberDisengage.h"
 #include "commands/ClimberEngage.h"
 #include "commands/SetClimbMotorSpeed.h"
+#include "commands/FullResetDrive.h"
 
 namespace 
 {
@@ -139,7 +140,7 @@ OI::OI()
   //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
   // dStart.WhenPressed(new SetVisionDrive());
-  dBack.WhenPressed(new SetControlDrive());
+  dBack.WhenPressed(new FullResetDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
   
@@ -224,6 +225,7 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive Climb Motor 0", new DriveClimb(0));
   frc::SmartDashboard::PutData("Climber Disengage", new ClimberDisengage());
   frc::SmartDashboard::PutData("CLimber Engage", new ClimberEngage());
+  frc::SmartDashboard::PutData("Reset Drive", new FullResetDrive());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {
