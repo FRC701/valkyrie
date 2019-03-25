@@ -8,7 +8,7 @@
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
-constexpr double kDefaultHighGear {0.75};
+constexpr double kDefaultHighGear {0.85};
 
 std::shared_ptr<Chassis> Chassis::self;
 
