@@ -134,10 +134,11 @@ OI::OI()
   dStart.WhenPressed(new StageOneClimb());
   dA.WhenPressed(new StageTwoClimb());
   dX.WhenPressed(new StageThreeClimb());
-  dY.WhenPressed(new ClimberEngage);
-  dB.WhenPressed(new ClimberDisengage);
+  dY.WhenPressed(new ClimberEngage());
+  dB.WhenPressed(new ClimberDisengage());
   //dY.WhenPressed(new StageFiveClimb());
   //dB.WhenPressed(new StageFiveClimb());
+  dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
   // dStart.WhenPressed(new SetVisionDrive());
   dBack.WhenPressed(new FullResetDrive());
@@ -167,8 +168,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
-  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(-0.3, -80));
-  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(0.5, 0));
+  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(-0.3, -54));
+  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(0.5, 34));
   frc::SmartDashboard::PutData("Run Climber Up", new SetClimbMotorSpeed(.3));
   frc::SmartDashboard::PutData("Run Climber Down", new SetClimbMotorSpeed(-.3));
   frc::SmartDashboard::PutData("Stop Climber Drive", new SetClimbMotorSpeed(0.));
@@ -225,6 +226,7 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive Climb Motor 0", new DriveClimb(0));
   frc::SmartDashboard::PutData("Climber Disengage", new ClimberDisengage());
   frc::SmartDashboard::PutData("CLimber Engage", new ClimberEngage());
+  frc::SmartDashboard::PutData("Climber zero", new MotorClimb(0.5, 0));
   frc::SmartDashboard::PutData("Reset Drive", new FullResetDrive());
 }
 

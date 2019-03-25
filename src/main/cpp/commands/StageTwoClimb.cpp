@@ -17,8 +17,8 @@
 #include "commands/SetArcadeDrive.h"
 
 StageTwoClimb::StageTwoClimb() {
-  constexpr double kDownSpeed = 0.2;
-  constexpr int kDownEncoder = 59;
+  constexpr double kDownSpeed = -0.6;
+  constexpr int kDownEncoder = -56;
 
   // Don't engage the climber for level 2
   AddSequential(new ClimbAndDrive(kDownSpeed, kDownEncoder));

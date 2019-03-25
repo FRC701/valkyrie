@@ -11,8 +11,8 @@
 #include "commands/ClimbAndDrive.h"
 
 StageOneClimb::StageOneClimb() {
-  constexpr double kUpSpeed = -0.3;
-  constexpr int kUpEncoder = -24;
+  constexpr double kUpSpeed = 0.5;
+  constexpr int kUpEncoder = 29;
 
   AddSequential(new ClimbAndDrive(kUpSpeed, kUpEncoder));
 
