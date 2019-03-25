@@ -132,7 +132,7 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftMotorPosition_revs{0.},
     mPositionDefaultCommand{nullptr},
     mSpeedDefaultCommand{nullptr},
-    mEncoderOffset{mLiftMotorEncoder.GetPosition()}
+    mEncoderOffset{0}
 {
     mLiftSolenoid.Set(kClimberDisengage);
     mDriveMotor.SetInverted(true);
@@ -211,5 +211,5 @@ int Climber::GetLiftMotorEncoderValue() {
 }
 
 void Climber::ResetEncoder() {
-    mEncoderOffset = mLiftMotorEncoder.GetPosition();
+    mEncoderOffset = 0;
 }
