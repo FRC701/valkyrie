@@ -51,8 +51,10 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Left Elevator Voltage", Elevator::getInstance()->GetLeftVoltage());
     frc::SmartDashboard::PutBoolean("Elevator Is Down", Elevator::getInstance()->IsElevatorDown());
     frc::SmartDashboard::PutNumber("Elevator Error", Elevator::getInstance()->GetEncoderError());
-    frc::SmartDashboard::PutNumber("Left Drive Current", Chassis::getInstance()->GetLeftCurrent());
-    frc::SmartDashboard::PutNumber("Right Drive Current", Chassis::getInstance()->GetRightCurrent());
+    frc::SmartDashboard::PutNumber("Left 1 Wheel Drive Current", Chassis::getInstance()->GetLeft1Current());
+    frc::SmartDashboard::PutNumber("Right 1 Wheel Drive Current", Chassis::getInstance()->GetRight1Current());
+    frc::SmartDashboard::PutNumber("Left 2 Wheel Drive Current", Chassis::getInstance()->GetLeft2Current());
+    frc::SmartDashboard::PutNumber("Right 2 Wheel Drive Current", Chassis::getInstance()->GetRight2Current());
     frc::SmartDashboard::PutNumber("Left Drive Voltage", Chassis::getInstance()->GetLeftVoltage());
     frc::SmartDashboard::PutNumber("Right Drive Voltage", Chassis::getInstance()->GetRightVoltage());
     frc::SmartDashboard::PutNumber("Roller current", CargoIntake::getInstance()->RollerCurrent());
