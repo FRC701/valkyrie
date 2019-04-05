@@ -5,16 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DriveClimb.h"
-#include "subsystems/Climber.h"
+#pragma once
 
-DriveClimb::DriveClimb(double speed) : mDriveMotorSpeed(speed)  {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(Climber::getInstance().get());
-}
+#include "commands/MotorClimb.h"
 
-// Called just before this Command runs the first time
-void DriveClimb::Initialize() {
-  Climber::getInstance()->DriveClimb(mDriveMotorSpeed);
-}
+class ClimbAndDrive : public MotorClimb {
+ public:
+  using Super = MotorClimb;
+  ClimbAndDrive(double speed, double encoderFinish);
+  void Execute() override;
+};

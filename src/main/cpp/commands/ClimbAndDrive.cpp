@@ -5,16 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DriveClimb.h"
+#include "commands/ClimbAndDrive.h"
+#include "subsystems/Chassis.h"
 #include "subsystems/Climber.h"
 
-DriveClimb::DriveClimb(double speed) : mDriveMotorSpeed(speed)  {
+
+ClimbAndDrive::ClimbAndDrive(double speed, double encoderFinish) : MotorClimb(speed, encoderFinish) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Climber::getInstance().get());
 }
 
-// Called just before this Command runs the first time
-void DriveClimb::Initialize() {
-  Climber::getInstance()->DriveClimb(mDriveMotorSpeed);
+// Called repeatedly when this Command is scheduled to run
+void ClimbAndDrive::Execute() {
+  Super::Execute();
+  mClimber->DriveClimb(0.15);
 }
+

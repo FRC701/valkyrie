@@ -19,8 +19,10 @@ class MotorClimb : public frc::Command {
   void End() override;
   void Interrupted() override;
 
+protected:
+  std::shared_ptr<Climber> mClimber;
+
 private:
   double mSpeed;
   double mEncoderFinish;
-  std::shared_ptr<Climber> mClimber;
 };

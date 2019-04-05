@@ -61,8 +61,8 @@ ConfigPIDController kConfig =
     /* .f = */ 0, // feedforward should be 0 for position
     /* .dFilter = */ 0, // TODO how is dFilter set
     /* .iZone = */ 0, // TODO how is iZone set
-    /* .outputRangeMaximum = */ 12,
-    /* .outputRangeMinimum = */ -12,
+    /* .outputRangeMaximum = */ 1,
+    /* .outputRangeMinimum = */ -1,
     /* .maxVelocity_RPM = */ 4000,
     /* .maxAcceleration_RPMPM = */ 4000,
     /* .minOutputVelocity_RPM = */ 0,
@@ -106,6 +106,9 @@ void configurePIDController(
         pidSlot);
 }
 
+constexpr auto kNormallyClosed = rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed;
+constexpr auto kNormallyOpen = rev::CANDigitalInput::LimitSwitchPolarity::kNormallyOpen;
+
 }
 
 std::shared_ptr<Climber> Climber::self;
@@ -115,30 +118,35 @@ std::shared_ptr<Climber> Climber::getInstance() {
   }
   return self;
 }
+
 Climber::Climber() : Subsystem("Climber"), 
-    mDriveMotorSpeed{0},
-    mLiftMotorSpeed{0},
-    mLiftMotorPosition_revs{0.},
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
     mLiftMotorController{mLiftMotor.GetPIDController()},
-    mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyOpen)},
+    mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(kNormallyOpen)},
+    mLiftMotorLimitOther{mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),
     mLiftMotorEncoder{mLiftMotor.GetEncoder()},
-    mEncoderOffset{mLiftMotorEncoder.GetPosition()}
+    mDriveMotorSpeed{0},
+    mLiftMotorSpeed{0},
+    mLiftMotorPosition_revs{0.},
+    mPositionDefaultCommand{nullptr},
+    mSpeedDefaultCommand{nullptr},
+    mEncoderOffset{0}
 {
     mLiftSolenoid.Set(kClimberDisengage);
-    mDriveMotor.Set(0.0);
-    mLiftMotor.Set(0.0);
     mDriveMotor.SetInverted(true);
-    mLiftMotor.SetInverted(true);
+    mLiftMotor.SetInverted(false);
     mLiftMotorLimit.EnableLimitSwitch(true);
+    mLiftMotorLimitOther.EnableLimitSwitch(true);
 
     configurePIDController(mLiftMotorController, kConfig);
+
+    Update();
 }
 
 void Climber::InitDefaultCommand() {
-    //mPositionDefaultCommand = new ClimberDefaultPositionCommand;
+    mPositionDefaultCommand = new ClimberDefaultPositionCommand;
     mSpeedDefaultCommand = new ClimberDefaultSpeedCommand;
     //SetPositionDefaultCommand();
     SetSpeedDefaultCommand();
@@ -151,6 +159,7 @@ void Climber::SetPositionDefaultCommand() {
 void Climber::SetSpeedDefaultCommand() {
     SetDefaultCommand(mSpeedDefaultCommand);
 }
+
 void Climber::Engage() {
     mLiftSolenoid.Set(kClimberEngage);
 }
@@ -182,7 +191,7 @@ void Climber::Update() {
 
 void Climber::UpdatePosition() {
     mDriveMotor.Set(mDriveMotorSpeed);
-    mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kSmartMotion);
+    mLiftMotorController.SetReference(mLiftMotorPosition_revs, rev::ControlType::kPosition);
 }
 
 bool Climber::IsCommandFinished() {
@@ -193,10 +202,14 @@ bool Climber::IsClimberUp() {
     return mLiftMotorLimit.Get();
 }
 
+bool Climber::IsOtherLimitSwitch() {
+    return mLiftMotorLimitOther.Get();
+}
+
 int Climber::GetLiftMotorEncoderValue() {
     return mLiftMotorEncoder.GetPosition() - mEncoderOffset;
 }
 
 void Climber::ResetEncoder() {
-    mEncoderOffset = mLiftMotorEncoder.GetPosition();
+    mEncoderOffset = 0;
 }

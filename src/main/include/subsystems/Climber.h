@@ -24,6 +24,7 @@ class Climber : public frc::Subsystem {
         rev::CANSparkMax  mLiftMotor;
         rev::CANPIDController mLiftMotorController;
         rev::CANDigitalInput mLiftMotorLimit;
+        rev::CANDigitalInput mLiftMotorLimitOther;
         frc::DoubleSolenoid mLiftSolenoid;
         rev::CANEncoder mLiftMotorEncoder;
         double mDriveMotorSpeed;
@@ -54,5 +55,6 @@ class Climber : public frc::Subsystem {
         int GetLiftMotorEncoderValue();
         bool IsCommandFinished();
         bool IsClimberUp();
+        bool IsOtherLimitSwitch();
         void ResetEncoder();
 };

@@ -8,7 +8,7 @@
 
 const char Chassis::kSubsystemName[] = "Chassis";
 
-constexpr double kDefaultHighGear {0.75};
+constexpr double kDefaultHighGear {0.85};
 
 std::shared_ptr<Chassis> Chassis::self;
 
@@ -90,12 +90,20 @@ double Chassis::GetRightPosition() {
   return rightEncoder.GetPosition();
 }
 
-double Chassis::GetLeftCurrent() {
+double Chassis::GetLeft1Current() {
   return left1Wheel.GetOutputCurrent();
 }
 
-double Chassis::GetRightCurrent() {
+double Chassis::GetLeft2Current() {
+  return left2Wheel.GetOutputCurrent();
+}
+
+double Chassis::GetRight1Current() {
   return right1Wheel.GetOutputCurrent();
+}
+
+double Chassis::GetRight2Current() {
+  return right2Wheel.GetOutputCurrent();
 }
 
 double Chassis::GetLeftVoltage() {

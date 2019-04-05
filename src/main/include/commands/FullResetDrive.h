@@ -5,16 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/DriveClimb.h"
-#include "subsystems/Climber.h"
+#pragma once
 
-DriveClimb::DriveClimb(double speed) : mDriveMotorSpeed(speed)  {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-  Requires(Climber::getInstance().get());
-}
+#include <frc/commands/CommandGroup.h>
 
-// Called just before this Command runs the first time
-void DriveClimb::Initialize() {
-  Climber::getInstance()->DriveClimb(mDriveMotorSpeed);
-}
+class FullResetDrive : public frc::CommandGroup {
+ public:
+  FullResetDrive();
+};

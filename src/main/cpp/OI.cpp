@@ -59,20 +59,22 @@
 #include "commands/DriveClimb.h"
 #include "commands/ClimberDisengage.h"
 #include "commands/ClimberEngage.h"
+#include "commands/SetClimbMotorSpeed.h"
+#include "commands/FullResetDrive.h"
 
 namespace 
 {
 
 constexpr double kElevatorHatchLevel_1 = 0.;
-constexpr double kElevatorHatchLevel_2 = 31500.;
-constexpr double kElevatorHatchLevel_3 = 31500.;
-//constexpr double kElevatorHatchLevel_3 = 61500.;
+constexpr double kElevatorHatchLevel_2 = 29000.;
+//constexpr double kElevatorHatchLevel_3 = 31500.;
+constexpr double kElevatorHatchLevel_3 = 57500.;
 
 constexpr double kElevatorCargoLevel_1 = 23500;
 constexpr double kElevatorCargoLevel_Ship = 32000;
 constexpr double kElevatorCargoLevel_2 = 50000;
-constexpr double kElevatorCargoLevel_3 = 50000;
-//constexpr double kElevatorCargoLevel_3 = 55000;
+//constexpr double kElevatorCargoLevel_3 = 50000;
+constexpr double kElevatorCargoLevel_3 = 71000;
 
 constexpr double kCargoOuttakeTimeout = 1.0;
 
@@ -132,13 +134,14 @@ OI::OI()
   dStart.WhenPressed(new StageOneClimb());
   dA.WhenPressed(new StageTwoClimb());
   dX.WhenPressed(new StageThreeClimb());
-  dY.WhenPressed(new ClimberEngage);
-  dB.WhenPressed(new ClimberDisengage);
+  dY.WhenPressed(new ClimberEngage());
+  dB.WhenPressed(new ClimberDisengage());
   //dY.WhenPressed(new StageFiveClimb());
   //dB.WhenPressed(new StageFiveClimb());
+  dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
   // dStart.WhenPressed(new SetVisionDrive());
-  dBack.WhenPressed(new SetControlDrive());
+  dBack.WhenPressed(new FullResetDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
   
@@ -146,7 +149,7 @@ OI::OI()
 
   coX.WhileHeld(new FullCargoIntake());
 
-  coPOV0.WhenPressed(new FullArmPosition(-21.));
+  coPOV0.WhenPressed(new FullArmPosition(21));
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
   coPOV270.WhenPressed(new FullArmPosition(-90.));
@@ -165,11 +168,11 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive -50", new Drive(-.50));
   frc::SmartDashboard::PutData("Drive -75", new Drive(-.75));
   frc::SmartDashboard::PutData("Drive -100", new Drive(-1));
-  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(0.3, 0));
-  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(-0.5, 0));
-  frc::SmartDashboard::PutData("Run Climber Drive", new MotorClimb(.8, 0.));
-  frc::SmartDashboard::PutData("Run Climber 0%", new MotorClimb(0., 0.));
-  frc::SmartDashboard::PutData("Stop Climber Drive", new MotorClimb(0., 0.));
+  frc::SmartDashboard::PutData("Run Climber Motor 30% (down)", new MotorClimb(-0.3, -54));
+  frc::SmartDashboard::PutData("Run Climber Motor -50% (up)", new MotorClimb(0.5, 34));
+  frc::SmartDashboard::PutData("Run Climber Up", new SetClimbMotorSpeed(.3));
+  frc::SmartDashboard::PutData("Run Climber Down", new SetClimbMotorSpeed(-.3));
+  frc::SmartDashboard::PutData("Stop Climber Drive", new SetClimbMotorSpeed(0.));
   frc::SmartDashboard::PutData("1. Reset Encoder", new ResetHatchIntakePosition());
   frc::SmartDashboard::PutData("2. Hatch Forward Point", new SaveHatchIntakeValueFWD());
   frc::SmartDashboard::PutData("3. Hatch Reverse Point", new SaveHatchIntakeValueREV());
@@ -223,6 +226,8 @@ OI::OI()
   frc::SmartDashboard::PutData("Drive Climb Motor 0", new DriveClimb(0));
   frc::SmartDashboard::PutData("Climber Disengage", new ClimberDisengage());
   frc::SmartDashboard::PutData("CLimber Engage", new ClimberEngage());
+  frc::SmartDashboard::PutData("Climber zero", new MotorClimb(0.5, 0));
+  frc::SmartDashboard::PutData("Reset Drive", new FullResetDrive());
 }
 
 std::shared_ptr<frc::Joystick> OI::getdriver() {

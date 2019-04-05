@@ -49,8 +49,10 @@ private:
   void DriveChassis(double speed);
   double GetRightPosition();
   double GetLeftPosition();
-  double GetLeftCurrent();
-  double GetRightCurrent();
+  double GetLeft1Current();
+  double GetLeft2Current();
+  double GetRight1Current();
+  double GetRight2Current();
   double GetLeftVoltage();
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
