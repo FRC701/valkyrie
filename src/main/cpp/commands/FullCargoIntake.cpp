@@ -9,11 +9,16 @@
 #include "commands/OpenCargoSqueeze.h"
 #include "commands/RunCargoRoller.h"
 #include "commands/PivotPositionByAngle.h"
+#include "commands/CargoRoller.h"
+#include "frc/Preferences.h"
 
 FullCargoIntake::FullCargoIntake() {
+  std::string cargoHoldKey = "CargoHold";
+  double cargoHoldSpeed = frc::Preferences::GetInstance()->GetDouble(cargoHoldKey);
   AddParallel(new PivotPositionByAngle(0));
   AddSequential(new OpenCargoSqueeze());
   AddSequential(new RunCargoRoller(0.7));
+  AddSequential(new CargoRoller(cargoHoldSpeed)); //MUST BE LAST COMMAND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
