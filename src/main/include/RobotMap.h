@@ -32,6 +32,8 @@ constexpr int kIDHatchPivot {10};
 //Hatch Pnuematics
 constexpr int kIDHatchPuncherForward {1};
 constexpr int kIDHatchPuncherReverse {6};
+constexpr int kIDHatchPusherForward {3};
+constexpr int kIDHatchPusherReverse {4};
 
 
 //Cargo Pneumatics

@@ -51,7 +51,8 @@ std::shared_ptr<HatchIntake> HatchIntake::getInstance() {
 }
 
 HatchIntake::HatchIntake() : Subsystem("HatchIntake"),
-mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse), 
+mPuncher(RobotMap::kIDHatchPuncherForward, RobotMap::kIDHatchPuncherReverse),
+mPusher(RobotMap::kIDHatchPusherForward, RobotMap::kIDHatchPusherReverse), 
 mPivot(RobotMap::kIDHatchPivot),
 armPot(RobotMap::kIDArmPot),
 mMotorSpeed{0},
@@ -80,6 +81,14 @@ void HatchIntake::Disengage() {
 
 void HatchIntake::Engage() {
   mPuncher.Set(kMotorEngage);
+}
+
+void HatchIntake::PusherEngage() {
+  mPusher.Set(kMotorEngage);
+}
+
+void HatchIntake::PusherDisengage() {
+  mPusher.Set(kMotorDisengage);
 }
 
 void HatchIntake::Pivot(double speed) {
