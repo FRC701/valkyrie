@@ -131,17 +131,17 @@ OI::OI()
 , mIsHatch(true)
 {
 
-  dStart.WhenPressed(new StageOneClimb());
-  dA.WhenPressed(new StageTwoClimb());
-  dX.WhenPressed(new StageThreeClimb());
-  dY.WhenPressed(new ClimberEngage());
-  dB.WhenPressed(new ClimberDisengage());
+  //dStart.WhenPressed(new StageOneClimb());
+  dA.WhenPressed(new StageOneClimb());
+  dX.WhenPressed(new StageTwoClimb());
+  dY.WhenPressed(new ClimberEngage);
+  dB.WhenPressed(new ClimberDisengage);
   //dY.WhenPressed(new StageFiveClimb());
   //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
-  // dStart.WhenPressed(new SetVisionDrive());
-  dBack.WhenPressed(new FullResetDrive());
+  dStart.WhenPressed(new SetVisionDrive());
+  dBack.WhenPressed(new SetControlDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());
   
