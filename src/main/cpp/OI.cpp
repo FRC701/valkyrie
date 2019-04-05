@@ -129,7 +129,7 @@ OI::OI()
 , mIsHatch(true)
 {
 
-  dStart.WhenPressed(new StageOneClimb());
+  //dStart.WhenPressed(new StageOneClimb());
   dA.WhenPressed(new StageTwoClimb());
   dX.WhenPressed(new StageThreeClimb());
   dY.WhenPressed(new ClimberEngage);
@@ -137,7 +137,7 @@ OI::OI()
   //dY.WhenPressed(new StageFiveClimb());
   //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenReleased(new dLBReleased());
-  // dStart.WhenPressed(new SetVisionDrive());
+  dStart.WhenPressed(new SetVisionDrive());
   dBack.WhenPressed(new SetControlDrive());
 
   coLB.WhenPressed(new HatchIntakeToggle());

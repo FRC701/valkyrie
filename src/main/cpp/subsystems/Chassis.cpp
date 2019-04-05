@@ -33,7 +33,7 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   mLimeLightTable{nt::NetworkTableInstance::GetDefault().GetTable("limelight")},
   mIsHighGear(true),
   mHighGear(0.75),
-  mLowGear(0.50)
+  mLowGear(0.30)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
     left2Wheel.SetOpenLoopRampRate(0.2);
@@ -70,12 +70,27 @@ void Chassis::SetArcadeDrive(double speed, double rotation) {
 }
 
 double Chassis::GetVisionRotation() {
-  constexpr double maxSpeed {0.5};
+  constexpr double maxSpeed {1};
   constexpr double maxAngle {27.0};
   constexpr double pRotation {maxSpeed / maxAngle};
   constexpr double setPoint {0};
   double measuredValue = mLimeLightTable->GetNumber("tx",0.0);
   return pRotation * (setPoint - measuredValue);
+}
+
+double Chassis::GetVisionDepth() {
+  double pDepth = 0;
+  if (mLimeLightTable->GetNumber("tv",0.0) == 1) {
+    constexpr double maxDepthSpeed {0.5};
+    constexpr double desiredDepth {3.5};
+    double currentDepth = mLimeLightTable->GetNumber("ta",0.0);
+    double changeRequired = desiredDepth - currentDepth;
+    pDepth = (changeRequired / desiredDepth) * maxDepthSpeed;
+  }
+  else {
+    pDepth = 0;
+  }
+  return pDepth;
 }
 
 void Chassis::DriveChassis(double speed) {
