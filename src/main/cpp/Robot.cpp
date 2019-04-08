@@ -60,7 +60,7 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Roller current", CargoIntake::getInstance()->RollerCurrent());
     frc::SmartDashboard::PutNumber("HatchIntake Current", HatchIntake::getInstance()->GetCurrent());
     frc::SmartDashboard::PutBoolean("Climber Fwd Limit Switch", Climber::getInstance()->IsClimberUp());
-    frc::SmartDashboard::PutBoolean("Climber Rev Limit Switch", Climber::getInstance()->IsOtherLimitSwitch());
+    frc::SmartDashboard::PutBoolean("Climber Rev Limit Switch", Climber::getInstance()->IsClimberDown());
     frc::SmartDashboard::PutNumber("Hatch Intake Angle", HatchIntake::getInstance()->GetAngle());
 }
 /**

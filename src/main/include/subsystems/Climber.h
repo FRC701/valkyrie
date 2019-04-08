@@ -57,6 +57,6 @@ class Climber : public frc::Subsystem {
         int GetLiftMotorEncoderValue();
         bool IsCommandFinished();
         bool IsClimberUp();
-        bool IsOtherLimitSwitch();
+        bool IsClimberDown();
         void ResetEncoder();
 };

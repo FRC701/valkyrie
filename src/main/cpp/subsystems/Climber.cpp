@@ -202,7 +202,7 @@ bool Climber::IsClimberUp() {
     return mFwdLimit.Get();
 }
 
-bool Climber::IsOtherLimitSwitch() {
+bool Climber::IsClimberDown() {
     return mRevLimit.Get();
 }
 
