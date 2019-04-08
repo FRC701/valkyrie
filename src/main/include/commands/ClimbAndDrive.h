@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include "commands/MotorClimb.h"
+#include "commands/SetClimbMotorSpeed.h"
 
-class ClimbAndDrive : public MotorClimb {
+class ClimbAndDrive : public SetClimbMotorSpeed {
  public:
-  using Super = MotorClimb;
-  ClimbAndDrive(double speed, double encoderFinish);
+  using Super = SetClimbMotorSpeed;
+  ClimbAndDrive(double speed);
   void Execute() override;
 };
