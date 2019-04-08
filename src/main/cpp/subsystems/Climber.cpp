@@ -199,11 +199,11 @@ bool Climber::IsCommandFinished() {
 }
 
 bool Climber::IsClimberUp() {
-    return mLiftMotorLimit.Get();
+    return mFwdLimit.Get();
 }
 
 bool Climber::IsOtherLimitSwitch() {
-    return mLiftMotorLimitOther.Get();
+    return mRevLimit.Get();
 }
 
 int Climber::GetLiftMotorEncoderValue() {

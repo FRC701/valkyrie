@@ -22,6 +22,8 @@ class Climber : public frc::Subsystem {
 
         WPI_TalonSRX mDriveMotor;
         rev::CANSparkMax  mLiftMotor;
+        rev::CANDigitalInput mFwdLimit = mLiftMotor.GetForwardLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
+        rev::CANDigitalInput mRevLimit = mLiftMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed);
         rev::CANPIDController mLiftMotorController;
         rev::CANDigitalInput mLiftMotorLimit;
         rev::CANDigitalInput mLiftMotorLimitOther;
