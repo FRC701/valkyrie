@@ -25,7 +25,12 @@ void SetClimbMotorSpeed::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool SetClimbMotorSpeed::IsFinished() {
-  return Climber::getInstance()->IsClimberUp();
+  if (mSpeed <= 0) {
+      return Climber::getInstance()->IsClimberUp();
+  }
+  else if (mSpeed > 0) {
+      return Climber::getInstance()->IsClimberDown();
+  }
 }
 
 // Called once after isFinished returns true
