@@ -25,8 +25,6 @@ class Climber : public frc::Subsystem {
         rev::CANDigitalInput mFwdLimit;
         rev::CANDigitalInput mRevLimit;
         rev::CANPIDController mLiftMotorController;
-        rev::CANDigitalInput mLiftMotorLimit;
-        rev::CANDigitalInput mLiftMotorLimitOther;
         frc::DoubleSolenoid mLiftSolenoid;
         rev::CANEncoder mLiftMotorEncoder;
         double mDriveMotorSpeed;
