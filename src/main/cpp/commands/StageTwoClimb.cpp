@@ -21,7 +21,7 @@ StageTwoClimb::StageTwoClimb() {
   constexpr int kDownEncoder = -56;
 
   // Don't engage the climber for level 2
-  AddSequential(new ClimbAndDrive(kDownSpeed, kDownEncoder));
+  AddSequential(new ClimbAndDrive(kDownSpeed));
   AddSequential(new ClimberEngage());
   // stall the lift motor
   // so far stalling the motor is not needed

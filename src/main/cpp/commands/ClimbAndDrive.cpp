@@ -10,7 +10,7 @@
 #include "subsystems/Climber.h"
 
 
-ClimbAndDrive::ClimbAndDrive(double speed, double encoderFinish) : MotorClimb(speed, encoderFinish) {
+ClimbAndDrive::ClimbAndDrive(double speed) : Super(speed) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
@@ -18,6 +18,6 @@ ClimbAndDrive::ClimbAndDrive(double speed, double encoderFinish) : MotorClimb(sp
 // Called repeatedly when this Command is scheduled to run
 void ClimbAndDrive::Execute() {
   Super::Execute();
-  mClimber->DriveClimb(0.15);
+  Climber::getInstance()->DriveClimb(0.15);
 }
 
