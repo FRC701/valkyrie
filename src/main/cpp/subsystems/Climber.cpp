@@ -122,6 +122,8 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"), 
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
+    mFwdLimit{mLiftMotor.GetForwardLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed)},
+    mRevLimit{mLiftMotor.GetReverseLimitSwitch(rev::CANDigitalInput::LimitSwitchPolarity::kNormallyClosed)},
     mLiftMotorController{mLiftMotor.GetPIDController()},
     mLiftMotorLimit{mLiftMotor.GetReverseLimitSwitch(kNormallyOpen)},
     mLiftMotorLimitOther{mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)},
@@ -137,8 +139,8 @@ Climber::Climber() : Subsystem("Climber"),
     mLiftSolenoid.Set(kClimberDisengage);
     mDriveMotor.SetInverted(true);
     mLiftMotor.SetInverted(false);
-    mLiftMotorLimit.EnableLimitSwitch(true);
-    mLiftMotorLimitOther.EnableLimitSwitch(true);
+    mFwdLimit.EnableLimitSwitch(true);
+    mRevLimit.EnableLimitSwitch(true);
 
     configurePIDController(mLiftMotorController, kConfig);
 
