@@ -57,6 +57,7 @@ private:
   double GetRightVoltage();
   void SetArcadeDrive(double speed, double rotation);
   double GetVisionRotation();
+  double GetVisionDepth();
   void SetCamDriverCam();
   void SetCamVisionProcessing();
   
