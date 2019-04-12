@@ -22,6 +22,7 @@ class HatchIntake : public frc::Subsystem {
   static std::shared_ptr<HatchIntake> self;
   
   frc::DoubleSolenoid mPuncher;
+  frc::DoubleSolenoid mPusher;
   WPI_TalonSRX mPivot;
   frc::AnalogInput armPot;
 
@@ -54,6 +55,8 @@ class HatchIntake : public frc::Subsystem {
   void InitDefaultCommand() override;
   void Engage();
   void Disengage();
+  void PusherEngage();
+  void PusherDisengage();
   void Pivot(double speed);
   void PivotPosition(double position);
   void PivotPositionByAngle(double angle);
