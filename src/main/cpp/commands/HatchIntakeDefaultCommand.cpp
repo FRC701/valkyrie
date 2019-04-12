@@ -16,7 +16,9 @@ HatchIntakeDefaultCommand::HatchIntakeDefaultCommand()
 }
 
 // Called just before this Command runs the first time
-void HatchIntakeDefaultCommand::Initialize() {}
+void HatchIntakeDefaultCommand::Initialize() {
+  HatchIntake::getInstance()->PusherDisengage();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void HatchIntakeDefaultCommand::Execute() {
