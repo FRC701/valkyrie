@@ -32,8 +32,8 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   m_drive{m_left, m_right},
   mLimeLightTable{nt::NetworkTableInstance::GetDefault().GetTable("limelight")},
   mIsHighGear(true),
-  mHighGear(0.75),
-  mLowGear(0.30)
+  mHighGear(.75),
+  mLowGear(0.50)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
     left2Wheel.SetOpenLoopRampRate(0.2);

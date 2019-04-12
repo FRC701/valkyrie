@@ -21,7 +21,6 @@ void VisionDrive::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void VisionDrive::Execute() {
 
-  //std::shared_ptr<OI> oi = OI::getInstance();
   std::shared_ptr<Chassis> chassis = Chassis::getInstance();
 
   chassis->SetArcadeDrive(chassis->GetVisionDepth(), chassis->GetVisionRotation());
