@@ -10,6 +10,7 @@
 #include "commands/RunCargoRoller.h"
 #include "commands/PivotPositionByAngle.h"
 #include "commands/CargoRoller.h"
+#include "commands/SetCargoSqueeze.h"
 #include "frc/Preferences.h"
 
 FullCargoIntake::FullCargoIntake() {
@@ -18,8 +19,7 @@ FullCargoIntake::FullCargoIntake() {
   AddParallel(new PivotPositionByAngle(0));
   AddSequential(new OpenCargoSqueeze());
   AddSequential(new RunCargoRoller(0.7));
-  AddSequential(new CargoRoller(cargoHoldSpeed)); //MUST BE LAST COMMAND!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  // Add Commands here:
+  AddSequential(new SetCargoSqueeze());  // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
