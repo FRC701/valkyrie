@@ -61,6 +61,12 @@
 #include "commands/ClimberEngage.h"
 #include "commands/SetClimbMotorSpeed.h"
 #include "commands/FullResetDrive.h"
+#include "commands/CargoRoller.h"
+#include "commands/SetArcadeDrive.h"
+#include "commands/FullArmMove.h"
+#include "commands/FullArmMoveZero.h"
+#include "commands/FullArmMoveTwo.h"
+
 
 namespace 
 {
@@ -140,6 +146,7 @@ OI::OI()
   //dB.WhenPressed(new StageFiveClimb());
   dLB.WhenPressed(new dLBPressed());
   dLB.WhenReleased(new dLBReleased());
+  dRB.WhenPressed(new SetArcadeDrive());
   dStart.WhenPressed(new SetVisionDrive());
   dBack.WhenPressed(new SetControlDrive());
 
@@ -148,7 +155,11 @@ OI::OI()
   coStart.WhenPressed(new FullElevatorLevel(kElevatorCargoLevel_Ship));
 
   coX.WhileHeld(new FullCargoIntake());
+  coX.WhenReleased(new CargoRoller(0.2));
 
+  //coPOV0.WhenPressed(new FullArmMoveZero());
+  //coPOV90.WhenPressed(new FullArmMove());
+  //coPOV180.WhenPressed(new FullArmMoveTwo());
   coPOV0.WhenPressed(new FullArmPosition(21));
   coPOV90.WhenPressed(new FullArmPosition(90.));
   coPOV180.WhenPressed(new FullArmPosition(130));
