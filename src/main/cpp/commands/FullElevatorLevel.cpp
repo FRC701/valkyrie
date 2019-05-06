@@ -15,9 +15,7 @@ FullElevatorLevel::FullElevatorLevel(int height){
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
-  AddSequential(new OpenCargoSqueeze());
   AddSequential(new SetElevator(height));
-  AddSequential(new SetCargoSqueeze());
   // To run multiple commands at the same time,
   // use AddParallel()
   // e.g. AddParallel(new Command1());
