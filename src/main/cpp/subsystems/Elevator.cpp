@@ -109,7 +109,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mLeftElevator.SetSensorPhase(mSensorPhase);
-	mLeftElevator.SetInverted(true);
+	mLeftElevator.SetInverted(false);
 	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
 
