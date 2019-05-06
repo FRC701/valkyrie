@@ -15,20 +15,19 @@
 #include "commands/ClimberDrive.h"
 #include "commands/ClimbAndDrive.h"
 #include "commands/SetArcadeDrive.h"
+#include "commands/ClimberSetSpeed.h"
 
 StageTwoClimb::StageTwoClimb() {
   constexpr double kDownSpeed = -0.6;
-  constexpr int kDownEncoder = -56;
-
   // Don't engage the climber for level 2
-  AddSequential(new ClimbAndDrive(kDownSpeed));
   AddSequential(new ClimberEngage());
+  AddSequential(new ClimbAndDrive(kDownSpeed));
   // stall the lift motor
   // so far stalling the motor is not needed
   // brake mode is strong
-  //AddSequential(new DriveClimb(0.2));
+  //AddSequential(new ClimberSetSpeed());
   // Level 2: Let the joystick run both the chassis and the climber wheel
   // AddSequential(new Drive(0.0));
-  AddParallel(new ClimberDrive());
-  AddSequential(new SetArcadeDrive());
+  AddParallel(new SetArcadeDrive());
+  AddSequential(new ClimberDrive());
 }
