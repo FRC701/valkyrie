@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchIntakeToggle.h"
+
 #include "subsystems/HatchIntake.h"
 
 HatchIntakeToggle::HatchIntakeToggle() {

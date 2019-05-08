@@ -6,10 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/StageThreeClimb.h"
-#include "commands/DriveClimb.h"
 #include "commands/ClimberEngage.h"
 #include "commands/ClimberDisengage.h"
+#include "commands/DriveClimb.h"
 #include "commands/MotorClimb.h"
+
 #include "subsystems/Chassis.h"
 
 StageThreeClimb::StageThreeClimb() {

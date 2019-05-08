@@ -6,7 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ClimberDrive.h"
+
 #include "subsystems/Climber.h"
+
 #include "OI.h"
 
 ClimberDrive::ClimberDrive() {

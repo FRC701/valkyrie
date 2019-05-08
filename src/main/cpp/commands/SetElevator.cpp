@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetElevator.h"
+
 #include "subsystems/Elevator.h"
 
 SetElevator::SetElevator(double position) : mPosition(position) {

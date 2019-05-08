@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetClimbMotorSpeed.h"
+
 #include "subsystems/Climber.h"
 
 SetClimbMotorSpeed::SetClimbMotorSpeed(double speed) : mSpeed(speed) {

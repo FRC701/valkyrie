@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchIntakeEngage.h"
+
 #include "subsystems/HatchIntake.h"
 
 HatchIntakeEngage::HatchIntakeEngage() {

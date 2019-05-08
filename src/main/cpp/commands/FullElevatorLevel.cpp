@@ -6,9 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullElevatorLevel.h"
-#include "commands/SetElevator.h"
-#include "commands/SetCargoSqueeze.h"
 #include "commands/OpenCargoSqueeze.h"
+#include "commands/SetCargoSqueeze.h"
+#include "commands/SetElevator.h"
 
 FullElevatorLevel::FullElevatorLevel(int height){
   // Add Commands here:

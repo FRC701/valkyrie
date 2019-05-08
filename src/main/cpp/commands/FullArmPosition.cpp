@@ -6,9 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullArmPosition.h"
-#include "commands/SetCargoSqueeze.h"
 #include "commands/PivotPositionByAngle.h"
-
+#include "commands/SetCargoSqueeze.h"
 
 FullArmPosition::FullArmPosition(double angle) {
   AddSequential(new SetCargoSqueeze());

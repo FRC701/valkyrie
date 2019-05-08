@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/PivotPosition.h"
+
 #include "subsystems/HatchIntake.h"
 
 PivotPosition::PivotPosition(double position) : mPosition(position) {

@@ -6,8 +6,10 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetControlDrive.h"
-#include "commands/TankDrive.h"
+
 #include "commands/SetCamModeDriver.h"
+
+#include "commands/TankDrive.h"
 
 SetControlDrive::SetControlDrive() {
   AddSequential(new SetCamModeDriver());

@@ -6,11 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullCargoIntake.h"
-#include "commands/OpenCargoSqueeze.h"
-#include "commands/RunCargoRoller.h"
-#include "commands/PivotPositionByAngle.h"
 #include "commands/CargoRoller.h"
+#include "commands/OpenCargoSqueeze.h"
+#include "commands/PivotPositionByAngle.h"
+#include "commands/RunCargoRoller.h"
 #include "commands/SetCargoSqueeze.h"
+
 #include "frc/Preferences.h"
 
 FullCargoIntake::FullCargoIntake() {

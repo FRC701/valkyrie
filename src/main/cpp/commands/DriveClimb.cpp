@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/DriveClimb.h"
+
 #include "subsystems/Climber.h"
 
 DriveClimb::DriveClimb(double speed) : mDriveMotorSpeed(speed)  {

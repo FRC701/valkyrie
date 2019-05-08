@@ -6,16 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/StageTwoClimb.h"
-#include "commands/DriveClimb.h"
-#include "commands/ClimberEngage.h"
+#include "commands/ClimbAndDrive.h"
 #include "commands/ClimberDisengage.h"
-#include "commands/MotorClimb.h"
+#include "commands/ClimberDrive.h"
+#include "commands/ClimberEngage.h"
+#include "commands/ClimberSetSpeed.h"
 #include "commands/Delay.h"
 #include "commands/Drive.h"
-#include "commands/ClimberDrive.h"
-#include "commands/ClimbAndDrive.h"
+#include "commands/DriveClimb.h"
+#include "commands/MotorClimb.h"
 #include "commands/SetArcadeDrive.h"
-#include "commands/ClimberSetSpeed.h"
 
 StageTwoClimb::StageTwoClimb() {
   constexpr double kDownSpeed = -0.6;

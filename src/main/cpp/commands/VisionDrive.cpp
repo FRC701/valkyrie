@@ -6,7 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/VisionDrive.h"
+
 #include "subsystems/Chassis.h"
+
 #include "OI.h"
 
 VisionDrive::VisionDrive() {

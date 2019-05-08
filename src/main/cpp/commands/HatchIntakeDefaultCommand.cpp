@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchIntakeDefaultCommand.h"
+
 #include "subsystems/HatchIntake.h"
 
 HatchIntakeDefaultCommand::HatchIntakeDefaultCommand() 

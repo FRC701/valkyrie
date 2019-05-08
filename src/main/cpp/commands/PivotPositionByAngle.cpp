@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/PivotPositionByAngle.h"
+
 #include "subsystems/HatchIntake.h"
 
 PivotPositionByAngle::PivotPositionByAngle(double angle) : mAngle(angle) {

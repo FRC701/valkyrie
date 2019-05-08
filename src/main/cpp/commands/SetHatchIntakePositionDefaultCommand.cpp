@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
-#include "subsystems/HatchIntake.h"
 
+#include "subsystems/HatchIntake.h"
 
 SetHatchIntakePositionDefaultCommand::SetHatchIntakePositionDefaultCommand()
 : mCommand(nullptr) {

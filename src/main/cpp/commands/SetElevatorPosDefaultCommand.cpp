@@ -8,6 +8,7 @@
 #include "commands/SetElevatorPosDefaultCommand.h"
 
 #include "subsystems/Elevator.h"
+
 SetElevatorPosDefaultCommand::SetElevatorPosDefaultCommand() {
   // Use Requires() here to declare subsystem dependencies
   Requires(Elevator::getInstance().get());

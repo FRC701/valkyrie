@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullArmMoveZero.h"
-#include "commands/FullElevatorLevel.h"
 #include "commands/FullArmPosition.h"
+#include "commands/FullElevatorLevel.h"
 
 FullArmMoveZero::FullArmMoveZero() {
   AddSequential(new FullElevatorLevel(8000));

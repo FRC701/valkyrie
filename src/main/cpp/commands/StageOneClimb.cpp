@@ -6,9 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/StageOneClimb.h"
-#include "commands/MotorClimb.h"
-#include "commands/Delay.h"
 #include "commands/ClimbAndDrive.h"
+#include "commands/Delay.h"
+#include "commands/MotorClimb.h"
 
 StageOneClimb::StageOneClimb() {
   constexpr double kUpSpeed = 0.5;

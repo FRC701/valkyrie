@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullResetDrive.h"
-#include "commands/SetControlDrive.h"
 #include "commands/MotorClimb.h"
+#include "commands/SetControlDrive.h"
 
 FullResetDrive::FullResetDrive() {
   // Add Commands here:

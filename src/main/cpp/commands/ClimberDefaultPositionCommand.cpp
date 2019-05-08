@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ClimberDefaultPositionCommand.h"
+
 #include "subsystems/Climber.h"
 
 ClimberDefaultPositionCommand::ClimberDefaultPositionCommand() {
