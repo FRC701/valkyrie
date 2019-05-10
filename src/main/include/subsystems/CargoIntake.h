@@ -8,8 +8,11 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
-#include "RobotMap.h"
+
 #include "frc/DoubleSolenoid.h"
+
+#include "RobotMap.h"
+
 #include "ctre/Phoenix.h"
 
 class CargoIntake : public frc::Subsystem {

@@ -6,9 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/Climber.h"
+
 #include "commands/ClimberDefaultPositionCommand.h"
 #include "commands/ClimberDefaultSpeedCommand.h"
+
 #include "RobotMap.h"
+
 #include "frc/DoubleSolenoid.h"
 
 namespace

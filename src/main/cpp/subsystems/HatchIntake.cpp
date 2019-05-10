@@ -6,10 +6,12 @@
 /*----------------------------------------------------------------------------*/
 
 #include "subsystems/HatchIntake.h"
+
 #include "commands/HatchIntakeDefaultCommand.h"
 #include "commands/HatchIntakeSpeedDefaultCommand.h"
-#include "utilities/LineCalculator.h"
 #include "commands/PivotHatch.h"
+
+#include "utilities/LineCalculator.h"
 
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;

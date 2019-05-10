@@ -6,10 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+
 #include <frc/commands/Subsystem.h>
-#include <ctre/Phoenix.h>
-#include "utilities/Preference.h"
 #include <frc/Preferences.h>
+
+#include <ctre/Phoenix.h>
+
+#include "utilities/Preference.h"
 
 class Elevator : public frc::Subsystem {
  private:

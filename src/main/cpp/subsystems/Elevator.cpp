@@ -5,12 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "RobotMap.h"
 #include "subsystems/Elevator.h"
+
+#include "RobotMap.h"
+
 #include "commands/ElevatorDefaultCommand.h"
 #include "commands/ElevatorSpeedDefaultCommand.h"
-#include "utilities/LineCalculator.h"
 
+#include "utilities/LineCalculator.h"
 
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;

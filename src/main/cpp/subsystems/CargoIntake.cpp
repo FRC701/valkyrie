@@ -5,6 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 #include "subsystems/CargoIntake.h"
+
 #include "commands/CargoRollerIdle.h"
 
 constexpr frc::DoubleSolenoid::Value kSqueeze = frc::DoubleSolenoid::kForward;
