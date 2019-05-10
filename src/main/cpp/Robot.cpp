@@ -12,9 +12,9 @@
 
 #include "subsystems/CargoIntake.h"
 #include "subsystems/Chassis.h"
+#include "subsystems/Climber.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/HatchIntake.h"
-#include "subsystems/Climber.h"
 
 ExampleSubsystem Robot::m_subsystem;
 

@@ -1,6 +1,6 @@
 #pragma once
-#include <frc/WPILib.h>
 #include "frc/buttons/POVButton.h"
+#include <frc/WPILib.h>
 
 class OI {
 private:
