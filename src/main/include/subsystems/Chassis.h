@@ -1,11 +1,9 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
-#include <frc/Drive/DifferentialDrive.h
+#include <frc/Drive/DifferentialDrive.h>
 #include <frc/SpeedControllerGroup.h>
-
 #include <networktables/NetworkTable.h>
-
 #include <rev/CANEncoder.h>
 #include <rev/CANSparkMax.h>
 
