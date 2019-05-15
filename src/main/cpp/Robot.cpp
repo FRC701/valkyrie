@@ -6,15 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
-
-#include <frc/commands/Scheduler.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
 #include "subsystems/CargoIntake.h"
 #include "subsystems/Chassis.h"
 #include "subsystems/Climber.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/HatchIntake.h"
+#include <frc/commands/Scheduler.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ExampleSubsystem Robot::m_subsystem;
 

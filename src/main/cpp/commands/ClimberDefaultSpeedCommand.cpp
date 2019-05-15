@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ClimberDefaultSpeedCommand.h"
-
 #include "subsystems/Climber.h"
 
 ClimberDefaultSpeedCommand::ClimberDefaultSpeedCommand() {

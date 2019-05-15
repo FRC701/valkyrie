@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ResetElevatorPosition.h"
-
 #include "subsystems/Elevator.h"
 
 ResetElevatorPosition::ResetElevatorPosition() {

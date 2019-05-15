@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetElevatorSpeed.h"
-
 #include "subsystems/Elevator.h"
 
 SetElevatorSpeed::SetElevatorSpeed(double speed) : mSpeed(speed) {

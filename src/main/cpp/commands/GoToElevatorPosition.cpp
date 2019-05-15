@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/GoToElevatorPosition.h"
-
 #include "subsystems/Elevator.h"
 
 GoToElevatorPosition::GoToElevatorPosition(double position): mPosition(position) {

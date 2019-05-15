@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchIntakeSpeedDefaultCommand.h"
-
 #include "subsystems/HatchIntake.h"
-
 #include "OI.h"
 
 HatchIntakeSpeedDefaultCommand::HatchIntakeSpeedDefaultCommand() {

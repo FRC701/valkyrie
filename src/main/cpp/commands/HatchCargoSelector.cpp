@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchCargoSelector.h"
-
 #include "OI.h"
-
 #include "frc/Commands/Scheduler.h"
 
 HatchCargoSelector::HatchCargoSelector(

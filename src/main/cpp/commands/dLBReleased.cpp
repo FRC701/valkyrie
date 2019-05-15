@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/dLBReleased.h"
-
 #include "subsystems/Chassis.h"
 
 dLBReleased::dLBReleased() {

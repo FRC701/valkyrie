@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetCargoSqueeze.h"
-
 #include "subsystems/CargoIntake.h"
 
 SetCargoSqueeze::SetCargoSqueeze() {

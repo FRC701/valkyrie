@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
-
 #include "subsystems/HatchIntake.h"
 
 SetHatchIntakePositionDefaultCommand::SetHatchIntakePositionDefaultCommand()

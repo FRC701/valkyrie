@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ElevatorDefaultCommand.h"
-
 #include "subsystems/Elevator.h"
 
 ElevatorDefaultCommand::ElevatorDefaultCommand() {

@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/MyAutoCommand.h"
-
 #include "Robot.h"
 
 MyAutoCommand::MyAutoCommand() {

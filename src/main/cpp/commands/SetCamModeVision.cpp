@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetCamModeVision.h"
-
 #include "subsystems/Chassis.h"
 
 SetCamModeVision::SetCamModeVision() {

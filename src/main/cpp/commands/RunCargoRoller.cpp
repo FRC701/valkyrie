@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/RunCargoRoller.h"
-
 #include "subsystems/CargoIntake.h"
-
 #include "OI.h"
 
 RunCargoRoller::RunCargoRoller(double speed): mSpeed(speed) {

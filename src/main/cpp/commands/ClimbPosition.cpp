@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ClimbPosition.h"
-
 #include "subsystems/Climber.h"
 
 ClimbPosition::ClimbPosition(double position)

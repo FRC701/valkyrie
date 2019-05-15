@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/PivotHatch.h"
-
 #include "subsystems/HatchIntake.h"
 
 PivotHatch::PivotHatch(double speed) : mSpeed(speed) {

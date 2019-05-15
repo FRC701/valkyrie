@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetHatchIntakeAngleValue.h"
-
 #include "subsystems/HatchIntake.h"
 
 SetHatchIntakeAngleValue::SetHatchIntakeAngleValue() {

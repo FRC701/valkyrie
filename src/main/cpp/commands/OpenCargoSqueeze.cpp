@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/OpenCargoSqueeze.h"
-
 #include "subsystems/CargoIntake.h"
 
 OpenCargoSqueeze::OpenCargoSqueeze() {

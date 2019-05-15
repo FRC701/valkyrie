@@ -1,10 +1,7 @@
 #include "subsystems/Chassis.h"
 #include "subsystems/Elevator.h"
-
 #include "commands/SetControlDrive.h"
-
 #include "RobotMap.h"
-
 #include <networktables/NetworkTableInstance.h>
 
 const char Chassis::kSubsystemName[] = "Chassis";

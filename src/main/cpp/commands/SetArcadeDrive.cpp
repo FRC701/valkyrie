@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetArcadeDrive.h"
-
 #include "subsystems/Chassis.h"
-
 #include "OI.h"
 
 SetArcadeDrive::SetArcadeDrive() {

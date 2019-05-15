@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/HatchIntakeDisengage.h"
-
 #include "subsystems/HatchIntake.h"
 
 HatchIntakeDisengage::HatchIntakeDisengage() {

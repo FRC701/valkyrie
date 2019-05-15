@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/Drive.h"
-
 #include "subsystems/Chassis.h"
 
 Drive::Drive(double speed): mSpeed(speed) {

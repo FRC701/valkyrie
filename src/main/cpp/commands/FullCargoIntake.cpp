@@ -11,7 +11,6 @@
 #include "commands/PivotPositionByAngle.h"
 #include "commands/RunCargoRoller.h"
 #include "commands/SetCargoSqueeze.h"
-
 #include "frc/Preferences.h"
 
 FullCargoIntake::FullCargoIntake() {

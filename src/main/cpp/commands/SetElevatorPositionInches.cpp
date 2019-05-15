@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetElevatorPositionInches.h"
-
 #include "subsystems/Elevator.h"
 
 SetElevatorPositionInches::SetElevatorPositionInches(double inches): mInches(inches) {

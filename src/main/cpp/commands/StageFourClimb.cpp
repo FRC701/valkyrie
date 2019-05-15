@@ -10,7 +10,6 @@
 #include "commands/ClimberEngage.h"
 #include "commands/DriveClimb.h"
 #include "commands/MotorClimb.h"
-
 #include "subsystems/Chassis.h"
 
 StageFourClimb::StageFourClimb() {

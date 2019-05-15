@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetElevatorPosDefaultCommand.h"
-
 #include "subsystems/Elevator.h"
 
 SetElevatorPosDefaultCommand::SetElevatorPosDefaultCommand() {

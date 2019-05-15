@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/MotorClimb.h"
-
 #include "subsystems/Climber.h"
 
 MotorClimb::MotorClimb(double speed, double encoderFinish)

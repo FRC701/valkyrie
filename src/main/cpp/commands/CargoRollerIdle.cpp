@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/CargoRollerIdle.h"
-
 #include "subsystems/CargoIntake.h"
 
 CargoRollerIdle::CargoRollerIdle(

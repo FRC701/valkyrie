@@ -6,9 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/CargoRollerOuttake.h"
-
 #include "subsystems/CargoIntake.h"
-
 #include "OI.h"
 
 CargoRollerOuttake::CargoRollerOuttake(double timeout)
