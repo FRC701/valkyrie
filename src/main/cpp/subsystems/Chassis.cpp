@@ -1,9 +1,7 @@
 #include "subsystems/Chassis.h"
-
+#include "subsystems/Elevator.h"
 #include "commands/SetControlDrive.h"
 #include "RobotMap.h"
-#include "subsystems/Elevator.h"
-
 #include <networktables/NetworkTableInstance.h>
 
 const char Chassis::kSubsystemName[] = "Chassis";
@@ -32,7 +30,7 @@ Chassis::Chassis() : Subsystem(kSubsystemName),
   m_drive{m_left, m_right},
   mLimeLightTable{nt::NetworkTableInstance::GetDefault().GetTable("limelight")},
   mIsHighGear(true),
-  mHighGear(.75),
+  mHighGear(.90),
   mLowGear(0.50)
   {
     left1Wheel.SetOpenLoopRampRate(0.2);
@@ -82,9 +80,9 @@ double Chassis::GetVisionDepth() {
   double pDepth = 0;
   if (mLimeLightTable->GetNumber("tv",0.0) == 1) {
     constexpr double maxDepthSpeed {0.5};
-    constexpr double desiredDepth {3.5};
+    constexpr double desiredDepth {10.0};
     double currentDepth = mLimeLightTable->GetNumber("ta",0.0);
-    double changeRequired = desiredDepth - currentDepth;
+    double changeRequired = desiredDepth - currentDepth + 4;
     pDepth = (changeRequired / desiredDepth) * maxDepthSpeed;
   }
   else {

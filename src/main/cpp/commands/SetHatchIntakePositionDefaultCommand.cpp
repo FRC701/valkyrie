@@ -8,7 +8,6 @@
 #include "commands/SetHatchIntakePositionDefaultCommand.h"
 #include "subsystems/HatchIntake.h"
 
-
 SetHatchIntakePositionDefaultCommand::SetHatchIntakePositionDefaultCommand()
 : mCommand(nullptr) {
   // Use Requires() here to declare subsystem dependencies

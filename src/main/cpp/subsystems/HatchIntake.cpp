@@ -8,9 +8,8 @@
 #include "subsystems/HatchIntake.h"
 #include "commands/HatchIntakeDefaultCommand.h"
 #include "commands/HatchIntakeSpeedDefaultCommand.h"
-#include "utilities/LineCalculator.h"
 #include "commands/PivotHatch.h"
-
+#include "utilities/LineCalculator.h"
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
 using frc::Preferences;
@@ -84,11 +83,11 @@ void HatchIntake::Engage() {
 }
 
 void HatchIntake::PusherEngage() {
-  mPusher.Set(kMotorEngage);
+  mPusher.Set(kMotorDisengage);
 }
 
 void HatchIntake::PusherDisengage() {
-  mPusher.Set(kMotorDisengage);
+  mPusher.Set(kMotorEngage);
 }
 
 void HatchIntake::Pivot(double speed) {
@@ -145,8 +144,8 @@ void HatchIntake::SetupMotionMagic()
   constexpr double kI {0};
   constexpr double kD {40};
   const double kMaxVelocity {1200};//encoderFwd}; // Read as encoderFwd/sec Move from 0 to max forward in 1 sec
-  const double kCruiseVelocity {1000}; //Sensor Units per 100ms
-  const double kMotionAcceleration {600};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec Was 1800
+  const double kCruiseVelocity {2400}; //Sensor Units per 100ms
+  const double kMotionAcceleration {1800};//kCruiseVelocity * 0.25}; //Sensor Units per 100ms/sec Was 1800
   mPivot.SelectProfileSlot(kSlotIndex, kPID_PrimaryClosedLoop);
   mPivot.Config_kF(kSlotIndex, kF, kTimeout_10Millis);
   mPivot.Config_kP(kSlotIndex, kP, kTimeout_10Millis);

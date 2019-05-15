@@ -5,18 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ClimbAndDrive.h"
-#include "subsystems/Chassis.h"
-#include "subsystems/Climber.h"
+#pragma once
 
-ClimbAndDrive::ClimbAndDrive(double speed) : Super(speed) {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-}
+#include <frc/commands/CommandGroup.h>
 
-// Called repeatedly when this Command is scheduled to run
-void ClimbAndDrive::Execute() {
-  Super::Execute();
-  Climber::getInstance()->DriveClimb(0.15);
-}
-
+class FullArmMove : public frc::CommandGroup {
+ public:
+  FullArmMove();
+};

@@ -122,7 +122,7 @@ std::shared_ptr<Climber> Climber::getInstance() {
 Climber::Climber() : Subsystem("Climber"), 
     mDriveMotor(RobotMap::kIDClimberDriveMotor),
     mLiftMotor{RobotMap::kIDClimberLiftMotor, rev::CANSparkMax::MotorType::kBrushless},
-    mFwdLimit{mLiftMotor.GetForwardLimitSwitch(kNormallyOpen)},
+    mFwdLimit{mLiftMotor.GetForwardLimitSwitch(kNormallyClosed)},
     mRevLimit{mLiftMotor.GetReverseLimitSwitch(kNormallyOpen)},
     mLiftMotorController{mLiftMotor.GetPIDController()},
     mLiftSolenoid(kPCMID1, RobotMap::kIDClimberForward, RobotMap::kIDClimberReverse),

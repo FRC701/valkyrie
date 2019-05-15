@@ -7,7 +7,6 @@
 
 #include "commands/SaveHatchIntakeValueREV.h"
 
-
 SaveHatchIntakeValueREV::SaveHatchIntakeValueREV() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());

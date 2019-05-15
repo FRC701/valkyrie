@@ -6,15 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Robot.h"
-
-#include <frc/commands/Scheduler.h>
-#include <frc/smartdashboard/SmartDashboard.h>
-
 #include "subsystems/CargoIntake.h"
 #include "subsystems/Chassis.h"
+#include "subsystems/Climber.h"
 #include "subsystems/Elevator.h"
 #include "subsystems/HatchIntake.h"
-#include "subsystems/Climber.h"
+#include <frc/commands/Scheduler.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 ExampleSubsystem Robot::m_subsystem;
 
@@ -59,8 +57,8 @@ const void EncoderValues() {
     frc::SmartDashboard::PutNumber("Right Drive Voltage", Chassis::getInstance()->GetRightVoltage());
     frc::SmartDashboard::PutNumber("Roller current", CargoIntake::getInstance()->RollerCurrent());
     frc::SmartDashboard::PutNumber("HatchIntake Current", HatchIntake::getInstance()->GetCurrent());
-    frc::SmartDashboard::PutBoolean("Climber Fwd Limit Switch", Climber::getInstance()->IsClimberUp());
     frc::SmartDashboard::PutBoolean("Climber Rev Limit Switch", Climber::getInstance()->IsClimberDown());
+    frc::SmartDashboard::PutBoolean("Climber Fwd Limit Switch", Climber::getInstance()->IsClimberUp());
     frc::SmartDashboard::PutNumber("Hatch Intake Angle", HatchIntake::getInstance()->GetAngle());
 }
 /**
@@ -104,8 +102,8 @@ void Robot::AutonomousInit() {
   //   m_autonomousCommand = &m_defaultAuto;
   // }
 
-  Elevator::getInstance()->ResetPosition();
-  HatchIntake::getInstance()->ResetPosition();
+  //Elevator::getInstance()->ResetPosition();
+  //HatchIntake::getInstance()->ResetPosition();
 
   m_autonomousCommand = m_chooser.GetSelected();
 

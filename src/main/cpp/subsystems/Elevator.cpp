@@ -5,16 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "RobotMap.h"
 #include "subsystems/Elevator.h"
+#include "RobotMap.h"
 #include "commands/ElevatorDefaultCommand.h"
 #include "commands/ElevatorSpeedDefaultCommand.h"
 #include "utilities/LineCalculator.h"
-
-
 using RobotMap::kPID_PrimaryClosedLoop;
 using RobotMap::kTimeout_10Millis;
-
 
 namespace
 {
@@ -109,7 +106,7 @@ void Elevator::SetUpTalons(){
 	mLeftElevator.ConfigReverseLimitSwitchSource(LimitSwitchSource_FeedbackConnector,
     LimitSwitchNormal_NormallyOpen, kTimeout_10Millis);
 	mLeftElevator.SetSensorPhase(mSensorPhase);
-	mLeftElevator.SetInverted(true);
+	mLeftElevator.SetInverted(false);
 	mLeftElevator.ConfigPeakOutputForward(1., kTimeout_10Millis);
 	mLeftElevator.ConfigPeakOutputReverse(-1., kTimeout_10Millis);
 

@@ -22,6 +22,7 @@ void ClimberDrive::Initialize() {}
 void ClimberDrive::Execute() {  
   double left = OI::getInstance()->getDriverLeftYAxis();
   Climber::getInstance()->DriveClimb(left);
+  Climber::getInstance()->MotorClimber(-0.3);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -7,12 +7,14 @@
 
 #pragma once
 
-#include <frc/commands/Subsystem.h>
-#include <frc/WPILib.h>
-#include <ctre/Phoenix.h>
-#include <frc/DoubleSolenoid.h>
-#include "rev/CANSparkMax.h"
 #include <frc/AnalogInput.h>
+#include <frc/commands/Subsystem.h>
+#include <frc/DoubleSolenoid.h>
+#include <frc/WPILib.h>
+
+#include <ctre/Phoenix.h>
+
+#include "rev/CANSparkMax.h"
 
 class Climber : public frc::Subsystem {
  private:

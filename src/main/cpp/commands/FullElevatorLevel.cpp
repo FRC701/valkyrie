@@ -6,18 +6,16 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/FullElevatorLevel.h"
-#include "commands/SetElevator.h"
-#include "commands/SetCargoSqueeze.h"
 #include "commands/OpenCargoSqueeze.h"
+#include "commands/SetCargoSqueeze.h"
+#include "commands/SetElevator.h"
 
 FullElevatorLevel::FullElevatorLevel(int height){
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
   // these will run in order.
-  AddSequential(new OpenCargoSqueeze());
   AddSequential(new SetElevator(height));
-  AddSequential(new SetCargoSqueeze());
   // To run multiple commands at the same time,
   // use AddParallel()
   // e.g. AddParallel(new Command1());

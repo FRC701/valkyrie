@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SetElevatorSpeedDefaultCommand.h"
-
 #include "subsystems/Elevator.h"
 
 SetElevatorSpeedDefaultCommand::SetElevatorSpeedDefaultCommand() {

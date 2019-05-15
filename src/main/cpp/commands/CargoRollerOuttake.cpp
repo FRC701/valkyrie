@@ -17,7 +17,9 @@ CargoRollerOuttake::CargoRollerOuttake(double timeout)
 }
 
 // Called just before this Command runs the first time
-void CargoRollerOuttake::Initialize() {}
+void CargoRollerOuttake::Initialize() {
+  CargoIntake::getInstance()->Squeeze();
+}
 
 // Called repeatedly when this Command is scheduled to run
 void CargoRollerOuttake::Execute() {

@@ -6,13 +6,16 @@
 /*----------------------------------------------------------------------------*/
 #pragma once
 
-#include <frc/commands/Subsystem.h>
-#include "utilities/Preference.h"
-#include "RobotMap.h"
-#include "frc/DoubleSolenoid.h"
-#include "ctre/Phoenix.h"
 #include <frc/AnalogInput.h>
+#include <frc/commands/Subsystem.h>
+#include "frc/DoubleSolenoid.h"
 #include <frc/Preferences.h>
+
+#include "utilities/Preference.h"
+
+#include "RobotMap.h"
+
+#include "ctre/Phoenix.h"
 
 class HatchIntake : public frc::Subsystem {
  private:

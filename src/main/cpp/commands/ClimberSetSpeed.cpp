@@ -5,37 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/HatchCargoSelector.h"
-#include "OI.h"
-#include "frc/Commands/Scheduler.h"
+#include "commands/ClimberSetSpeed.h"
+#include "subsystems/Climber.h"
 
-HatchCargoSelector::HatchCargoSelector(
- frc::Command* hatchControls,
- frc::Command* cargoControls):
- mHatchCommand(hatchControls),
- mCargoCommand(cargoControls)
-{
+ClimberSetSpeed::ClimberSetSpeed() {
   // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
+  Requires(Climber::getInstance().get());
 }
 
 // Called just before this Command runs the first time
-void HatchCargoSelector::Initialize() {
-  Command* command 
-    = OI::getInstance()->isHatch()
-    ? mHatchCommand : mCargoCommand;
-  frc::Scheduler::GetInstance()->AddCommand(command);
-}
+void ClimberSetSpeed::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void HatchCargoSelector::Execute() {}
+void ClimberSetSpeed::Execute() {
+  Climber::getInstance()->MotorClimber(-0.3);
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool HatchCargoSelector::IsFinished() { return true; }
+bool ClimberSetSpeed::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void HatchCargoSelector::End() {}
+void ClimberSetSpeed::End() {
+  Climber::getInstance()->MotorClimber(0);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void HatchCargoSelector::Interrupted() {}
+void ClimberSetSpeed::Interrupted() {
+  Climber::getInstance()->MotorClimber(0);
+}

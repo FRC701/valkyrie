@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ElevatorSpeedDefaultCommand.h"
-
 #include "subsystems/Elevator.h"
 #include "OI.h"
 

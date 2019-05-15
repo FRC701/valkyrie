@@ -30,19 +30,19 @@ constexpr int kIDCargoRoller {9};
 constexpr int kIDHatchPivot {10};
 
 //Hatch Pnuematics
-constexpr int kIDHatchPuncherForward {3};
-constexpr int kIDHatchPuncherReverse {4};
-constexpr int kIDHatchPusherForward {2};
-constexpr int kIDHatchPusherReverse {5};
+constexpr int kIDHatchPuncherForward {2};
+constexpr int kIDHatchPuncherReverse {5};
+constexpr int kIDHatchPusherForward {6};
+constexpr int kIDHatchPusherReverse {1};
 
 
 //Cargo Pneumatics
 constexpr int kIDCargoClawForward {3};
 constexpr int kIDCargoClawReverse {4};
-constexpr int kIDCargoPuncherForward {0};
-constexpr int kIDCargoPuncherReverse {7};
-constexpr int kIDCargoPneumaticForward {2};
-constexpr int kIDCargoPneumaticReverse {5};
+constexpr int kIDCargoPuncherForward {8};
+constexpr int kIDCargoPuncherReverse {9};
+constexpr int kIDCargoPneumaticForward {0};
+constexpr int kIDCargoPneumaticReverse {7};
 
 //Climber Pnuematics
 constexpr int kIDClimberForward {3};// These have moved from practrice bot

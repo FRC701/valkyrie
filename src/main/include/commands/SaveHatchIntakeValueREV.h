@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/commands/InstantCommand.h>
+
 #include "subsystems/HatchIntake.h"
 
 class SaveHatchIntakeValueREV : public frc::InstantCommand {

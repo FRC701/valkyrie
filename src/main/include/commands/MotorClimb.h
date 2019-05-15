@@ -8,6 +8,7 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+
 #include "subsystems/Climber.h"
 
 class MotorClimb : public frc::Command {
